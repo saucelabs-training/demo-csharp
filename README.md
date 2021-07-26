@@ -7,11 +7,14 @@ This directory contains example scripts and dependencies for running automated S
 ## 🖥 Web automation
 
 * **🥇Best practice frameworks for web testing**
-  * [Production-level framework doing web automation on desktop and mobile. Using best practices, parallel, cross-browser, NUnit, Selenium, Appium, Visual](./DotnetCore/Sauce.Demo/Core.BestPractices.Web)
+  * [Production-level framework doing web automation on desktop and mobile](./DotnetCore/Sauce.Demo/Core.BestPractices.Web) `.net` `best practice` `appium` `visual` `accessibility` `cross-browser` `parallel`
   * [👁‍🗨Visual e2e framework](./DotnetCore/Sauce.Demo/Core.BestPractices.Web/Tests/Desktop/VisualTests.cs) `.net` `best practice`
   * [📱Real devices framework](./DotnetCore/Sauce.Demo/Core.BestPractices.Web/Tests/Mobile) `.net` `best practice`
   
 * **Code Examples**
+
+All examples are using .NET and Mstest unless specified
+
   * [Simple W3C Selenium test](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/SimpleSauceTests.cs) `.net` `mstest`
   * [Accessibility Test](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/AxeAccesibility.cs) `.net` `mstest`
   * [Quick start with Selenium](./SauceExamples/SeleniumNunit/SimpleExamples/SimpleSauceTest.cs) `.net framework`
@@ -25,6 +28,7 @@ This directory contains example scripts and dependencies for running automated S
   * [Visual E2E](./SauceExamples/SeleniumNunit/Visual) `.net framework`
   * [Front-end perf testing examples](./SauceExamples/SeleniumNunit/SaucePerformance/PerformanceDemo.cs) `.net framework`
   * [Performance testing and nework throttling](./SauceExamples/SeleniumNunit/SaucePerformance/CustomCapabilitiesTests.cs) `.net framework`
+  * [Creating a shareable test url](https://github.com/saucelabs-training/demo-csharp/blob/88adafe1ce43c1497f3688c26b9f05534dde2246/DotnetCore/Sauce.Demo/Core.Selenium.Examples/SimpleSauceTests.cs#L62)
 
 
 ## 📱Mobile automation
