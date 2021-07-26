@@ -85,13 +85,14 @@ namespace Core.Selenium.Examples
 
             _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), browserOptions.ToCapabilities(),
                 TimeSpan.FromSeconds(30));
+            var sessionId = ((RemoteWebDriver) _driver).SessionId;
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");
 
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(6));
             wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("#user-name")));
 
             // share this with your teams
-            var testUrl = @"https://app.saucelabs.com/tests/" + ((RemoteWebDriver)_driver).SessionId;
+            var testUrl = "https://app.saucelabs.com/tests/" + sessionId;
         }
     }
 }
