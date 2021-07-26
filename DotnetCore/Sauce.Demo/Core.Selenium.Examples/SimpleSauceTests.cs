@@ -4,6 +4,8 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace Core.Selenium.Examples
 {
@@ -29,10 +31,10 @@ namespace Core.Selenium.Examples
         [TestMethod]
         public void EdgeW3C()
         {
-            //TODO please supply your Sauce Labs user name in an environment variable
-            _sauceUserName = Environment.GetEnvironmentVariable("SAUCE_USERNAME", EnvironmentVariableTarget.User);
-            //TODO please supply your own Sauce Labs access Key in an environment variable
-            _sauceAccessKey = Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY", EnvironmentVariableTarget.User);
+            //TODO please set your Sauce Labs username/access key in an environment variable
+            _sauceUserName = Environment.GetEnvironmentVariable("SAUCE_USERNAME");
+            // Do NOT use EnvironmentVariableTarget as it won't work in CI
+            _sauceAccessKey = Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY");
             _sauceOptions = new Dictionary<string, object>
             {
                 ["username"] = _sauceUserName,
@@ -52,7 +54,44 @@ namespace Core.Selenium.Examples
             _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), browserOptions.ToCapabilities(),
                 TimeSpan.FromSeconds(30));
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");
-            Assert.IsTrue(_driver.Url.Contains("saucedemo.com"));
+
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(6));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("#user-name")));
+        }
+        [TestMethod]
+        public void VisibilityTest()
+        {
+            //TODO please set your Sauce Labs username/access key in an environment variable
+            _sauceUserName = Environment.GetEnvironmentVariable("SAUCE_USERNAME");
+            // Do NOT use EnvironmentVariableTarget as it won't work in CI
+            _sauceAccessKey = Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY");
+            _sauceOptions = new Dictionary<string, object>
+            {
+                ["username"] = _sauceUserName,
+                ["accessKey"] = _sauceAccessKey,
+                ["name"] = TestContext.TestName,
+                //Set the visibility of your test: https://docs.saucelabs.com/test-results/sharing-test-results/index.html
+                ["public"] = "public"
+            };
+
+            var browserOptions = new EdgeOptions
+            {
+                BrowserVersion = "latest",
+                PlatformName = "Windows 10"
+                //AcceptInsecureCertificates = true //Insecure Certs are Not supported by Edge
+            };
+
+            browserOptions.AddAdditionalCapability("sauce:options", _sauceOptions);
+
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), browserOptions.ToCapabilities(),
+                TimeSpan.FromSeconds(30));
+            _driver.Navigate().GoToUrl("https://www.saucedemo.com");
+
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(6));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("#user-name")));
+
+            // share this with your teams
+            var testUrl = @"https://app.saucelabs.com/tests/" + ((RemoteWebDriver)_driver).SessionId;
         }
     }
 }
