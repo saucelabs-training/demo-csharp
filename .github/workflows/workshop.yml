@@ -6,10 +6,15 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  SCREENER_API_KEY: ${{ secrets.SCREENER_API_KEY }}
+  SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+  SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -18,27 +23,31 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      working-directory: './demo-csharp/DotnetCore/Sauce.Demo/'
+      #working-directory: './demo-csharp/DotnetCore/Sauce.Demo/'
       run: |
+        cd ./DotnetCore/Sauce.Demo/
         dotnet restore
     - name: Build
       run: |
-        cd demo-csharp\DotnetCore\Sauce.Demo
+        cd ./DotnetCore/Sauce.Demo/
         dotnet build --no-restore
     - name: Test desktop web
+      env:
+        SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+        SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
       run: |
-        cd demo-csharp\DotnetCore\Sauce.Demo
-        dotnet test .\Core.Selenium.Examples --filter TestCategory=desktop
+        cd ./DotnetCore/Sauce.Demo/
+        dotnet test ./Core.Selenium.Examples --filter TestCategory=desktop
     - name: Test emusim web
       run: |
-        cd demo-csharp\DotnetCore\Sauce.Demo
-        dotnet test .\Core.Selenium.Examples --filter TestCategory=emusim
+        cd ./DotnetCore/Sauce.Demo/
+        dotnet test ./Core.Selenium.Examples --filter TestCategory=emusim
     - name: Test rdc web
       run: |
-        cd demo-csharp\DotnetCore\Sauce.Demo
-        dotnet test .\Core.Selenium.Examples --filter TestCategory=rdc
+        cd ./DotnetCore/Sauce.Demo/
+        dotnet test ./Core.Selenium.Examples --filter TestCategory=rdc
     - name: Run all tests
       run: |
-        cd demo-csharp\DotnetCore\Sauce.Demo
-        dotnet test .\Core.Selenium.Examples
+        cd ./DotnetCore/Sauce.Demo/
+        dotnet test ./Core.Selenium.Examples
 

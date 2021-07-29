@@ -1,9 +1,8 @@
-﻿using Core.Common;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Enums;
 
-namespace Core.BestPractices.Web.Tests.Mobile
+namespace Core.Selenium.Examples.RDC.Web
 {
     public class MobileBaseTest : AllTestsBase
     {
@@ -16,7 +15,7 @@ namespace Core.BestPractices.Web.Tests.Mobile
             MobileOptions.AddAdditionalCapability(MobileCapabilityType.BrowserName, Browser);
             MobileOptions.AddAdditionalCapability("name", TestContext.CurrentContext.Test.Name);
             MobileOptions.AddAdditionalCapability("newCommandTimeout", 90);
-            MobileOptions.AddAdditionalCapability("build", Constants.BuildId);
+            MobileOptions.AddAdditionalCapability("build", Common.Constants.BuildId);
         }
 
         public readonly string DeviceName;

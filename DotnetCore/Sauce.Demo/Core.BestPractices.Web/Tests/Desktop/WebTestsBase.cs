@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Core.Common;
 using NUnit.Framework;
 
 namespace Core.BestPractices.Web.Tests.Desktop

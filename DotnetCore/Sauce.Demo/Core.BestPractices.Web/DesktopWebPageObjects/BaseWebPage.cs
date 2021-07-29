@@ -1,3 +1,4 @@
+using Core.Common;
 using OpenQA.Selenium;
 
 namespace Core.BestPractices.Web.DesktopWebPageObjects

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.BestPractices.Web
+namespace Core.Common
 {
     public class SauceLabsEndpoint
     {

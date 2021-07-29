@@ -1,5 +1,6 @@
 using System;
 using Core.BestPractices.Web.DesktopWebPageObjects;
+using Core.Common;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.iOS;
 

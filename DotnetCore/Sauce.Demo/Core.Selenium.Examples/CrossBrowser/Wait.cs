@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
-namespace Core.BestPractices.Web
+namespace Core.Selenium.Examples.CrossBrowser
 {
     public class Wait
     {

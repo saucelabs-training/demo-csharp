@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.BestPractices.Web
+namespace Core.Selenium.Examples
 {
     public static class Constants
     {

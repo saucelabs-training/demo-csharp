@@ -1,15 +1,19 @@
-﻿using Core.BestPractices.Web.MobileWebPageObjects.Android;
+﻿using System;
 using Core.Common;
-using FluentAssertions;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.Enums;
+using OpenQA.Selenium.Support.UI;
+using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
-namespace Core.BestPractices.Web.Tests.Mobile.Android
+namespace Core.Selenium.Examples.Emusim.Web.End
 {
     [TestFixture]
-    [TestFixtureSource(typeof(TestConfigData), nameof(TestConfigData.PopularAndroidSimulators))]
+    [TestFixtureSource(typeof(TestConfigData), nameof(TestConfigData.AndroidSimulators))]
+    [Category("emusim")]
+    [Category("android-end")]
     public class AndroidEmusimTests : EmusimBaseTest
     {
         [SetUp]
@@ -43,11 +47,17 @@ namespace Core.BestPractices.Web.Tests.Mobile.Android
         }
 
         [Test]
-        public void LoginPageOpens()
+        [Retry(1)]
+        public void ValidUserCanLogin()
         {
-            var loginPage = new LoginPage(_driver);
-            loginPage.Visit();
-            loginPage.IsVisible().Should().NotThrow();
+            _driver.Navigate().GoToUrl("https://www.saucedemo.com");
+            // Appium doesn't accept Ids as a locator strategy. Better to use CssSelector
+            _driver.FindElement(By.CssSelector("#user-name")).SendKeys("standard_user");
+            _driver.FindElement(By.CssSelector("#password")).SendKeys("secret_sauce");
+            _driver.FindElement(By.CssSelector(".btn_action")).Click();
+
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("#inventory_container")));
         }
     }
 }

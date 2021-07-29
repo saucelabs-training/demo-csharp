@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Selenium.Examples", "Core.Selenium.Examples\Core.Selenium.Examples.csproj", "{A191F1BF-F80A-4EB3-B883-E519C0CDAC56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.BestPractices.Web", "Core.BestPractices.Web\Core.BestPractices.Web.csproj", "{14354D79-1A45-43A6-9F28-C3F910232DE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.BestPractices.Web", "Core.BestPractices.Web\Core.BestPractices.Web.csproj", "{14354D79-1A45-43A6-9F28-C3F910232DE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common", "Core.Common\Core.Common.csproj", "{820866CE-01F3-4695-9886-702B0AAB3CF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{14354D79-1A45-43A6-9F28-C3F910232DE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14354D79-1A45-43A6-9F28-C3F910232DE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14354D79-1A45-43A6-9F28-C3F910232DE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{820866CE-01F3-4695-9886-702B0AAB3CF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{820866CE-01F3-4695-9886-702B0AAB3CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{820866CE-01F3-4695-9886-702B0AAB3CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{820866CE-01F3-4695-9886-702B0AAB3CF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

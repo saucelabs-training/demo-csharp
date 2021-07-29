@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using System.Threading;
+using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace Core.Selenium.Examples
 {
     [TestClass]
-    public class SimpleSauceTests
+    public class DesktopTests
     {
         private IWebDriver _driver;
         private string _sauceUserName;
@@ -56,7 +58,7 @@ namespace Core.Selenium.Examples
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");
 
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(6));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("#user-name")));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#user-name")));
         }
         [TestMethod]
         public void VisibilityTest()

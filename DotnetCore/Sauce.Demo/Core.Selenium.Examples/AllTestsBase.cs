@@ -9,7 +9,7 @@ using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.iOS;
 using OpenQA.Selenium.Remote;
 
-namespace Core.BestPractices.Web.Tests
+namespace Core.Selenium.Examples
 {
     [TestFixture]
     public class AllTestsBase

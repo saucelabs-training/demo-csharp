@@ -5,8 +5,8 @@
 
 trigger: 
   branches:
-    include: 
-    - master
+    include:
+      - 2_hr_workshop
 
 pool:
   vmImage: 'windows-latest'
@@ -20,16 +20,23 @@ variables:
   SAUCE_ACCESS_KEY: $(sauceKey)
 
 steps:
-- task: NuGetToolInstaller@1
-- task: NuGetCommand@2
+- task: UseDotNet@2
   inputs:
-    restoreSolution: '$(solution)'
+    version: '5.0.x'
+  
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    command: 'build'
+    projects: '**DotnetCore/Sauce.Demo/Core.Selenium.Examples/**.csproj'
+    configuration: $(buildConfiguration)
+
 - bash: echo $(SAUCE_USERNAME)
 - task: DotNetCoreCLI@2
   displayName: 'Run desktop tests'
   inputs:
     command: test
-    projects: '**DotnetCore/Sauce.Demo/*.csproj'
+    projects: '**DotnetCore/Sauce.Demo/Core.Selenium.Examples/**.csproj'
     arguments: '--configuration $(buildConfiguration) --filter TestCategory=desktop'
   # Can also reference env variables in a single task
   env:
