@@ -30,21 +30,20 @@ In this repository, you will find a cohesive Greybox (we have some insight into 
 | App is secure  | 🙅‍♂️ | Not covered here, but something to consider for testing strategy  |   |
 
 
-## Running tests
+## ⚙️Setup
 
-[Download .NET 5](https://dotnet.microsoft.com/download)
+* [Download .NET 5](https://dotnet.microsoft.com/download)
+* Open terminal and run `dotnet --info` to ensure installation.
+* `git clone https://github.com/saucelabs-training/demo-csharp.git`
+* Download an IDE of your choice. Probably VS for Mac, or VS Code.
 
-Open terminal and run `dotnet` to ensure installation.
+## Running all tests
 
-`git clone https://github.com/saucelabs-training/demo-csharp.git`
-
-Download an IDE of your choice. Probably VS for Mac, or VS Code.
-
-Run all the tests inside of the `Core.BestPractices.Web.csproj`
+* Run all the tests inside of the `Core.BestPractices.Web.csproj`
 
 ```bash
 git clone https://github.com/saucelabs-training/demo-csharp.git
-cd .\DotnetCore\Sauce.Demo\Core.BestPractices.Web
+cd demo-csharp/DotnetCore/Sauce.Demo/Core.BestPractices.Web/
 dotnet test
 ```
 
@@ -52,7 +51,7 @@ dotnet test
 
 ```bash
 git clone https://github.com/saucelabs-training/demo-csharp.git
-cd .\DotnetCore\Sauce.Demo\Core.BestPractices.Web
+cd demo-csharp/DotnetCore/Sauce.Demo/Core.BestPractices.Web/
 dotnet test --filter Name=AccessibilityTest
 ```
 
