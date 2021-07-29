@@ -10,6 +10,8 @@ In this repository, you will find a cohesive Greybox (we have some insight into 
 
 ✅ Visual testing
 
+✅ Accessibility testing
+
 ✅ CICD pipeline executed on push and PR
 
 ✅ Sauce Labs cloud infrastructure
@@ -22,10 +24,11 @@ In this repository, you will find a cohesive Greybox (we have some insight into 
 | Every web page of the app looks correct on mobile  | ✅ | Visual test on real mobile devices | A visual test efficiently validates app rendering | Appium, Screener.io |
 | A user can successfully check out on desktop  | ✅ | Functional web test  | Functional testing of the most critical functionality is important | Selenium |
 | A user can successfully check out on mobile  | ✅ | Functional mobile test  | Although redundant to a functional web test, it's relatively easy to test this on a mobile device as well  | Appium |
+| App is accessibility friendly  | ✅ | Selenium web test | Accessibility in applications is becoming extremely important  | Selenium, Axe
 | Front-end performance is at least an A  | 🙅‍♂️ | Front-end performance test  | Front-end perf is an important aspect of any digital quality effort | Selenium, Sauce Labs |
 | Test code runs on every commit in under 5 minutes  | 🙅‍♂️ | CICD  | Slow feedback makes it hard to iterate  | Github Actions |
 | App is secure  | 🙅‍♂️ | Not covered here, but something to consider for testing strategy  |   |
-| App is accessibility friendly  | 🙅‍♂️ | Not covered here, but something to consider for testing strategy |   |
+
 
 ## Running tests
 
@@ -38,8 +41,19 @@ Open terminal and run `dotnet` to ensure installation.
 Download an IDE of your choice. Probably VS for Mac, or VS Code.
 
 Run all the tests inside of the `Core.BestPractices.Web.csproj`
+
 ```bash
 git clone https://github.com/saucelabs-training/demo-csharp.git
 cd .\DotnetCore\Sauce.Demo\Core.BestPractices.Web
 dotnet test
 ```
+
+### Run accessibility test
+
+```bash
+git clone https://github.com/saucelabs-training/demo-csharp.git
+cd .\DotnetCore\Sauce.Demo\Core.BestPractices.Web
+dotnet test --filter Name=AccessibilityTest
+```
+
+

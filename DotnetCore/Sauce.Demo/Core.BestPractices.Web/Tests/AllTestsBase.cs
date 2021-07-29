@@ -17,15 +17,15 @@ namespace Core.BestPractices.Web.Tests
         public IWebDriver Driver { get; set; }
 
         public string SauceUserName =>
-            Environment.GetEnvironmentVariable("SAUCE_USERNAME", EnvironmentVariableTarget.User);
+            Environment.GetEnvironmentVariable("SAUCE_USERNAME");
 
         public string SauceAccessKey =>
-            Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY", EnvironmentVariableTarget.User);
+            Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY");
 
         public Dictionary<string, object> SauceOptions;
 
         public string ScreenerApiKey =>
-            Environment.GetEnvironmentVariable("SCREENER_API_KEY", EnvironmentVariableTarget.User);
+            Environment.GetEnvironmentVariable("SCREENER_API_KEY");
 
         public IJavaScriptExecutor JsExecutor => (IJavaScriptExecutor) Driver;
 
