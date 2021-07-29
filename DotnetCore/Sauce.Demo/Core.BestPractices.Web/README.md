@@ -42,7 +42,6 @@ In this repository, you will find a cohesive Greybox (we have some insight into 
 * Run all the tests inside of the `Core.BestPractices.Web.csproj`
 
 ```bash
-git clone https://github.com/saucelabs-training/demo-csharp.git
 cd demo-csharp/DotnetCore/Sauce.Demo/Core.BestPractices.Web/
 dotnet test
 ```
@@ -50,7 +49,6 @@ dotnet test
 ### Run accessibility test
 
 ```bash
-git clone https://github.com/saucelabs-training/demo-csharp.git
 cd demo-csharp/DotnetCore/Sauce.Demo/Core.BestPractices.Web/
 dotnet test --filter Name=AccessibilityTest
 ```
