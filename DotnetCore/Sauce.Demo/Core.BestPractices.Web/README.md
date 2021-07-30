@@ -50,7 +50,14 @@ dotnet test
 
 ```bash
 cd demo-csharp/DotnetCore/Sauce.Demo/Core.BestPractices.Web/
-dotnet test --filter Name=AccessibilityTest
+dotnet test --filter Name=AccessibilityTest --verbosity normal
+```
+
+### Run visual tests
+
+```
+cd demo-csharp/DotnetCore/Sauce.Demo/Core.BestPractices.Web/
+dotnet test --filter VisualTests --verbosity normal
 ```
 
 
