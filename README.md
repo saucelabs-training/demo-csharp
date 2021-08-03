@@ -6,16 +6,16 @@ This directory contains example scripts and dependencies for running automated S
 
 ## 🖥 Web automation
 
-* **🥇Best practice frameworks for web testing**
+### 🥇Best practice frameworks for web testing
   * [Production-level framework doing web automation on desktop and mobile](./DotnetCore/Sauce.Demo/Core.BestPractices.Web) `.net` `best practice` `appium` `visual` `accessibility` `cross-browser` `parallel`
   * [👁‍🗨Visual e2e framework](./DotnetCore/Sauce.Demo/Core.BestPractices.Web/Tests/Desktop/VisualTests.cs) `.net` `best practice`
   * [📱Real devices framework](./DotnetCore/Sauce.Demo/Core.BestPractices.Web/Tests/Mobile) `.net` `best practice`
   
-* **Code Examples**
+### Code Examples
 
 All examples are using .NET and Mstest unless specified
 
-  * [Simple W3C Selenium test](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/SimpleSauceTests.cs) `.net` `mstest`
+  * [Simple W3C Selenium test](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/DesktopTests.cs)
   * [Accessibility Test](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/AxeAccesibility.cs) `.net` `mstest`
   * [Quick start with Selenium](./SauceExamples/SeleniumNunit/SimpleExamples/SimpleSauceTest.cs) `.net framework`
   * [Parallel, cross-browser, NUnit, Selenium](./SauceExamples/Web.Tests/BestPractices/test) `.net framework`
@@ -33,10 +33,11 @@ All examples are using .NET and Mstest unless specified
 
 ## 📱Mobile automation
 
-* **🥇Best practice frameworks for mobile testing**
-  * [Mobile automation framework](./SauceExamples/Core.Appium.MsTest.BestPractices)`.net` `best practice` `nunit`
+### 🥇Best practice frameworks for mobile testing
+  * [Mobile automation framework for native apps](./SauceExamples/Core.Appium.MsTest.BestPractices)`.net` `best practice` `nunit`
+  * [📱Mobile testing framework for web](./DotnetCore/Sauce.Demo/Core.BestPractices.Web/Tests/Mobile) `.net` `best practice` `nunit`
 
-* **Examples**
+### Examples
   * Emusim
     * Web
       * [Web test on emusim w/ Android](./SauceExamples/Core.Appium.MsTest.Scripts/Emusim/Browser/AndroidWebTests.cs)
