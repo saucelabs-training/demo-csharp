@@ -7,8 +7,12 @@ solutions.
 ## Run the tests
 
 * Clone the code
-* `cd SauceExamples\Core.Appium.MsTest.BestPractices`
-* run `dotnet test`
+
+```bash
+cd demo-csharp/SauceExamples/Core.Appium.MsTest.BestPractices
+dotnet test --verbosity normal
+```
+
 * Output will look something like this
 ```
 Determining projects to restore...
