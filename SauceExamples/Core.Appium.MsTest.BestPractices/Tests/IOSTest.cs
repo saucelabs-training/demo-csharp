@@ -9,7 +9,7 @@ using OpenQA.Selenium.Appium.iOS;
 
 namespace Core.Appium.Nunit.BestPractices.Tests
 {
-    public class IosTest
+    public class IosTest : BaseNativeAppTest
     {
         private readonly string _deviceName;
         public IOSDriver<IOSElement> Driver;
@@ -18,14 +18,6 @@ namespace Core.Appium.Nunit.BestPractices.Tests
         {
             _deviceName = deviceName;
         }
-
-        public static string HubUrlPart => "ondemand.us-west-1.saucelabs.com/wd/hub";
-        public string SauceUser => Environment.GetEnvironmentVariable("SAUCE_USERNAME", EnvironmentVariableTarget.User);
-
-        public string SauceAccessKey =>
-            Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY", EnvironmentVariableTarget.User);
-
-        public string Url => $"https://{SauceUser}:{SauceAccessKey}@{HubUrlPart}";
 
         [SetUp]
         public void Setup()

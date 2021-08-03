@@ -14,6 +14,7 @@ namespace Core.Appium.Nunit.BestPractices.Tests
         }
 
         [Test]
+        [Retry(1)]
         public void ShouldOpenApp()
         {
             var loginScreen = new LoginScreen(Driver);
@@ -21,6 +22,7 @@ namespace Core.Appium.Nunit.BestPractices.Tests
         }
 
         [Test]
+        [Retry(1)]
         public void ShouldLogin()
         {
             var loginScreen = new LoginScreen(Driver);
