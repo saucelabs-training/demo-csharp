@@ -1,18 +1,23 @@
-# Dotnet Core Sauce Examples
+# Dotnet Sauce Examples
 
-## Run tests
+All examples in this repo are using the latest version of .NET. .NET Framework is now obsolete, but those examples are here.
 
-* Download the latest [.NET Version](https://dotnet.microsoft.com/download) (not .NET Core)
+## ⚙️Setup
+* Download [.NET](https://dotnet.microsoft.com/download) (not .NET Core)
+* Open terminal and run dotnet --info to ensure installation.
+* `git clone https://github.com/saucelabs-training/demo-csharp.git`
+* Download an IDE of your choice. Probably VS for Mac, or VS Code.
+
+## TOC
+
+* [Best practices for web testing](./DotnetCore/Sauce.Demo/Core.BestPractices.Web)
+* [Selenium examples](./DotnetCore/Sauce.Demo/Core.Selenium.Examples)
+
+## Running all tests
+
+* Run all the tests inside of the `Core.BestPractices.Web.csproj`
 
 ```bash
-git clone https://github.com/saucelabs-training/demo-csharp.git
-cd .\DotnetCore\Sauce.Demo\
+cd demo-csharp/DotnetCore/Sauce.Demo/Core.BestPractices.Web/
 dotnet test
-```
-
-### Run best practices framework
-
-```bash
-cd .\DotnetCore\Sauce.Demo\
-dotnet test .\Core.BestPractices.Web\Core.BestPractices.Web.csproj
 ```
