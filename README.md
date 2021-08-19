@@ -30,6 +30,9 @@ All examples are using .NET and Mstest unless specified
   * [Performance testing and nework throttling](./SauceExamples/SeleniumNunit/SaucePerformance/CustomCapabilitiesTests.cs) `.net framework`
   * [Creating a shareable test url](https://github.com/saucelabs-training/demo-csharp/blob/88adafe1ce43c1497f3688c26b9f05534dde2246/DotnetCore/Sauce.Demo/Core.Selenium.Examples/SimpleSauceTests.cs#L62)
 
+### 📕Training
+
+* [Visual E2E testing](https://youtu.be/j3VFrnXZWfo)
 
 ## 📱Mobile automation
 
