@@ -5,8 +5,6 @@ using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
-using System.Threading;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace Core.Selenium.Examples
@@ -51,7 +49,7 @@ namespace Core.Selenium.Examples
                 //AcceptInsecureCertificates = true //Insecure Certs are Not supported by Edge
             };
 
-            browserOptions.AddAdditionalCapability("sauce:options", _sauceOptions);
+            browserOptions.AddAdditionalOption("sauce:options", _sauceOptions);
 
             _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), browserOptions.ToCapabilities(),
                 TimeSpan.FromSeconds(30));
@@ -83,7 +81,7 @@ namespace Core.Selenium.Examples
                 //AcceptInsecureCertificates = true //Insecure Certs are Not supported by Edge
             };
 
-            browserOptions.AddAdditionalCapability("sauce:options", _sauceOptions);
+            browserOptions.AddAdditionalOption("sauce:options", _sauceOptions);
 
             _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), browserOptions.ToCapabilities(),
                 TimeSpan.FromSeconds(30));

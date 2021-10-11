@@ -35,11 +35,8 @@ namespace Core.Selenium.Examples.CrossBrowser.End
                 ["build"] = DateTime.Now.ToString("F")
             };
 
-            if (BrowserOptions.BrowserName == "chrome")
-                ((ChromeOptions) BrowserOptions).AddAdditionalCapability("sauce:options", SauceOptions, true);
-            else
-                BrowserOptions.AddAdditionalCapability("sauce:options", SauceOptions);
-            Driver = GetDesktopDriver(BrowserOptions.ToCapabilities());
+            BrowserOptions.AddAdditionalOption("sauce:options", SauceOptions);
+            Driver = GetDesktopDriver(BrowserOptions);
         }
 
         public void ExecuteSauceCleanupSteps(IWebDriver driver)
@@ -60,7 +57,13 @@ namespace Core.Selenium.Examples.CrossBrowser.End
 
         public Dictionary<string, object> SauceOptions { get; set; }
 
+        [Obsolete("Use DriverOptions instead of ICapabilities.")]
         public IWebDriver GetDesktopDriver(ICapabilities browserOptions)
+        {
+            return new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), browserOptions);
+        }
+
+        public IWebDriver GetDesktopDriver(DriverOptions browserOptions)
         {
             return new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), browserOptions);
         }

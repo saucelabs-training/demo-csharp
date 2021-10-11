@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -20,7 +19,6 @@ namespace Core.Selenium.Examples
         {
             var browserOptions = new ChromeOptions
             {
-                UseSpecCompliantProtocol = true,
                 PlatformName = "Windows 10",
                 BrowserVersion = "latest"
             };
@@ -30,12 +28,13 @@ namespace Core.Selenium.Examples
                 { "username", Environment.GetEnvironmentVariable("SAUCE_USERNAME") },
                 { "accessKey", Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY") }
             };
-            browserOptions.AddAdditionalCapability("sauce:options", sauceOptions, true);
+            browserOptions.AddAdditionalOption("sauce:options", sauceOptions);
             _webDriver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), browserOptions);
             _webDriver.Navigate().GoToUrl("https://www.saucedemo.com");
             var results = _webDriver.Analyze();
             Assert.IsNull(results.Error);
         }
+
         [TestCleanup]
         public void Teardown()
         {
