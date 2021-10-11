@@ -11,7 +11,7 @@ All examples in this repo are using the latest version of .NET. .NET Framework i
 ## TOC
 
 * [Best practices for web testing](./DotnetCore/Sauce.Demo/Core.BestPractices.Web)
-* [Selenium examples](./DotnetCore/Sauce.Demo/Core.Selenium.Examples)
+* [Selenium test](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/DesktopTests.cs)
 
 ## Running all tests
 
