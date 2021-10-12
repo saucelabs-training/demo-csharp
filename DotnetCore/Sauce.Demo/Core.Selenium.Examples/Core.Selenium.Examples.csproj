@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Core.Common\Core.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Selenium4\Resources\.keep" />
+  </ItemGroup>
+
 </Project>
