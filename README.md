@@ -15,8 +15,9 @@ This directory contains example scripts and dependencies for running automated S
 
 All examples are using .NET and Mstest unless specified
 
-  * [Simple W3C Selenium test](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/DesktopTests.cs) `.net` `mstest`
+  * [Simple W3C Selenium test](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/Selenium4Demo.cs) `.net` `mstest` `selenium4`
   * [Accessibility Test](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/AxeAccesibility.cs) `.net` `mstest`
+  * [Selenium 4 New Features](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/Selenium4/NewFeatures) `.net` `mstest` `selenium4`
   * [Quick start with Selenium](./SauceExamples/SeleniumNunit/SimpleExamples/SimpleSauceTest.cs) `.net framework`
   * [Parallel, cross-browser, NUnit, Selenium](./SauceExamples/Web.Tests/BestPractices/test) `.net framework`
   * [Selenium W3C examples](./SauceExamples/Selenium4DotNetFramework/Selenium4SauceTests.cs) `.net framework`
