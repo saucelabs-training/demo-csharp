@@ -21,7 +21,7 @@ In this repository, you will find a cohesive Greybox (we have some insight into 
 | Expected Behavior  | Tested? | Test Type  | Rationale  | Tech |
 |---|---|---|---|---|
 | Every web page of the app looks correct on desktop | ✅ | Visual test | A visual test efficiently validates app rendering | Selenium, Screener.io |
-| Every web page of the app looks correct on mobile  | ✅ | Visual test on real mobile devices | A visual test efficiently validates app rendering | Appium, Screener.io |
+| Every web page of the app looks correct on mobile  | ✅ | Visual test | A visual test efficiently validates app rendering | Selenium, Screener.io |
 | A user can successfully check out on desktop  | ✅ | Functional web test  | Functional testing of the most critical functionality is important | Selenium |
 | A user can successfully check out on mobile  | ✅ | Functional mobile test  | Although redundant to a functional web test, it's relatively easy to test this on a mobile device as well  | Appium |
 | App is accessibility friendly  | ✅ | Selenium web test | Accessibility in applications is becoming extremely important  | Selenium, Axe
