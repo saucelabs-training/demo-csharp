@@ -13,11 +13,15 @@ All examples in this repo are using the latest version of .NET. .NET Framework i
 * [Best practices for web testing](./DotnetCore/Sauce.Demo/Core.BestPractices.Web)
 * [Selenium test](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/DesktopTests.cs)
 
-## Running all tests
+## Running tests
 
 * Run all the tests inside of the `Core.BestPractices.Web.csproj`
 
 ```bash
 cd demo-csharp/DotnetCore/Sauce.Demo/Core.BestPractices.Web/
+# run all tests
 dotnet test
+# run only visual tests
+cd demo-csharp/DotnetCore/Sauce.Demo/Core.Selenium.Examples
+dotnet test --filter VisualTestOnChrome
 ```
