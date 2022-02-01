@@ -26,7 +26,7 @@ All examples are using .NET and Mstest unless specified
   * [Sauce Labs REST API](./SauceExamples/SeleniumNunit/SimpleExamples/RestApiForVdc.cs) `.net framework`
   * [Set pass/fail status,Selenium,NUnit](https://github.com/saucelabs-training/demo-csharp/blob/5d7e8731e4120ae381d8ff14bcf58d672b3bc2fc/SauceExamples/Web.Tests/BestPractices/test/BaseTest.cs#L60) `.net framework`
   * [Set pass/fail status,Selenium,MsTest](https://github.com/saucelabs-training/demo-csharp/blob/5d7e8731e4120ae381d8ff14bcf58d672b3bc2fc/SauceExamples/SeleniumMsTest/ParallelTests/DataDriven/DataDrivenCrossBrowserParallelMethods.cs#L84) `.net framework`
-  * [Visual E2E](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/VisualTests) `.net`
+  * [Visual E2E](./DotnetCore/Sauce.Demo/Core.Selenium.Examples/VisualTests.cs) `.net`
   * [Visual E2E](./SauceExamples/SeleniumNunit/Visual) `.net framework`
   * [Front-end perf testing examples](./SauceExamples/SeleniumNunit/SaucePerformance/PerformanceDemo.cs) `.net framework`
   * [Performance testing and nework throttling](./SauceExamples/SeleniumNunit/SaucePerformance/CustomCapabilitiesTests.cs) `.net framework`
