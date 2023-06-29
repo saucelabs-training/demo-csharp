@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Safari;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 
@@ -12,7 +14,7 @@ namespace Dotnet
     public class SeleniumWeb
     {
         [TestMethod]
-        public void SimpleTest()
+        public void GitpodWebTest()
         {
             Assert.IsTrue(true);
         }
@@ -23,23 +25,32 @@ namespace Dotnet
         [TestInitialize]
         public void Setup()
         {
-            var browserOptions = new ChromeOptions();
-            browserOptions.PlatformName = "Windows 10";
-            browserOptions.BrowserVersion = "latest";
+            DriverOptions browserOptions;
+            if (Environment.GetEnvironmentVariable("BROWSER_NAME") == "Firefox") {
+                browserOptions = new FirefoxOptions();
+            } else if (Environment.GetEnvironmentVariable("BROWSER_NAME") == "Safari") {
+                browserOptions = new SafariOptions();
+            } else {
+                browserOptions = new ChromeOptions();
+            }
+            browserOptions.PlatformName = Environment.GetEnvironmentVariable("PLATFORM_NAME") ?? "Windows 11";
+            browserOptions.BrowserVersion = Environment.GetEnvironmentVariable("BROWSER_VERSION") ?? "latest";
 
             var sauceOptions = new Dictionary<string, object>();
             sauceOptions.Add("name", TestContext.TestName);
             sauceOptions.Add("username", Environment.GetEnvironmentVariable("SAUCE_USERNAME"));
             sauceOptions.Add("accessKey", Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY"));
+            sauceOptions.Add("build", Environment.GetEnvironmentVariable("BUILD"));
 
             browserOptions.AddAdditionalOption("sauce:options", sauceOptions);
-            var sauceUrl = new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub");
+            var region = Environment.GetEnvironmentVariable("REGION") ?? "us-west-1";
+            var sauceUrl = new Uri("https://ondemand." + region + ".saucelabs.com/wd/hub");
 
             Driver = new RemoteWebDriver(sauceUrl, browserOptions);
         }
 
         [TestMethod]
-        public void LoginTest()
+        public void GitpodSauceDemoTest()
         {
             Driver.Navigate().GoToUrl("https://www.saucedemo.com");
 
