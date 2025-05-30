@@ -15,12 +15,12 @@ public class TestBase
 
     static TestBase()
     {
-        BuildName = "DotNet MSTest Examples";
+        BuildName = "DotNet MSTest Examples Async";
         string buildNumber = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
         BuildIdentifier = $"{BuildName}: {buildNumber}";
     }
-    
-    protected void StartChromeSession(TestContext context)
+
+    protected virtual Task StartChromeSessionAsync(TestContext context)
     {
         testName = context.TestName;
 
@@ -36,6 +36,8 @@ public class TestBase
 
         driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), options);
         sessionId = ((RemoteWebDriver)driver).SessionId.ToString();
+
+        return Task.CompletedTask;
     }
 
     private static Dictionary<string, object> DefaultSauceOptions(TestContext context)
@@ -50,12 +52,30 @@ public class TestBase
         };
     }
 
-    protected void QuitSession(TestContext context)
+    protected async Task RunWithReporting(Func<Task> testBody)
+    {
+        bool passed = false;
+
+        try
+        {
+            await testBody().ConfigureAwait(false);
+            passed = true;
+        }
+        finally
+        {
+            await QuitSessionAsync(passed).ConfigureAwait(false);
+        }
+    }
+
+    protected virtual Task QuitSessionAsync(bool passed)
     {
         try
         {
-            string result = context.CurrentTestOutcome == UnitTestOutcome.Passed ? "passed" : "failed";
-            ((IJavaScriptExecutor)driver).ExecuteScript($"sauce:job-result={result}");
+            if (driver is IJavaScriptExecutor executor)
+            {
+                var result = passed ? "passed" : "failed";
+                executor.ExecuteScript($"sauce:job-result={result}");
+            }
         }
         catch (Exception e)
         {
@@ -63,14 +83,11 @@ public class TestBase
         }
         finally
         {
-            PrintResults();
+            Console.WriteLine($"SauceOnDemandSessionID={sessionId} job-name={testName}");
+            Console.WriteLine($"Test Job Link: https://app.saucelabs.com/tests/{sessionId}");
             driver?.Quit();
         }
-    }
 
-    private void PrintResults()
-    {
-        Console.WriteLine($"SauceOnDemandSessionID={sessionId} job-name={testName}");
-        Console.WriteLine($"Test Job Link: https://app.saucelabs.com/tests/{sessionId}");
+        return Task.CompletedTask;
     }
 }
