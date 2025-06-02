@@ -7,65 +7,84 @@ namespace NUnitExamples.demo;
 [Parallelizable(ParallelScope.All)]
 public class NavigationTests : TestBase
 {
-
     [Test]
-    public void CancelFromCart()
+    public async Task CancelFromCart()
     {
-        Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
-        Driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("standard_user");
-        Driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
-        Driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
-        Driver.FindElement(By.ClassName("shopping_cart_link")).Click();
-        Driver.FindElement(By.CssSelector("button[data-test='continue-shopping']")).Click();
+        await RunWithReporting(async () =>
+        {
+            await StartChromeSessionAsync();
+            
+            Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
+            Driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("standard_user");
+            Driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
+            Driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
+            Driver.FindElement(By.ClassName("shopping_cart_link")).Click();
+            Driver.FindElement(By.CssSelector("button[data-test='continue-shopping']")).Click();
 
-        Assert.That(Driver.Url, Is.EqualTo("https://www.saucedemo.com/inventory.html"));
+            Assert.That(Driver.Url, Is.EqualTo("https://www.saucedemo.com/inventory.html"));
+        });
     }
 
     [Test]
-    public void CancelFromInfoPage()
+    public async Task CancelFromInfoPage()
     {
-        Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
-        Driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("standard_user");
-        Driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
-        Driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
-        Driver.FindElement(By.CssSelector("button[data-test='add-to-cart-sauce-labs-onesie']")).Click();
-        Driver.FindElement(By.ClassName("shopping_cart_link")).Click();
-        Driver.FindElement(By.CssSelector("button[data-test='checkout']")).Click();
-        Driver.FindElement(By.CssSelector("button[data-test='cancel']")).Click();
+        await RunWithReporting(async () =>
+        {
+            await StartChromeSessionAsync();
+            
+            Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
+            Driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("standard_user");
+            Driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
+            Driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
+            Driver.FindElement(By.CssSelector("button[data-test='add-to-cart-sauce-labs-onesie']")).Click();
+            Driver.FindElement(By.ClassName("shopping_cart_link")).Click();
+            Driver.FindElement(By.CssSelector("button[data-test='checkout']")).Click();
+            Driver.FindElement(By.CssSelector("button[data-test='cancel']")).Click();
 
-        Assert.That(Driver.Url, Is.EqualTo("https://www.saucedemo.com/cart.html"));
+            Assert.That(Driver.Url, Is.EqualTo("https://www.saucedemo.com/cart.html"));
+        });
     }
 
     [Test]
-    public void CancelFromCheckoutPage()
+    public async Task CancelFromCheckoutPage()
     {
-        Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
-        Driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("standard_user");
-        Driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
-        Driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
-        Driver.FindElement(By.CssSelector("button[data-test='add-to-cart-sauce-labs-onesie']")).Click();
-        Driver.FindElement(By.ClassName("shopping_cart_link")).Click();
-        Driver.FindElement(By.CssSelector("button[data-test='checkout']")).Click();
-        Driver.FindElement(By.CssSelector("input[data-test='firstName']")).SendKeys("Luke");
-        Driver.FindElement(By.CssSelector("input[data-test='lastName']")).SendKeys("Perry");
-        Driver.FindElement(By.CssSelector("input[data-test='postalCode']")).SendKeys("90210");
-        Driver.FindElement(By.CssSelector("input[data-test='continue']")).Click();
-        Driver.FindElement(By.CssSelector("button[data-test='cancel']")).Click();
+        await RunWithReporting(async () =>
+        {
+            await StartChromeSessionAsync();
+            
+            Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
+            Driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("standard_user");
+            Driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
+            Driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
+            Driver.FindElement(By.CssSelector("button[data-test='add-to-cart-sauce-labs-onesie']")).Click();
+            Driver.FindElement(By.ClassName("shopping_cart_link")).Click();
+            Driver.FindElement(By.CssSelector("button[data-test='checkout']")).Click();
+            Driver.FindElement(By.CssSelector("input[data-test='firstName']")).SendKeys("Luke");
+            Driver.FindElement(By.CssSelector("input[data-test='lastName']")).SendKeys("Perry");
+            Driver.FindElement(By.CssSelector("input[data-test='postalCode']")).SendKeys("90210");
+            Driver.FindElement(By.CssSelector("input[data-test='continue']")).Click();
+            Driver.FindElement(By.CssSelector("button[data-test='cancel']")).Click();
 
-        Assert.That(Driver.Url, Is.EqualTo("https://www.saucedemo.com/inventory.html"));
+            Assert.That(Driver.Url, Is.EqualTo("https://www.saucedemo.com/inventory.html"));
+        });
     }
 
     [Test]
-    public void StartCheckout()
+    public async Task StartCheckout()
     {
-        Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
-        Driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("standard_user");
-        Driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
-        Driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
-        Driver.FindElement(By.CssSelector("button[data-test='add-to-cart-sauce-labs-onesie']")).Click();
-        Driver.FindElement(By.ClassName("shopping_cart_link")).Click();
-        Driver.FindElement(By.CssSelector("button[data-test='checkout']")).Click();
+        await RunWithReporting(async () =>
+        {
+            await StartChromeSessionAsync();
+            
+            Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
+            Driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("standard_user");
+            Driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
+            Driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
+            Driver.FindElement(By.CssSelector("button[data-test='add-to-cart-sauce-labs-onesie']")).Click();
+            Driver.FindElement(By.ClassName("shopping_cart_link")).Click();
+            Driver.FindElement(By.CssSelector("button[data-test='checkout']")).Click();
 
-        Assert.That(Driver.Url, Is.EqualTo("https://www.saucedemo.com/checkout-step-one.html"));
+            Assert.That(Driver.Url, Is.EqualTo("https://www.saucedemo.com/checkout-step-one.html"));
+        });
     }
 }

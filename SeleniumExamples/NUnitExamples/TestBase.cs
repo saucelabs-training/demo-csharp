@@ -9,7 +9,7 @@ namespace NUnitExamples;
 // Immutable build info for clarity
 public static class BuildInfo
 {
-    public static readonly string Name = "DotNet NUnit Examples";
+    public static readonly string Name = "DotNet NUnit Examples Async";
     public static readonly string Identifier = $"{Name}: {DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()}";
 }
 
@@ -17,12 +17,13 @@ public static class BuildInfo
 [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
 public abstract class TestBase
 {
-    public required IWebDriver Driver { get; set; }
+    protected IWebDriver Driver { get; private set; } = null!;
+    private string? sessionId;
+    private string? testName;
 
-    [SetUp]
-    public void BaseSetUp()
+    protected virtual Task StartChromeSessionAsync()
     {
-        string testName = TestContext.CurrentContext.Test.Name;
+        testName = TestContext.CurrentContext.Test.Name;
 
         var options = new ChromeOptions();
         options.AddUserProfilePreference("profile.password_manager_leak_detection", false);
@@ -40,21 +41,46 @@ public abstract class TestBase
         options.PlatformName = "Windows 11";
 
         Driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), options);
+        
+        if (Driver != null)
+        {
+            sessionId = ((RemoteWebDriver)Driver).SessionId.ToString();
+        }
+        else
+        {
+            throw new InvalidOperationException("Failed to initialize WebDriver");
+        }
+
+        return Task.CompletedTask;
     }
 
-    [TearDown]
-    public void BaseTearDown()
+    protected async Task RunWithReporting(Func<Task> testBody)
+    {
+        bool passed = false;
+
+        try
+        {
+            await testBody().ConfigureAwait(false);
+            passed = true;
+        }
+        finally
+        {
+            await QuitSessionAsync(passed).ConfigureAwait(false);
+        }
+    }
+
+    protected virtual Task QuitSessionAsync(bool passed)
     {
         try
         {
-            string sessionId = ((RemoteWebDriver)Driver).SessionId.ToString();
-            string testName = TestContext.CurrentContext.Test.Name;
-            string result = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed ? "passed" : "failed";
+            if (sessionId != null && testName != null)
+            {
+                string result = passed ? "passed" : "failed";
+                ((IJavaScriptExecutor)Driver).ExecuteScript($"sauce:job-result={result}");
 
-            ((IJavaScriptExecutor)Driver).ExecuteScript($"sauce:job-result={result}");
-
-            Console.WriteLine($"SauceOnDemandSessionID={sessionId} job-name={testName}");
-            Console.WriteLine($"Test Job Link: https://app.saucelabs.com/tests/{sessionId}");
+                Console.WriteLine($"SauceOnDemandSessionID={sessionId} job-name={testName}");
+                Console.WriteLine($"Test Job Link: https://app.saucelabs.com/tests/{sessionId}");
+            }
         }
         catch (Exception e)
         {
@@ -71,5 +97,7 @@ public abstract class TestBase
                 Console.WriteLine("Problem quitting driver: " + e);
             }
         }
+
+        return Task.CompletedTask;
     }
 }
