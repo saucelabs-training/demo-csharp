@@ -8,54 +8,63 @@ public class AuthenticationTest : TestBase
 {
     public TestContext TestContext { get; set; }
 
-    [TestInitialize]
-    public void SetupTest() => StartChromeSession(TestContext);
-
-    [TestCleanup]
-    public void TeardownTest() => QuitSession(TestContext);
-
     [TestMethod]
-    public void SignInUnSuccessful()
+    public async Task SignInUnSuccessful()
     {
-        driver.Navigate().GoToUrl("https://www.saucedemo.com/");
+        await RunWithReporting(async () =>
+        {
+            await StartChromeSessionAsync(TestContext);
 
-        driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("locked_out_user");
-        driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
-        driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
+            driver.Navigate().GoToUrl("https://www.saucedemo.com/");
 
-        var errorElement = driver.FindElement(By.CssSelector("[data-test='error']"));
-        Assert.IsTrue(
-            errorElement.Text.Contains("Sorry, this user has been locked out"),
-            "Error message not found or incorrect"
-        );
+            driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("locked_out_user");
+            driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
+            driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
+
+            var errorElement = driver.FindElement(By.CssSelector("[data-test='error']"));
+            Assert.IsTrue(
+                errorElement.Text.Contains("Sorry, this user has been locked out"),
+                "Error message not found or incorrect"
+            );
+        });
     }
-    
+
     [TestMethod]
-    public void SignInSuccessful()
+    public async Task SignInSuccessful()
     {
-        driver.Navigate().GoToUrl("https://www.saucedemo.com/");
+        await RunWithReporting(async () =>
+        {
+            await StartChromeSessionAsync(TestContext);
 
-        driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("standard_user");
-        driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
-        driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
+            driver.Navigate().GoToUrl("https://www.saucedemo.com/");
 
-        Assert.AreEqual("https://www.saucedemo.com/inventory.html", driver.Url, "Login Not Successful");
+            driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("standard_user");
+            driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
+            driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
+
+            Assert.AreEqual("https://www.saucedemo.com/inventory.html", driver.Url, "Login Not Successful");
+        });
     }
-    
+
     [TestMethod]
-    public void Logout()
+    public async Task Logout()
     {
-        driver.Navigate().GoToUrl("https://www.saucedemo.com/");
+        await RunWithReporting(async () =>
+        {
+            await StartChromeSessionAsync(TestContext);
 
-        driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("standard_user");
-        driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
-        driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
+            driver.Navigate().GoToUrl("https://www.saucedemo.com/");
 
-        driver.FindElement(By.Id("react-burger-menu-btn")).Click();
-        Thread.Sleep(1000);
+            driver.FindElement(By.CssSelector("input[data-test='username']")).SendKeys("standard_user");
+            driver.FindElement(By.CssSelector("input[data-test='password']")).SendKeys("secret_sauce");
+            driver.FindElement(By.CssSelector("input[data-test='login-button']")).Click();
 
-        driver.FindElement(By.Id("logout_sidebar_link")).Click();
+            driver.FindElement(By.Id("react-burger-menu-btn")).Click();
+            await Task.Delay(1000);
 
-        Assert.AreEqual("https://www.saucedemo.com/", driver.Url, "Logout Not Successful");
+            driver.FindElement(By.Id("logout_sidebar_link")).Click();
+
+            Assert.AreEqual("https://www.saucedemo.com/", driver.Url, "Logout Not Successful");
+        });
     }
 }
