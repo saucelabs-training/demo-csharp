@@ -16,12 +16,12 @@ namespace Core.BestPractices.Web.Tests.Mobile.IOS
         public void Setup()
         {
             var appiumOptions = new AppiumOptions();
-            appiumOptions.AddAdditionalCapability(MobileCapabilityType.DeviceName, DeviceName);
-            appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformName, "iOS");
-            appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, PlatformVersion);
-            appiumOptions.AddAdditionalCapability(MobileCapabilityType.BrowserName, "Safari");
-            appiumOptions.AddAdditionalCapability("name", TestContext.CurrentContext.Test.Name);
-            appiumOptions.AddAdditionalCapability("build", Constants.BuildId);
+            appiumOptions.AddAdditionalOption(MobileCapabilityType.DeviceName, DeviceName);
+            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformName, "iOS");
+            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformVersion, PlatformVersion);
+            appiumOptions.AddAdditionalOption(MobileCapabilityType.BrowserName, "Safari");
+            appiumOptions.AddAdditionalOption("name", TestContext.CurrentContext.Test.Name);
+            appiumOptions.AddAdditionalOption("build", Constants.BuildId);
 
             _driver = GetIOSDriver(appiumOptions);
         }
@@ -35,7 +35,7 @@ namespace Core.BestPractices.Web.Tests.Mobile.IOS
             _driver.Quit();
         }
 
-        private IOSDriver<IOSElement> _driver;
+        private IOSDriver _driver;
 
         public IOSEmusimTests(string deviceName, string platformVersion) : base(deviceName, platformVersion)
         {

@@ -34,9 +34,9 @@ namespace Core.Selenium.Examples.CrossBrowser.Start
             };
 
             if (BrowserOptions.BrowserName == "chrome")
-                ((ChromeOptions) BrowserOptions).AddAdditionalCapability("sauce:options", SauceOptions, true);
+                ((ChromeOptions) BrowserOptions).AddAdditionalOption("sauce:options", SauceOptions);
             else
-                BrowserOptions.AddAdditionalCapability("sauce:options", SauceOptions);
+                BrowserOptions.AddAdditionalOption("sauce:options", SauceOptions);
             Driver = GetDesktopDriver(BrowserOptions.ToCapabilities());
         }
 

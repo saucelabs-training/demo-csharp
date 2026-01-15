@@ -41,8 +41,7 @@ namespace Core.Selenium.Examples.Selenium4.NewFeatures
             var parentFullName = Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
 
             
-            ((ITakesScreenshot) Driver).GetScreenshot().SaveAsFile(parentFullName + "/Selenium4/Resources/ChromeScreenshot.png", 
-                ScreenshotImageFormat.Png);
+            ((ITakesScreenshot) Driver).GetScreenshot().SaveAsFile(parentFullName + "/Selenium4/Resources/ChromeScreenshot.png");
         }
 
         [TestMethod]

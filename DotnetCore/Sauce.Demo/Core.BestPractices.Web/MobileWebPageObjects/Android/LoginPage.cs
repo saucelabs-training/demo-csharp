@@ -8,7 +8,7 @@ namespace Core.BestPractices.Web.MobileWebPageObjects.Android
 {
     public class LoginPage
     {
-        public LoginPage(AndroidDriver<AndroidElement> driver)
+        public LoginPage(AndroidDriver driver)
         {
             Driver = driver;
             Wait = new Wait(Driver);
@@ -16,7 +16,7 @@ namespace Core.BestPractices.Web.MobileWebPageObjects.Android
 
         private By UsernameLocator { get; } = By.CssSelector("#user-name");
 
-        public AndroidDriver<AndroidElement> Driver { get; }
+        public AndroidDriver Driver { get; }
         public Wait Wait { get; }
 
         public LoginPage Visit()

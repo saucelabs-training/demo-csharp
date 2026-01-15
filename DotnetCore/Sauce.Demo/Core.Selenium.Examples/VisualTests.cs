@@ -63,8 +63,8 @@ namespace Core.Selenium.Examples
                 PlatformName = "Windows 10",
             };
             _sauceOptions.Add("name", TestContext.CurrentContext.Test.Name);
-            chromeOptions.AddAdditionalCapability("sauce:options", _sauceOptions, true);
-            chromeOptions.AddAdditionalCapability("sauce:visual", _visualOptions, true);
+            chromeOptions.AddAdditionalOption("sauce:options", _sauceOptions);
+            chromeOptions.AddAdditionalOption("sauce:visual", _visualOptions);
 
             _driver = GetDriver(chromeOptions);
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");
@@ -84,7 +84,7 @@ namespace Core.Selenium.Examples
             JsExecutor.ExecuteScript("/*@visual.snapshot*/", "cropTo", croppedElement);
 
             var response = ((IJavaScriptExecutor) _driver).ExecuteScript("/*@visual.end*/");
-            Assert.Null(response);
+            Assert.That(response, Is.Null);
         }
 
         private IWebDriver GetDriver(DriverOptions driverOptions)

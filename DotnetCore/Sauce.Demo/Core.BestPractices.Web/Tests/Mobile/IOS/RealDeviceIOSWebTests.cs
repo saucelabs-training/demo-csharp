@@ -24,7 +24,7 @@ namespace Core.BestPractices.Web.Tests.Mobile.IOS
             Driver.Quit();
         }
 
-        public new IOSDriver<IOSElement> Driver { get; set; }
+        public new IOSDriver Driver { get; set; }
 
         public RealDeviceIOSWebTests(string deviceName, string platform, string browser) :
             base(deviceName, platform, browser)

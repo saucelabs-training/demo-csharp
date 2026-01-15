@@ -11,12 +11,12 @@ namespace Core.BestPractices.Web.Tests.Mobile
         public void MobileBaseSetup()
         {
             MobileOptions = new AppiumOptions();
-            MobileOptions.AddAdditionalCapability(MobileCapabilityType.DeviceName, DeviceName);
-            MobileOptions.AddAdditionalCapability(MobileCapabilityType.PlatformName, Platform);
-            MobileOptions.AddAdditionalCapability(MobileCapabilityType.BrowserName, Browser);
-            MobileOptions.AddAdditionalCapability("name", TestContext.CurrentContext.Test.Name);
-            MobileOptions.AddAdditionalCapability("newCommandTimeout", 90);
-            MobileOptions.AddAdditionalCapability("build", Constants.BuildId);
+            MobileOptions.AddAdditionalOption(MobileCapabilityType.DeviceName, DeviceName);
+            MobileOptions.AddAdditionalOption(MobileCapabilityType.PlatformName, Platform);
+            MobileOptions.AddAdditionalOption(MobileCapabilityType.BrowserName, Browser);
+            MobileOptions.AddAdditionalOption("name", TestContext.CurrentContext.Test.Name);
+            MobileOptions.AddAdditionalOption("newCommandTimeout", 90);
+            MobileOptions.AddAdditionalOption("build", Constants.BuildId);
         }
 
         public readonly string DeviceName;

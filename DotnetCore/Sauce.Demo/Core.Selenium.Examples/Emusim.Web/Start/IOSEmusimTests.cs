@@ -21,14 +21,14 @@ namespace Core.Selenium.Examples.Emusim.Web.Start
         {
             //TODO use https://saucelabs.com/platform/platform-configurator#/
             var appiumOptions = new AppiumOptions();
-            appiumOptions.AddAdditionalCapability(MobileCapabilityType.DeviceName, DeviceName);
+            appiumOptions.AddAdditionalOption(MobileCapabilityType.DeviceName, DeviceName);
             // TODO change this value to run on iOS
-            appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformName, "Android");
-            appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, PlatformVersion);
+            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformName, "Android");
+            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformVersion, PlatformVersion);
             // TODO run on Safari
-            appiumOptions.AddAdditionalCapability(MobileCapabilityType.BrowserName, "Chrome");
-            appiumOptions.AddAdditionalCapability("name", TestContext.CurrentContext.Test.Name);
-            appiumOptions.AddAdditionalCapability("build", Common.Constants.BuildId);
+            appiumOptions.AddAdditionalOption(MobileCapabilityType.BrowserName, "Chrome");
+            appiumOptions.AddAdditionalOption("name", TestContext.CurrentContext.Test.Name);
+            appiumOptions.AddAdditionalOption("build", Common.Constants.BuildId);
 
             //TODO GetIOSDriver() instead
             _driver = GetAndroidDriver(appiumOptions);
@@ -43,7 +43,7 @@ namespace Core.Selenium.Examples.Emusim.Web.Start
             _driver.Quit();
         }
         //TODO change this to use IOSDriver<IOSElement>
-        private AndroidDriver<AndroidElement> _driver;
+        private AndroidDriver _driver;
 
         public IOSEmusimTests(string deviceName, string platformVersion) : base(deviceName, platformVersion)
         {

@@ -44,13 +44,13 @@ namespace Core.Selenium.Examples
             return new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), browserOptions);
         }
 
-        public AndroidDriver<AndroidElement> GetAndroidDriver(AppiumOptions appiumOptions)
+        public AndroidDriver GetAndroidDriver(AppiumOptions appiumOptions)
         {
             return new(new SauceLabsEndpoint().EmusimUri(SauceUserName, SauceAccessKey), appiumOptions, TimeSpan
                 .FromSeconds(240));
         }
 
-        public IOSDriver<IOSElement> GetIOSDriver(AppiumOptions appiumOptions)
+        public IOSDriver GetIOSDriver(AppiumOptions appiumOptions)
         {
             return new(new SauceLabsEndpoint().EmusimUri(SauceUserName, SauceAccessKey), appiumOptions, TimeSpan
                 .FromSeconds(240));

@@ -40,8 +40,7 @@ namespace Core.Selenium.Examples.Selenium4.NewFeatures
             var parentFullName = Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
 
             
-            ((ITakesScreenshot) Driver).GetScreenshot().SaveAsFile(parentFullName + "/Selenium4/Resources/FirefoxScreenshot.png", 
-                ScreenshotImageFormat.Png);
+            ((ITakesScreenshot) Driver).GetScreenshot().SaveAsFile(parentFullName + "/Selenium4/Resources/FirefoxScreenshot.png");
         }
 
         [TestMethod]
@@ -70,7 +69,7 @@ namespace Core.Selenium.Examples.Selenium4.NewFeatures
             Screenshot image = new Screenshot(base64);
 
             var parentFullName = Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
-            image.SaveAsFile(parentFullName + "/Selenium4/Resources/FirefoxFullPageScreenshot.png", ScreenshotImageFormat.Png);
+            image.SaveAsFile(parentFullName + "/Selenium4/Resources/FirefoxFullPageScreenshot.png");
         }
 
         [TestCleanup]

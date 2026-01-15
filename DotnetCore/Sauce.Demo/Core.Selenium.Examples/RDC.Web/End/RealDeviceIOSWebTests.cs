@@ -28,7 +28,7 @@ namespace Core.Selenium.Examples.RDC.Web.End
             Driver.Quit();
         }
 
-        public new IOSDriver<IOSElement> Driver { get; set; }
+        public new IOSDriver Driver { get; set; }
 
         public RealDeviceIOSWebTests(string deviceName, string platform, string browser) :
             base(deviceName, platform, browser)

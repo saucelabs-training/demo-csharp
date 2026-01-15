@@ -20,7 +20,7 @@ namespace Core.BestPractices.Web.Tests.Desktop
                 BrowserVersion = "latest",
                 PlatformName = "Windows 10",
             };
-            chromeOptions.AddAdditionalCapability("sauce:options", SauceOptions, true);
+            chromeOptions.AddAdditionalOption("sauce:options", SauceOptions);
             Driver = GetDesktopDriver(chromeOptions.ToCapabilities());
         }
         [Test]
@@ -28,7 +28,7 @@ namespace Core.BestPractices.Web.Tests.Desktop
         {
             Driver.Navigate().GoToUrl("https://www.ultimateqa.com");
             var results = Driver.Analyze();
-            Assert.IsNull(results.Error);
+            Assert.That(results.Error, Is.Null);
         }
     }
 }

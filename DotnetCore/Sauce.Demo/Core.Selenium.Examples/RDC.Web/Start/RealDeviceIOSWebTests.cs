@@ -29,7 +29,7 @@ namespace Core.Selenium.Examples.RDC.Web.Start
         }
 
         //TODO replace with IOSDriver<IOSElement>
-        public new AndroidDriver<AndroidElement> Driver { get; set; }
+        public new AndroidDriver Driver { get; set; }
 
         public RealDeviceIOSWebTests(string deviceName, string platform, string browser) :
             base(deviceName, platform, browser)

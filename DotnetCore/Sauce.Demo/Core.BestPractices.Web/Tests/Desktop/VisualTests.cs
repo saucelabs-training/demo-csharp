@@ -32,13 +32,13 @@ namespace Core.BestPractices.Web.Tests.Desktop
 
             if (_browserOptions.BrowserName.Equals("chrome", StringComparison.OrdinalIgnoreCase))
             {
-                ((ChromeOptions) _browserOptions).AddAdditionalCapability("sauce:options", SauceOptions, true);
-                ((ChromeOptions) _browserOptions).AddAdditionalCapability("sauce:visual", _visualOptions, true);
+                ((ChromeOptions) _browserOptions).AddAdditionalOption("sauce:options", SauceOptions);
+                ((ChromeOptions) _browserOptions).AddAdditionalOption("sauce:visual", _visualOptions);
             }
             else
             {
-                _browserOptions.AddAdditionalCapability("sauce:options", SauceOptions);
-                _browserOptions.AddAdditionalCapability("sauce:visual", _visualOptions);
+                _browserOptions.AddAdditionalOption("sauce:options", SauceOptions);
+                _browserOptions.AddAdditionalOption("sauce:visual", _visualOptions);
             }
 
             Driver = GetVisualDriver(_browserOptions.ToCapabilities());

@@ -8,7 +8,7 @@ namespace Core.BestPractices.Web.MobileWebPageObjects.IOS
 {
     public class LoginPage
     {
-        public LoginPage(IOSDriver<IOSElement> driver)
+        public LoginPage(IOSDriver driver)
         {
             Driver = driver;
             Wait = new Wait(Driver);
@@ -16,7 +16,7 @@ namespace Core.BestPractices.Web.MobileWebPageObjects.IOS
 
         private By UsernameLocator { get; } = By.CssSelector("#user-name");
 
-        public IOSDriver<IOSElement> Driver { get; }
+        public IOSDriver Driver { get; }
         public Wait Wait { get; }
 
         public LoginPage Visit()

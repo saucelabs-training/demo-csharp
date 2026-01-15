@@ -20,12 +20,12 @@ namespace Core.Selenium.Examples.Emusim.Web.End
         public void Setup()
         {
             var appiumOptions = new AppiumOptions();
-            appiumOptions.AddAdditionalCapability(MobileCapabilityType.DeviceName, DeviceName);
-            appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformName, "iOS");
-            appiumOptions.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, PlatformVersion);
-            appiumOptions.AddAdditionalCapability(MobileCapabilityType.BrowserName, "Safari");
-            appiumOptions.AddAdditionalCapability("name", TestContext.CurrentContext.Test.Name);
-            appiumOptions.AddAdditionalCapability("build", Common.Constants.BuildId);
+            appiumOptions.AddAdditionalOption(MobileCapabilityType.DeviceName, DeviceName);
+            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformName, "iOS");
+            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformVersion, PlatformVersion);
+            appiumOptions.AddAdditionalOption(MobileCapabilityType.BrowserName, "Safari");
+            appiumOptions.AddAdditionalOption("name", TestContext.CurrentContext.Test.Name);
+            appiumOptions.AddAdditionalOption("build", Common.Constants.BuildId);
 
             _driver = GetIOSDriver(appiumOptions);
         }
@@ -39,7 +39,7 @@ namespace Core.Selenium.Examples.Emusim.Web.End
             _driver.Quit();
         }
 
-        private IOSDriver<IOSElement> _driver;
+        private IOSDriver _driver;
 
         public IOSEmusimTests(string deviceName, string platformVersion) : base(deviceName, platformVersion)
         {

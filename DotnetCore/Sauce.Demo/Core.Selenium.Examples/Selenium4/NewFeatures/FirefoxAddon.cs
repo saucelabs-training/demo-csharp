@@ -80,7 +80,7 @@ namespace Core.Selenium.Examples.Selenium4.NewFeatures
 
             Driver.Navigate().GoToUrl("https://www.saucedemo.com");
 
-            Assert.IsFalse(Driver.FindElements(By.CssSelector(".bot_column2")).IsNullOrEmpty());
+            Assert.IsFalse(Driver.FindElements(By.CssSelector(".bot_column2")).Count == 0);
             
             Dictionary<string, object> removeParams = new Dictionary<string, object>();
             removeParams.Add("id", id);
@@ -90,7 +90,7 @@ namespace Core.Selenium.Examples.Selenium4.NewFeatures
 
             Driver.Navigate().Refresh();
 
-            Assert.IsTrue(Driver.FindElements(By.CssSelector(".bot_column2")).IsNullOrEmpty());
+            Assert.IsTrue(Driver.FindElements(By.CssSelector(".bot_column2")).Count == 0);
         }
 
         [TestCleanup]

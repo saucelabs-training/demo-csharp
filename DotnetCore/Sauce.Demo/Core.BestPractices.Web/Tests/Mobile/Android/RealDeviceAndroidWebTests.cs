@@ -24,7 +24,7 @@ namespace Core.BestPractices.Web.Tests.Mobile.Android
             Driver.Quit();
         }
 
-        public new AndroidDriver<AndroidElement> Driver { get; set; }
+        public new AndroidDriver Driver { get; set; }
 
         public RealDeviceAndroidWebTests(string deviceName, string platform, string browser) :
             base(deviceName, platform, browser)
