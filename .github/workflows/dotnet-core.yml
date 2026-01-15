@@ -34,10 +34,10 @@ jobs:
       run: dotnet restore DotnetCore/Sauce.Demo/Sauce.Demo.sln
     
     - name: Build
-      run: dotnet build DotnetCore/Sauce.Demo/Sauce.Demo.sln --no-restore
+      run: dotnet build DotnetCore/Sauce.Demo/Sauce.Demo.sln --no-restore --configuration Release
     
     - name: Run Selenium Examples Tests
-      run: dotnet test DotnetCore/Sauce.Demo/Core.Selenium.Examples/Core.Selenium.Examples.csproj --no-build --verbosity normal --logger "trx;LogFileName=selenium-examples-results.trx"
+      run: dotnet test DotnetCore/Sauce.Demo/Core.Selenium.Examples/Core.Selenium.Examples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=selenium-examples-results.trx"
       continue-on-error: true
     
     - name: Upload test results
@@ -63,10 +63,10 @@ jobs:
       run: dotnet restore DotnetCore/Sauce.Demo/Sauce.Demo.sln
     
     - name: Build
-      run: dotnet build DotnetCore/Sauce.Demo/Sauce.Demo.sln --no-restore
+      run: dotnet build DotnetCore/Sauce.Demo/Sauce.Demo.sln --no-restore --configuration Release
     
     - name: Run Best Practices Web Tests
-      run: dotnet test DotnetCore/Sauce.Demo/Core.BestPractices.Web/Core.BestPractices.Web.csproj --no-build --verbosity normal --logger "trx;LogFileName=best-practices-web-results.trx"
+      run: dotnet test DotnetCore/Sauce.Demo/Core.BestPractices.Web/Core.BestPractices.Web.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=best-practices-web-results.trx"
       continue-on-error: true
     
     - name: Upload test results

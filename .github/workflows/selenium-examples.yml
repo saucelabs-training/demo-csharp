@@ -34,10 +34,10 @@ jobs:
       run: dotnet restore SeleniumExamples/MSTestExamples/MSTestExamples.csproj
     
     - name: Build
-      run: dotnet build SeleniumExamples/MSTestExamples/MSTestExamples.csproj --no-restore
+      run: dotnet build SeleniumExamples/MSTestExamples/MSTestExamples.csproj --no-restore --configuration Release
     
     - name: Run tests
-      run: dotnet test SeleniumExamples/MSTestExamples/MSTestExamples.csproj --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      run: dotnet test SeleniumExamples/MSTestExamples/MSTestExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=mstest-examples-results.trx"
       continue-on-error: true
     
     - name: Upload test results
@@ -45,7 +45,7 @@ jobs:
       if: always()
       with:
         name: mstest-examples-results
-        path: '**/test-results.trx'
+        path: '**/mstest-examples-results.trx'
 
   nunit-examples:
     name: NUnit Examples
@@ -63,10 +63,10 @@ jobs:
       run: dotnet restore SeleniumExamples/NUnitExamples/NUnitExamples.csproj
     
     - name: Build
-      run: dotnet build SeleniumExamples/NUnitExamples/NUnitExamples.csproj --no-restore
+      run: dotnet build SeleniumExamples/NUnitExamples/NUnitExamples.csproj --no-restore --configuration Release
     
     - name: Run tests
-      run: dotnet test SeleniumExamples/NUnitExamples/NUnitExamples.csproj --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      run: dotnet test SeleniumExamples/NUnitExamples/NUnitExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=nunit-examples-results.trx"
       continue-on-error: true
     
     - name: Upload test results
@@ -74,5 +74,5 @@ jobs:
       if: always()
       with:
         name: nunit-examples-results
-        path: '**/test-results.trx'
+        path: '**/nunit-examples-results.trx'
 

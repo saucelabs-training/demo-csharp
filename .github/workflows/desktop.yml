@@ -31,23 +31,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup .NET Framework
-      uses: microsoft/setup-msbuild@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
     
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v2
+    - name: Restore dependencies
+      run: dotnet restore SauceExamples/SeleniumMsTest/Selenium3.MsTest.Scripts.csproj
     
-    - name: Restore NuGet packages
-      run: nuget restore SauceExamples/SauceExamples.sln
+    - name: Build
+      run: dotnet build SauceExamples/SeleniumMsTest/Selenium3.MsTest.Scripts.csproj --no-restore --configuration Release
     
-    - name: Build solution
-      run: msbuild SauceExamples/SauceExamples.sln /p:Configuration=Release
-    
-    - name: Setup VSTest
-      uses: darenm/Setup-VSTest@v1.3
-    
-    - name: Run Selenium MsTest Tests
-      run: vstest.console.exe SauceExamples/SeleniumMsTest/bin/Release/Selenium3.MsTest.Scripts.dll /Logger:trx;LogFileName=selenium-mstest-results.trx
+    - name: Run tests
+      run: dotnet test SauceExamples/SeleniumMsTest/Selenium3.MsTest.Scripts.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=selenium-mstest-results.trx"
       continue-on-error: true
     
     - name: Upload test results
@@ -64,23 +60,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup .NET Framework
-      uses: microsoft/setup-msbuild@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
     
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v2
+    - name: Restore dependencies
+      run: dotnet restore SauceExamples/SeleniumNunit/Selenium3.Nunit.Scripts.csproj
     
-    - name: Restore NuGet packages
-      run: nuget restore SauceExamples/SauceExamples.sln
+    - name: Build
+      run: dotnet build SauceExamples/SeleniumNunit/Selenium3.Nunit.Scripts.csproj --no-restore --configuration Release
     
-    - name: Build solution
-      run: msbuild SauceExamples/SauceExamples.sln /p:Configuration=Release
-    
-    - name: Setup VSTest
-      uses: darenm/Setup-VSTest@v1.3
-    
-    - name: Run Selenium NUnit Tests
-      run: vstest.console.exe SauceExamples/SeleniumNunit/bin/Release/Selenium3.Nunit.Scripts.dll /Logger:trx;LogFileName=selenium-nunit-results.trx
+    - name: Run tests
+      run: dotnet test SauceExamples/SeleniumNunit/Selenium3.Nunit.Scripts.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=selenium-nunit-results.trx"
       continue-on-error: true
     
     - name: Upload test results
@@ -97,23 +89,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup .NET Framework
-      uses: microsoft/setup-msbuild@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
     
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v2
+    - name: Restore dependencies
+      run: dotnet restore SauceExamples/Web.Tests/Selenium3.Nunit.Framework.csproj
     
-    - name: Restore NuGet packages
-      run: nuget restore SauceExamples/SauceExamples.sln
+    - name: Build
+      run: dotnet build SauceExamples/Web.Tests/Selenium3.Nunit.Framework.csproj --no-restore --configuration Release
     
-    - name: Build solution
-      run: msbuild SauceExamples/SauceExamples.sln /p:Configuration=Release
-    
-    - name: Setup VSTest
-      uses: darenm/Setup-VSTest@v1.3
-    
-    - name: Run Web Tests
-      run: vstest.console.exe SauceExamples/Web.Tests/bin/Release/Selenium3.Nunit.Framework.dll /Logger:trx;LogFileName=web-tests-results.trx
+    - name: Run tests
+      run: dotnet test SauceExamples/Web.Tests/Selenium3.Nunit.Framework.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=web-tests-results.trx"
       continue-on-error: true
     
     - name: Upload test results
@@ -130,23 +118,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup .NET Framework
-      uses: microsoft/setup-msbuild@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
     
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v2
+    - name: Restore dependencies
+      run: dotnet restore SauceExamples/Selenium4DotNetFramework/Selenium4.MsTest.Scripts.csproj
     
-    - name: Restore NuGet packages
-      run: nuget restore SauceExamples/SauceExamples.sln
+    - name: Build
+      run: dotnet build SauceExamples/Selenium4DotNetFramework/Selenium4.MsTest.Scripts.csproj --no-restore --configuration Release
     
-    - name: Build solution
-      run: msbuild SauceExamples/SauceExamples.sln /p:Configuration=Release
-    
-    - name: Setup VSTest
-      uses: darenm/Setup-VSTest@v1.3
-    
-    - name: Run Selenium 4 Tests
-      run: vstest.console.exe SauceExamples/Selenium4DotNetFramework/bin/Release/Selenium4.MsTest.Scripts.dll /Logger:trx;LogFileName=selenium4-framework-results.trx
+    - name: Run tests
+      run: dotnet test SauceExamples/Selenium4DotNetFramework/Selenium4.MsTest.Scripts.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=selenium4-framework-results.trx"
       continue-on-error: true
     
     - name: Upload test results
