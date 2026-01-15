@@ -15,7 +15,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="NUnit" Version="4.4.0" />
     <PackageReference Include="RestSharp" Version="113.1.0" />
-    <PackageReference Include="Selenium.Support" Version="3.141.0" />
+    <PackageReference Include="Selenium.Support" Version="4.39.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.2" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
