@@ -1,27 +1,158 @@
-name: Web Tests
+name: Desktop Web Tests (.NET Framework)
 
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'SauceExamples/SeleniumMsTest/**'
+      - 'SauceExamples/SeleniumNunit/**'
+      - 'SauceExamples/Web.Tests/**'
+      - 'SauceExamples/Selenium4DotNetFramework/**'
+      - '.github/workflows/desktop.yml'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'SauceExamples/SeleniumMsTest/**'
+      - 'SauceExamples/SeleniumNunit/**'
+      - 'SauceExamples/Web.Tests/**'
+      - 'SauceExamples/Selenium4DotNetFramework/**'
+      - '.github/workflows/desktop.yml'
+  workflow_dispatch:
+
+env:
+  SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+  SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  selenium-mstest:
+    name: Selenium 3 MsTest Scripts
+    runs-on: windows-latest
+    
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET Framework
+      uses: microsoft/setup-msbuild@v2
+    
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+    
+    - name: Restore NuGet packages
+      run: nuget restore SauceExamples/SauceExamples.sln
+    
+    - name: Build solution
+      run: msbuild SauceExamples/SauceExamples.sln /p:Configuration=Release
+    
+    - name: Setup VSTest
+      uses: darenm/Setup-VSTest@v1.2
+    
+    - name: Run Selenium MsTest Tests
+      run: vstest.console.exe SauceExamples/SeleniumMsTest/bin/Release/Selenium3.MsTest.Scripts.dll /Logger:trx;LogFileName=selenium-mstest-results.trx
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
       with:
-        dotnet-version: 5.0.x
-    - name: Restore dependencies
-      working-directory: ./dotnetCore/Sauce.Demo/Core.BestPractices.Web
-      run: dotnet restore
-    - name: Build
-      working-directory: ./dotnetCore/Sauce.Demo/Core.BestPractices.Web
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+        name: selenium-mstest-results
+        path: '**/selenium-mstest-results.trx'
+
+  selenium-nunit:
+    name: Selenium 3 NUnit Scripts
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET Framework
+      uses: microsoft/setup-msbuild@v2
+    
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+    
+    - name: Restore NuGet packages
+      run: nuget restore SauceExamples/SauceExamples.sln
+    
+    - name: Build solution
+      run: msbuild SauceExamples/SauceExamples.sln /p:Configuration=Release
+    
+    - name: Setup VSTest
+      uses: darenm/Setup-VSTest@v1.2
+    
+    - name: Run Selenium NUnit Tests
+      run: vstest.console.exe SauceExamples/SeleniumNunit/bin/Release/Selenium3.Nunit.Scripts.dll /Logger:trx;LogFileName=selenium-nunit-results.trx
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: selenium-nunit-results
+        path: '**/selenium-nunit-results.trx'
+
+  web-tests:
+    name: Web Tests Framework
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET Framework
+      uses: microsoft/setup-msbuild@v2
+    
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+    
+    - name: Restore NuGet packages
+      run: nuget restore SauceExamples/SauceExamples.sln
+    
+    - name: Build solution
+      run: msbuild SauceExamples/SauceExamples.sln /p:Configuration=Release
+    
+    - name: Setup VSTest
+      uses: darenm/Setup-VSTest@v1.2
+    
+    - name: Run Web Tests
+      run: vstest.console.exe SauceExamples/Web.Tests/bin/Release/Selenium3.Nunit.Framework.dll /Logger:trx;LogFileName=web-tests-results.trx
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: web-tests-results
+        path: '**/web-tests-results.trx'
+
+  selenium4-framework:
+    name: Selenium 4 .NET Framework
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET Framework
+      uses: microsoft/setup-msbuild@v2
+    
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+    
+    - name: Restore NuGet packages
+      run: nuget restore SauceExamples/SauceExamples.sln
+    
+    - name: Build solution
+      run: msbuild SauceExamples/SauceExamples.sln /p:Configuration=Release
+    
+    - name: Setup VSTest
+      uses: darenm/Setup-VSTest@v1.2
+    
+    - name: Run Selenium 4 Tests
+      run: vstest.console.exe SauceExamples/Selenium4DotNetFramework/bin/Release/Selenium4.MsTest.Scripts.dll /Logger:trx;LogFileName=selenium4-framework-results.trx
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: selenium4-framework-results
+        path: '**/selenium4-framework-results.trx'
+

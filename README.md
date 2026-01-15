@@ -1,8 +1,7 @@
 # C# Sauce Labs Demo Scripts and Frameworks
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/728698e058a04148a6a0da043ef7be1e)](https://app.codacy.com/gh/saucelabs-training/demo-csharp?utm_source=github.com&utm_medium=referral&utm_content=saucelabs-training/demo-csharp&utm_campaign=Badge_Grade_Dashboard)
 
-
-This directory contains example scripts and dependencies for running automated Selenium tests on Sauce Labs using C#.
+This directory contains example scripts and dependencies for running automated 
+tests on Sauce Labs using C#.
 
 ## 🖥 Web automation
 
@@ -60,34 +59,6 @@ All examples are using .NET and Mstest unless specified
       * [Legacy RDC REST API status updates](./SauceExamples/Core.Appium.MsTest.Scripts/RealDevices/NativeApp/LegacyRdc/iOSExamples.cs)
 
 ### [📕 Mobile Testing Training Tutorials](https://github.com/saucelabs-training/demo-java/blob/master/TRAINING.md)
-
-
-## 🚀 CICD
-
-### Azure DevOps
-
-> **Azure DevOps Sauce Labs Plugin does NOT work!** You cannot view Sauce Labs videos inside of Azure DevOps. You need to go to saucelabs.com to view the test assets. You can add richer logging to your tests and add test asset links directly into the logs (but this is extra work).
-
-[![Build Status](https://dev.azure.com/nikolayadvolodkin/SauceExamples/_apis/build/status/ADO%20Desktop%20Tests?branchName=master)](https://dev.azure.com/nikolayadvolodkin/SauceExamples/_build/latest?definitionId=37&branchName=master)
-
-[How to configure Azure DevOps with Sauce Labs](https://ultimateqa.com/tfs-vsts-and-azure-devops/#C_with_Sauce_Labs_and_Azure_DevOps)
-
-Example task to run tests in Sauce
-```yml
-- task: DotNetCoreCLI@2
-  displayName: 'Run tests'
-  inputs:
-    command: test
-    projects: '**DotnetCore/Sauce.Demo/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --filter TestCategory=desktop'
-  env:
-    SAUCE_USERNAME: $(sauceUsername)
-    SAUCE_ACCESS_KEY: $(sauceKey)
-```
-
-### Github Actions
-
-Coming soon...
 
 
 ## Parallelization capabilities of unit testing libraries

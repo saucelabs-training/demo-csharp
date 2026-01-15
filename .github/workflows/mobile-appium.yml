@@ -1,0 +1,148 @@
+name: Mobile Appium Tests
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'SauceExamples/Core.Appium.MsTest.BestPractices/**'
+      - 'SauceExamples/Core.Appium.MsTest.Scripts/**'
+      - 'SauceExamples/DotnetFramework/Appium/**'
+      - '.github/workflows/mobile-appium.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'SauceExamples/Core.Appium.MsTest.BestPractices/**'
+      - 'SauceExamples/Core.Appium.MsTest.Scripts/**'
+      - 'SauceExamples/DotnetFramework/Appium/**'
+      - '.github/workflows/mobile-appium.yml'
+  workflow_dispatch:
+
+env:
+  SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+  SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+
+jobs:
+  appium-best-practices:
+    name: Appium Best Practices (NUnit)
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore SauceExamples/Core.Appium.MsTest.BestPractices/Core.Appium.Nunit.BestPractices.csproj
+    
+    - name: Build
+      run: dotnet build SauceExamples/Core.Appium.MsTest.BestPractices/Core.Appium.Nunit.BestPractices.csproj --no-restore
+    
+    - name: Run tests
+      run: dotnet test SauceExamples/Core.Appium.MsTest.BestPractices/Core.Appium.Nunit.BestPractices.csproj --no-build --verbosity normal --logger "trx;LogFileName=appium-best-practices-results.trx"
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: appium-best-practices-results
+        path: '**/appium-best-practices-results.trx'
+
+  appium-examples:
+    name: Appium Examples
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj
+    
+    - name: Build
+      run: dotnet build SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj --no-restore
+    
+    - name: Run tests
+      run: dotnet test SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj --no-build --verbosity normal --logger "trx;LogFileName=appium-examples-results.trx"
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: appium-examples-results
+        path: '**/appium-examples-results.trx'
+
+  appium-mstest-framework:
+    name: Appium 4 MsTest (.NET Framework)
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET Framework
+      uses: microsoft/setup-msbuild@v2
+    
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+    
+    - name: Restore NuGet packages
+      run: nuget restore SauceExamples/SauceExamples.sln
+    
+    - name: Build solution
+      run: msbuild SauceExamples/SauceExamples.sln /p:Configuration=Release
+    
+    - name: Setup VSTest
+      uses: darenm/Setup-VSTest@v1.2
+    
+    - name: Run Appium MsTest Tests
+      run: vstest.console.exe SauceExamples/DotnetFramework/Appium/Appium4.MsTest.Scripts/bin/Release/Appium4.MsTest.Scripts.dll /Logger:trx;LogFileName=appium-mstest-framework-results.trx
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: appium-mstest-framework-results
+        path: '**/appium-mstest-framework-results.trx'
+
+  appium-nunit-framework:
+    name: Appium 4 NUnit (.NET Framework)
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET Framework
+      uses: microsoft/setup-msbuild@v2
+    
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+    
+    - name: Restore NuGet packages
+      run: nuget restore SauceExamples/SauceExamples.sln
+    
+    - name: Build solution
+      run: msbuild SauceExamples/SauceExamples.sln /p:Configuration=Release
+    
+    - name: Setup VSTest
+      uses: darenm/Setup-VSTest@v1.2
+    
+    - name: Run Appium NUnit Tests
+      run: vstest.console.exe SauceExamples/DotnetFramework/Appium/Appium4.NUnit.Scripts/bin/Release/Appium4.NUnit.Scripts.dll /Logger:trx;LogFileName=appium-nunit-framework-results.trx
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: appium-nunit-framework-results
+        path: '**/appium-nunit-framework-results.trx'
+

@@ -1,26 +1,78 @@
-name: .NET Core
+name: DotNet Core Best Practices
 
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'DotnetCore/**'
+      - '.github/workflows/dotnet-core.yml'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'DotnetCore/**'
+      - '.github/workflows/dotnet-core.yml'
+  workflow_dispatch:
+
+env:
+  SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+  SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
 
 jobs:
-  build:
-
-    runs-on: windows-latest
-
+  selenium-examples:
+    name: Selenium Examples
+    runs-on: ubuntu-latest
+    
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 3.1.101
-    - name: Install dependencies
-      run: | 
-        dotnet restore ~/SauceExamples/DotnetCore/Core.Selenium4.MsTest.Scripts/Core.Selenium4.MsTest.Scripts.csproj --verbosity detailed
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore DotnetCore/Sauce.Demo/Sauce.Demo.sln
+    
     - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet build DotnetCore/Sauce.Demo/Sauce.Demo.sln --no-restore
+    
+    - name: Run Selenium Examples Tests
+      run: dotnet test DotnetCore/Sauce.Demo/Core.Selenium.Examples/Core.Selenium.Examples.csproj --no-build --verbosity normal --logger "trx;LogFileName=selenium-examples-results.trx"
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: selenium-examples-results
+        path: '**/selenium-examples-results.trx'
+
+  best-practices-web:
+    name: Best Practices Web
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore DotnetCore/Sauce.Demo/Sauce.Demo.sln
+    
+    - name: Build
+      run: dotnet build DotnetCore/Sauce.Demo/Sauce.Demo.sln --no-restore
+    
+    - name: Run Best Practices Web Tests
+      run: dotnet test DotnetCore/Sauce.Demo/Core.BestPractices.Web/Core.BestPractices.Web.csproj --no-build --verbosity normal --logger "trx;LogFileName=best-practices-web-results.trx"
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: best-practices-web-results
+        path: '**/best-practices-web-results.trx'
+

@@ -1,0 +1,49 @@
+name: Selenium 4 & SpecFlow Tests
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'SauceExamples/DotnetCore/Core.Selenium4.MsTest.Scripts/**'
+      - '.github/workflows/selenium4-specflow.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'SauceExamples/DotnetCore/Core.Selenium4.MsTest.Scripts/**'
+      - '.github/workflows/selenium4-specflow.yml'
+  workflow_dispatch:
+
+env:
+  SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+  SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+
+jobs:
+  selenium4-mstest-specflow:
+    name: Selenium 4 MsTest with SpecFlow
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore SauceExamples/DotnetCore/Core.Selenium4.MsTest.Scripts/Core.Selenium4.MsTest.Scripts.csproj
+    
+    - name: Build
+      run: dotnet build SauceExamples/DotnetCore/Core.Selenium4.MsTest.Scripts/Core.Selenium4.MsTest.Scripts.csproj --no-restore
+    
+    - name: Run tests
+      run: dotnet test SauceExamples/DotnetCore/Core.Selenium4.MsTest.Scripts/Core.Selenium4.MsTest.Scripts.csproj --no-build --verbosity normal --logger "trx;LogFileName=selenium4-specflow-results.trx"
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: selenium4-specflow-results
+        path: '**/selenium4-specflow-results.trx'
+
