@@ -1,0 +1,49 @@
+name: Simple Dotnet Tests
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Dotnet/**'
+      - '.github/workflows/dotnet-simple.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'Dotnet/**'
+      - '.github/workflows/dotnet-simple.yml'
+  workflow_dispatch:
+
+env:
+  SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+  SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+
+jobs:
+  dotnet-simple-tests:
+    name: Simple Dotnet Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore Dotnet/Dotnet.csproj
+    
+    - name: Build
+      run: dotnet build Dotnet/Dotnet.csproj --no-restore --configuration Release
+    
+    - name: Run tests
+      run: dotnet test Dotnet/Dotnet.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=dotnet-simple-results.trx"
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: dotnet-simple-results
+        path: '**/dotnet-simple-results.trx'
+
