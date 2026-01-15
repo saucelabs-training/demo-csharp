@@ -24,7 +24,6 @@ namespace Selenium3.Nunit.Scripts.Parallel
                 {
                     BrowserVersion = "latest",
                     PlatformName = "Windows 10",
-                    UseSpecCompliantProtocol = true
                 };
                 //TODO please supply your Sauce Labs user name in an environment variable
                 SauceUserName = Environment.GetEnvironmentVariable("SAUCE_USERNAME", EnvironmentVariableTarget.User);

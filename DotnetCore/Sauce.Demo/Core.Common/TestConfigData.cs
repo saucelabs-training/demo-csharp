@@ -20,8 +20,7 @@ namespace Core.Common
         private static readonly ChromeOptions ChromeOptions = new()
         {
             BrowserVersion = "latest",
-            PlatformName = "Windows 10",
-            UseSpecCompliantProtocol = true
+            PlatformName = "Windows 10"
         };
 
         private static readonly EdgeOptions EdgeOptions = new()

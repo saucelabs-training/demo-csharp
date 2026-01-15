@@ -27,7 +27,6 @@ namespace Selenium3.Nunit.Scripts.SimpleExamples
             {
                 BrowserVersion = "latest",
                 PlatformName = "Linux",
-                UseSpecCompliantProtocol = true
             };
             sauceOptions.Add("name", TestContext.CurrentContext.Test.Name);
             chromeOptions.AddAdditionalCapability("sauce:options", sauceOptions, true);

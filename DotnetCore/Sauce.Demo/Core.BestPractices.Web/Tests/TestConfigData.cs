@@ -21,7 +21,6 @@ namespace Core.BestPractices.Web.Tests
         {
             BrowserVersion = "latest",
             PlatformName = "Windows 10",
-            UseSpecCompliantProtocol = true
         };
 
         private static readonly EdgeOptions edgeOptions = new()

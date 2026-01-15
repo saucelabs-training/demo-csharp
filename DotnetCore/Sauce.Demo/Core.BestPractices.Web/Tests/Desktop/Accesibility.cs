@@ -19,7 +19,6 @@ namespace Core.BestPractices.Web.Tests.Desktop
             {
                 BrowserVersion = "latest",
                 PlatformName = "Windows 10",
-                UseSpecCompliantProtocol = true
             };
             chromeOptions.AddAdditionalCapability("sauce:options", SauceOptions, true);
             Driver = GetDesktopDriver(chromeOptions.ToCapabilities());

@@ -24,7 +24,6 @@ namespace Selenium3.Nunit.Scripts.SaucePerformance
             {
                 BrowserVersion = "latest",
                 PlatformName = "Windows 10",
-                UseSpecCompliantProtocol = true
             };
             var sauceOptions = new Dictionary<string, object>
             {
