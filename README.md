@@ -53,7 +53,6 @@ All examples are using .NET and Mstest unless specified
   * Real Devices
     * [Native App, IOS](./SauceExamples/DotnetFramework/Appium/Appium4.NUnit.Scripts/RealDevices/NativeApp/UP/GetStartedIos.cs)
     * [Native App, Android](./SauceExamples/DotnetFramework/Appium/Appium4.NUnit.Scripts/RealDevices/NativeApp/UP/AndroidAdvanced.cs)
-    * [Specflow,MsTest in Parallel](./SauceExamples/DotnetCore/Core.Selenium4.MsTest.Scripts/SpecFlow)
     * [Download test assets from real devices](./SauceExamples/Core.Appium.MsTest.Scripts/RealDevices/NativeApp/DownloadAssets.cs)
     * Legacy RDC **❗️Deprecated! Use Unified Platform**
       * [Legacy RDC REST API status updates](./SauceExamples/Core.Appium.MsTest.Scripts/RealDevices/NativeApp/LegacyRdc/iOSExamples.cs)
