@@ -36,7 +36,7 @@ namespace Appium4.NUnit.Scripts.Emusim.Browser
             _sauceOptions.Add("name", MethodBase.GetCurrentMethod().Name);
             options.AddAdditionalCapability("sauce:options", _sauceOptions);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"),
                 options.ToCapabilities(), TimeSpan.FromSeconds(30));
         }
         [TearDown]

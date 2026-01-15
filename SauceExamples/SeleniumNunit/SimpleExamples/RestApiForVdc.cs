@@ -36,7 +36,7 @@ namespace Selenium3.Nunit.Scripts.SimpleExamples
             options.AddAdditionalCapability("accessKey", sauceAccessKey, true);
             options.AddAdditionalCapability("name", TestContext.CurrentContext.Test.Name, true);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), options.ToCapabilities(),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), options.ToCapabilities(),
                 TimeSpan.FromSeconds(600));
             _driver.Navigate().GoToUrl("https://www.google.com");
             sessionId = ((RemoteWebDriver)_driver).SessionId;
@@ -53,7 +53,7 @@ namespace Selenium3.Nunit.Scripts.SimpleExamples
             options.AddAdditionalCapability("accessKey", sauceAccessKey, true);
             options.AddAdditionalCapability("name", TestContext.CurrentContext.Test.Name, true);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), options.ToCapabilities(),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), options.ToCapabilities(),
                 TimeSpan.FromSeconds(600));
             _driver.Navigate().GoToUrl("https://www.google.com");
             sessionId = ((RemoteWebDriver)_driver).SessionId;

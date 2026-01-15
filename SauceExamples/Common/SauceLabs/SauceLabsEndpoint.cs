@@ -4,9 +4,9 @@ namespace Common.SauceLabs
 {
     public class SauceLabsEndpoint
     {
-        private static string EmusimDomain = "@ondemand.saucelabs.com:443" + "/wd/hub";
+        private static string EmusimDomain = "@ondemand.us-west-1.saucelabs.com:443" + "/wd/hub";
         public static string SauceUsWestDomain = "ondemand.us-west-1.saucelabs.com/wd/hub";
-        public string SauceHubUrl => "https://ondemand.saucelabs.com/wd/hub";
+        public string SauceHubUrl => "https://ondemand.us-west-1.saucelabs.com/wd/hub";
         public Uri SauceHubUri => new Uri(SauceHubUrl);
         public Uri UsWestHubUri => new Uri($"https://{SauceUsWestDomain}");
 

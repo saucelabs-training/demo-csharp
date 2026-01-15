@@ -67,7 +67,6 @@ jobs:
     
     - name: Run Best Practices Web Tests
       run: dotnet test DotnetCore/Sauce.Demo/Core.BestPractices.Web/Core.BestPractices.Web.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=best-practices-web-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6

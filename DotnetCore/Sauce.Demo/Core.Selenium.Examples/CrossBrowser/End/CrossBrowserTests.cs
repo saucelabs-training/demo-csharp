@@ -60,12 +60,12 @@ namespace Core.Selenium.Examples.CrossBrowser.End
         [Obsolete("Use DriverOptions instead of ICapabilities.")]
         public IWebDriver GetDesktopDriver(ICapabilities browserOptions)
         {
-            return new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), browserOptions);
+            return new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), browserOptions);
         }
 
         public IWebDriver GetDesktopDriver(DriverOptions browserOptions)
         {
-            return new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), browserOptions);
+            return new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), browserOptions);
         }
 
         public string BrowserVersion { get; }

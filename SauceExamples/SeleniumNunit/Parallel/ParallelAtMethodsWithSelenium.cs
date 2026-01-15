@@ -37,7 +37,7 @@ namespace Selenium3.Nunit.Scripts.Parallel
                 SauceOptions.Add("name", TestContext.CurrentContext.Test.Name);
                 chromeOptions.AddAdditionalCapability("sauce:options", SauceOptions, true);
 
-                Driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"),
+                Driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"),
                     chromeOptions.ToCapabilities(), TimeSpan.FromSeconds(600));
             }
 

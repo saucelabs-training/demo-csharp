@@ -51,7 +51,7 @@ namespace Core.Selenium.Examples
 
             browserOptions.AddAdditionalOption("sauce:options", _sauceOptions);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), browserOptions.ToCapabilities(),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), browserOptions.ToCapabilities(),
                 TimeSpan.FromSeconds(30));
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");
 
@@ -83,7 +83,7 @@ namespace Core.Selenium.Examples
 
             browserOptions.AddAdditionalOption("sauce:options", _sauceOptions);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), browserOptions.ToCapabilities(),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), browserOptions.ToCapabilities(),
                 TimeSpan.FromSeconds(30));
             var sessionId = ((RemoteWebDriver) _driver).SessionId;
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");

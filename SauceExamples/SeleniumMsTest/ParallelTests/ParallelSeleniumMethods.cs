@@ -25,7 +25,7 @@ namespace Selenium3.MsTest.Scripts.ParallelTests
         private string _sauceUserName;
         private string _sauceAccessKey;
         private Dictionary<string, object> _sauceOptions;
-        private Uri SeleniumHub => new Uri("https://ondemand.saucelabs.com/wd/hub");
+        private Uri SeleniumHub => new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub");
 
         public TestContext TestContext { get; set; }
         [TestInitialize]

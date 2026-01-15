@@ -26,7 +26,7 @@ namespace Core.BestPractices.Web.Tests.Desktop
         [Test]
         public void AccessibilityTest()
         {
-            Driver.Navigate().GoToUrl("https://www.ultimateqa.com");
+            Driver.Navigate().GoToUrl("https://www.saucelabs.com");
             var results = Driver.Analyze();
             Assert.That(results.Error, Is.Null);
         }

@@ -81,7 +81,7 @@ namespace Appium4.NUnit.Scripts.Emusim.NativeApp
 
                 //60 seconds default for the connection timeout
                 var sauceHubUrl = new Uri($"https://{SauceUser.Name}:{SauceUser.AccessKey}" +
-                    "@ondemand.saucelabs.com:443/wd/hub");
+                    "@ondemand.us-west-1.saucelabs.com:443/wd/hub");
                 Driver = new IOSDriver<IOSElement>(sauceHubUrl, capabilities);
             }
 

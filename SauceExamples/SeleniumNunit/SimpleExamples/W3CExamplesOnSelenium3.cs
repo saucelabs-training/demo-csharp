@@ -66,7 +66,7 @@ namespace Selenium3.Nunit.Scripts.SimpleExamples
             _sauceOptions.Add("name", TestContext.CurrentContext.Test.Name);
             options.AddAdditionalCapability("sauce:options", _sauceOptions);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), options.ToCapabilities(),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), options.ToCapabilities(),
                 TimeSpan.FromSeconds(600));
             _driver.Navigate().GoToUrl("https://www.google.com");
             Assert.Pass();
@@ -85,7 +85,7 @@ namespace Selenium3.Nunit.Scripts.SimpleExamples
             _sauceOptions.Add("name", TestContext.CurrentContext.Test.Name);
             options.AddAdditionalCapability("sauce:options", _sauceOptions);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), options.ToCapabilities(),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), options.ToCapabilities(),
                 TimeSpan.FromSeconds(600));
             _driver.Navigate().GoToUrl("https://www.google.com");
             Assert.Pass();
@@ -101,7 +101,7 @@ namespace Selenium3.Nunit.Scripts.SimpleExamples
             _sauceOptions.Add("name", TestContext.CurrentContext.Test.Name);
             chromeOptions.AddAdditionalCapability("sauce:options", _sauceOptions, true);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"),
                 chromeOptions.ToCapabilities(), TimeSpan.FromSeconds(600));
             _driver.Navigate().GoToUrl("https://www.google.com");
             Assert.Pass();
@@ -119,7 +119,7 @@ namespace Selenium3.Nunit.Scripts.SimpleExamples
 
             safariOptions.AddAdditionalCapability("sauce:options", _sauceOptions);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"),
                 safariOptions.ToCapabilities(), TimeSpan.FromSeconds(600));
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");
             Assert.Pass();

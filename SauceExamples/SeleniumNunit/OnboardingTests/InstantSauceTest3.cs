@@ -34,7 +34,7 @@ namespace Selenium3.Nunit.Scripts.OnboardingTests
             caps.SetCapability("username", sauceUserName);
             caps.SetCapability("accessKey", sauceAccessKey);
             caps.SetCapability("name", TestContext.CurrentContext.Test.Name);
-            _driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"),
+            _driver = new RemoteWebDriver(new Uri("http://ondemand.us-west-1.saucelabs.com:80/wd/hub"),
                 caps, TimeSpan.FromSeconds(600));
 
             //TODO Please supply your publicly available web url in place of saucedemo.com

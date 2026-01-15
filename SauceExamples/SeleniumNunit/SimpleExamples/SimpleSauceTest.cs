@@ -31,7 +31,7 @@ namespace Selenium3.Nunit.Scripts.SimpleExamples
             options.AddAdditionalCapability("build", "ShwabTeamName:" + DateTime.Now, true);
 
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), options.ToCapabilities(),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), options.ToCapabilities(),
                 TimeSpan.FromSeconds(600));
             _driver.Navigate().GoToUrl("https://www.google.com");
             Assert.Pass();

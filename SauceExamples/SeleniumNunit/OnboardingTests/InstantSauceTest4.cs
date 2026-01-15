@@ -76,7 +76,7 @@ namespace Selenium3.Nunit.Scripts.OnboardingTests
              */
             caps.SetCapability("build", "SauceDemo");
 
-            _driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"),
+            _driver = new RemoteWebDriver(new Uri("http://ondemand.us-west-1.saucelabs.com:80/wd/hub"),
                 caps, TimeSpan.FromSeconds(600));
 
             _javascriptExecutor = ((IJavaScriptExecutor)_driver);

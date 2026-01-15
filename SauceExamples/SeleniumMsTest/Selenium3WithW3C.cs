@@ -21,7 +21,7 @@ namespace Selenium3.MsTest.Scripts
         private string _sauceAccessKey;
         private Dictionary<string, object> sauceOptions;
         public TestContext TestContext { get; set; }
-        private Uri SeleniumHub => new Uri("https://ondemand.saucelabs.com/wd/hub");
+        private Uri SeleniumHub => new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub");
 
 
         [TestMethod]

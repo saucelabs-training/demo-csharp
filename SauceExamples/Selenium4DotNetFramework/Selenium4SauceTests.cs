@@ -45,7 +45,7 @@ namespace Selenium4.MsTest.Scripts
             sauceOptions.Add("name", MethodBase.GetCurrentMethod().Name);
             options.AddAdditionalOption("sauce:options", sauceOptions);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), options.ToCapabilities(),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), options.ToCapabilities(),
                 TimeSpan.FromSeconds(30));
             GoToThenAssert();
         }
@@ -62,7 +62,7 @@ namespace Selenium4.MsTest.Scripts
             sauceOptions.Add("name", MethodBase.GetCurrentMethod().Name);
             options.AddAdditionalOption("sauce:options", sauceOptions);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), options.ToCapabilities(),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), options.ToCapabilities(),
                 TimeSpan.FromSeconds(30));
             GoToThenAssert();
         }
@@ -84,7 +84,7 @@ namespace Selenium4.MsTest.Scripts
             sauceOptions.Add("name", MethodBase.GetCurrentMethod().Name);
             chromeOptions.AddAdditionalOption("sauce:options", sauceOptions);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"),
                 chromeOptions.ToCapabilities(), TimeSpan.FromSeconds(30));
             GoToThenAssert();
         }
@@ -100,7 +100,7 @@ namespace Selenium4.MsTest.Scripts
             sauceOptions.Add("name", MethodBase.GetCurrentMethod().Name);
             safariOptions.AddAdditionalOption("sauce:options", sauceOptions);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"),
                 safariOptions.ToCapabilities(), TimeSpan.FromSeconds(30));
             GoToThenAssert();
         }
@@ -115,7 +115,7 @@ namespace Selenium4.MsTest.Scripts
             sauceOptions.Add("name", MethodBase.GetCurrentMethod().Name);
             browserOptions.AddAdditionalOption("sauce:options", sauceOptions);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"),
                 browserOptions.ToCapabilities(), TimeSpan.FromSeconds(30));
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");
             GoToThenAssert();
@@ -131,7 +131,7 @@ namespace Selenium4.MsTest.Scripts
             sauceOptions.Add("name", MethodBase.GetCurrentMethod().Name);
             browserOptions.AddAdditionalOption("sauce:options", sauceOptions);
 
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"),
                 browserOptions.ToCapabilities(), TimeSpan.FromSeconds(30));
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");
             GoToThenAssert();

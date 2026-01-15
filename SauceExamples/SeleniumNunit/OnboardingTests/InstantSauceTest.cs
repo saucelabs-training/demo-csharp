@@ -42,7 +42,7 @@ namespace Selenium3.Nunit.Scripts.OnboardingTests
 
             //create a new Remote driver that will allow your test to send
             //commands to the Sauce Labs grid so that Sauce can execute your tests
-            _driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"),
+            _driver = new RemoteWebDriver(new Uri("http://ondemand.us-west-1.saucelabs.com:80/wd/hub"),
                 capabilities, TimeSpan.FromSeconds(600));
             //navigate to the url of the Sauce Labs Sample app
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");

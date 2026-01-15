@@ -35,7 +35,7 @@ namespace Selenium3.MsTest.Scripts
             var tags = new List<string> { "Release1", "SmokeTests", "LoginFeature" };
             caps.SetCapability("tags", tags);
             caps.SetCapability("extendedDebugging", true);
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"), caps,
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"), caps,
                 TimeSpan.FromSeconds(60));
             _driver.Navigate().GoToUrl("https://www.google.com");
         }

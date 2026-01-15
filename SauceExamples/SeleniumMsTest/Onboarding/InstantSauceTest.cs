@@ -45,7 +45,7 @@ namespace Selenium3.MsTest.Scripts.Onboarding
             //It's not a good idea to set this value too high because if something goes wrong,
             // the test will just hang for this amount of time. 60 sec is plenty
             var connectionTimeout = TimeSpan.FromSeconds(60);
-            _driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"),
+            _driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"),
                 safariOptions.ToCapabilities(), connectionTimeout);
 
             //navigate to the url of the Sauce Labs Sample app

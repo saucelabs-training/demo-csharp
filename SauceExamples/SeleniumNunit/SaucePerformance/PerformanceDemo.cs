@@ -35,7 +35,7 @@ namespace Selenium3.Nunit.Scripts.SaucePerformance
             };
             chromeOptions.AddAdditionalCapability("sauce:options", sauceOptions, true);
 
-            Driver = new RemoteWebDriver(new Uri("https://ondemand.saucelabs.com/wd/hub"),
+            Driver = new RemoteWebDriver(new Uri("https://ondemand.us-west-1.saucelabs.com/wd/hub"),
                 chromeOptions.ToCapabilities(), TimeSpan.FromSeconds(600));
         }
 
