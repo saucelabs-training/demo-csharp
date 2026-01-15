@@ -46,7 +46,6 @@ jobs:
     
     - name: Run tests
       run: dotnet test SauceExamples/SeleniumMsTest/Selenium3.MsTest.Scripts.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=selenium-mstest-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6
@@ -75,7 +74,6 @@ jobs:
     
     - name: Run tests
       run: dotnet test SauceExamples/SeleniumNunit/Selenium3.Nunit.Scripts.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=selenium-nunit-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6
@@ -104,7 +102,6 @@ jobs:
     
     - name: Run tests
       run: dotnet test SauceExamples/Web.Tests/Selenium3.Nunit.Framework.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=web-tests-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6
@@ -133,7 +130,6 @@ jobs:
     
     - name: Run tests
       run: dotnet test SauceExamples/Selenium4DotNetFramework/Selenium4.MsTest.Scripts.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=selenium4-framework-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6

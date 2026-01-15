@@ -38,7 +38,6 @@ jobs:
     
     - name: Run tests
       run: dotnet test Dotnet/Dotnet.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=dotnet-simple-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6

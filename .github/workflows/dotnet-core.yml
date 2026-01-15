@@ -38,7 +38,6 @@ jobs:
     
     - name: Run Selenium Examples Tests
       run: dotnet test DotnetCore/Sauce.Demo/Core.Selenium.Examples/Core.Selenium.Examples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=selenium-examples-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6

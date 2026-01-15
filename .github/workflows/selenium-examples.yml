@@ -38,7 +38,6 @@ jobs:
     
     - name: Run tests
       run: dotnet test SeleniumExamples/MSTestExamples/MSTestExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=mstest-examples-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6
@@ -67,7 +66,6 @@ jobs:
     
     - name: Run tests
       run: dotnet test SeleniumExamples/NUnitExamples/NUnitExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=nunit-examples-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6

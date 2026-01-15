@@ -42,7 +42,6 @@ jobs:
     
     - name: Run tests
       run: dotnet test SauceExamples/Core.Appium.MsTest.BestPractices/Core.Appium.Nunit.BestPractices.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=appium-best-practices-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6
@@ -71,7 +70,6 @@ jobs:
     
     - name: Run tests
       run: dotnet test SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=appium-examples-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6
@@ -100,7 +98,6 @@ jobs:
     
     - name: Run tests
       run: dotnet test SauceExamples/DotnetFramework/Appium/Appium4.MsTest.Scripts/Appium4.MsTest.Scripts.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=appium-mstest-framework-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6
@@ -129,7 +126,6 @@ jobs:
     
     - name: Run tests
       run: dotnet test SauceExamples/DotnetFramework/Appium/Appium4.NUnit.Scripts/Appium4.NUnit.Scripts.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=appium-nunit-framework-results.trx"
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v6
