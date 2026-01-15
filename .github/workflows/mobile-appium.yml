@@ -24,7 +24,7 @@ env:
 jobs:
   appium-best-practices:
     name: Appium Best Practices (NUnit)
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '3.1.x'
+        dotnet-version: '5.0.x'
     
     - name: Restore dependencies
       run: dotnet restore SauceExamples/Core.Appium.MsTest.BestPractices/Core.Appium.Nunit.BestPractices.csproj
@@ -53,7 +53,7 @@ jobs:
 
   appium-examples:
     name: Appium Examples
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v4
@@ -81,7 +81,7 @@ jobs:
         path: '**/appium-examples-results.trx'
 
   appium-mstest-framework:
-    name: Appium 4 MsTest (.NET Framework)
+    name: Appium MsTest (.NET Framework)
     runs-on: windows-latest
     
     steps:
@@ -110,7 +110,7 @@ jobs:
         path: '**/appium-mstest-framework-results.trx'
 
   appium-nunit-framework:
-    name: Appium 4 NUnit (.NET Framework)
+    name: Appium NUnit (.NET Framework)
     runs-on: windows-latest
     
     steps:

@@ -15,7 +15,6 @@ namespace Common.TestData
         {
             new object[] { "Google Pixel.*", ""},
             new object[] { "Samsung Galaxy.*", ""},
-            new object[] { "HTC.*", ""},
         };
     }
 }

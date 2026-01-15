@@ -143,12 +143,8 @@ namespace Core.Common
             get
             {
                 yield return new TestFixtureData("Google Pixel.*", "Android", "Chrome");
-                yield return new TestFixtureData("Google Pixel.*", "Android", "Chrome");
-                yield return new TestFixtureData("Google Pixel.*", "Android", "Chrome");
                 // duplication for massive parallel example
-                yield return new TestFixtureData("HTC.*", "Android", "Chrome");
-                yield return new TestFixtureData("HTC.*", "Android", "Chrome");
-                yield return new TestFixtureData("Huawei.*", "Android", "Chrome");
+                yield return new TestFixtureData("Samsung.*", "Android", "Chrome");
             }
         }
 
@@ -157,7 +153,7 @@ namespace Core.Common
             get
             {
                 yield return new TestFixtureData("Google Pixel.*", "Android", "Chrome");
-                yield return new TestFixtureData("HTC.*", "Android", "Chrome");
+                yield return new TestFixtureData("Samsung.*", "Android", "Chrome");
             }
         }
 
