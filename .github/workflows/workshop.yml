@@ -2,9 +2,9 @@ name: .NET Workshop
 
 on:
   push:
-    branches: [ 2_hr_workshop ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   SCREENER_API_KEY: ${{ secrets.SCREENER_API_KEY }}
