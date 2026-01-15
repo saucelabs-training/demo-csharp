@@ -24,7 +24,7 @@ env:
 jobs:
   appium-best-practices:
     name: Appium Best Practices (NUnit)
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     steps:
     - uses: actions/checkout@v4
@@ -32,16 +32,16 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '3.1.x'
     
     - name: Restore dependencies
       run: dotnet restore SauceExamples/Core.Appium.MsTest.BestPractices/Core.Appium.Nunit.BestPractices.csproj
     
     - name: Build
-      run: dotnet build SauceExamples/Core.Appium.MsTest.BestPractices/Core.Appium.Nunit.BestPractices.csproj --no-restore
+      run: dotnet build SauceExamples/Core.Appium.MsTest.BestPractices/Core.Appium.Nunit.BestPractices.csproj --no-restore --configuration Release
     
     - name: Run tests
-      run: dotnet test SauceExamples/Core.Appium.MsTest.BestPractices/Core.Appium.Nunit.BestPractices.csproj --no-build --verbosity normal --logger "trx;LogFileName=appium-best-practices-results.trx"
+      run: dotnet test SauceExamples/Core.Appium.MsTest.BestPractices/Core.Appium.Nunit.BestPractices.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=appium-best-practices-results.trx"
       continue-on-error: true
     
     - name: Upload test results
@@ -53,7 +53,7 @@ jobs:
 
   appium-examples:
     name: Appium Examples
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     steps:
     - uses: actions/checkout@v4
@@ -61,16 +61,16 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '5.0.x'
     
     - name: Restore dependencies
       run: dotnet restore SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj
     
     - name: Build
-      run: dotnet build SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj --no-restore
+      run: dotnet build SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj --no-restore --configuration Release
     
     - name: Run tests
-      run: dotnet test SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj --no-build --verbosity normal --logger "trx;LogFileName=appium-examples-results.trx"
+      run: dotnet test SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=appium-examples-results.trx"
       continue-on-error: true
     
     - name: Upload test results
@@ -87,23 +87,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup .NET Framework
-      uses: microsoft/setup-msbuild@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
     
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v2
+    - name: Restore dependencies
+      run: dotnet restore SauceExamples/DotnetFramework/Appium/Appium4.MsTest.Scripts/Appium4.MsTest.Scripts.csproj
     
-    - name: Restore NuGet packages
-      run: nuget restore SauceExamples/SauceExamples.sln
+    - name: Build
+      run: dotnet build SauceExamples/DotnetFramework/Appium/Appium4.MsTest.Scripts/Appium4.MsTest.Scripts.csproj --no-restore --configuration Release
     
-    - name: Build solution
-      run: msbuild SauceExamples/SauceExamples.sln /p:Configuration=Release
-    
-    - name: Setup VSTest
-      uses: darenm/Setup-VSTest@v1.2
-    
-    - name: Run Appium MsTest Tests
-      run: vstest.console.exe SauceExamples/DotnetFramework/Appium/Appium4.MsTest.Scripts/bin/Release/Appium4.MsTest.Scripts.dll /Logger:trx;LogFileName=appium-mstest-framework-results.trx
+    - name: Run tests
+      run: dotnet test SauceExamples/DotnetFramework/Appium/Appium4.MsTest.Scripts/Appium4.MsTest.Scripts.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=appium-mstest-framework-results.trx"
       continue-on-error: true
     
     - name: Upload test results
@@ -120,23 +116,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup .NET Framework
-      uses: microsoft/setup-msbuild@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
     
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v2
+    - name: Restore dependencies
+      run: dotnet restore SauceExamples/DotnetFramework/Appium/Appium4.NUnit.Scripts/Appium4.NUnit.Scripts.csproj
     
-    - name: Restore NuGet packages
-      run: nuget restore SauceExamples/SauceExamples.sln
+    - name: Build
+      run: dotnet build SauceExamples/DotnetFramework/Appium/Appium4.NUnit.Scripts/Appium4.NUnit.Scripts.csproj --no-restore --configuration Release
     
-    - name: Build solution
-      run: msbuild SauceExamples/SauceExamples.sln /p:Configuration=Release
-    
-    - name: Setup VSTest
-      uses: darenm/Setup-VSTest@v1.2
-    
-    - name: Run Appium NUnit Tests
-      run: vstest.console.exe SauceExamples/DotnetFramework/Appium/Appium4.NUnit.Scripts/bin/Release/Appium4.NUnit.Scripts.dll /Logger:trx;LogFileName=appium-nunit-framework-results.trx
+    - name: Run tests
+      run: dotnet test SauceExamples/DotnetFramework/Appium/Appium4.NUnit.Scripts/Appium4.NUnit.Scripts.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=appium-nunit-framework-results.trx"
       continue-on-error: true
     
     - name: Upload test results
