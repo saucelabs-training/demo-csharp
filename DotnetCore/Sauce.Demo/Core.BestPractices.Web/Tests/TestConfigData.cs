@@ -20,13 +20,13 @@ namespace Core.BestPractices.Web.Tests
         private static readonly ChromeOptions chromeOptions = new()
         {
             BrowserVersion = "latest",
-            PlatformName = "Windows 10",
+            PlatformName = "Windows 11",
         };
 
         private static readonly EdgeOptions edgeOptions = new()
         {
             BrowserVersion = "latest",
-            PlatformName = "Windows 10"
+            PlatformName = "Windows 11"
         };
 
         internal static IEnumerable PopularDesktopCombinations
@@ -79,14 +79,8 @@ namespace Core.BestPractices.Web.Tests
         {
             get
             {
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                //duplication for more parallelization
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
+                yield return new TestFixtureData("Google Pixel 9 Emulator", "16.0");
+                yield return new TestFixtureData("Google Pixel 9 Emulator", "16.0");
             }
         }
 
@@ -94,28 +88,11 @@ namespace Core.BestPractices.Web.Tests
         {
             get
             {
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-            }
-        }
-
-        public static IEnumerable PopularVisualResolutions
-        {
-            get
-            {
-                yield return new TestFixtureData(safariOptions, "375x812", "Iphone X");
-                yield return new TestFixtureData(safariOptions, "1280x1024", "1024p");
-                yield return new TestFixtureData(safariOptions, "1920x1080", "1080p");
-                yield return new TestFixtureData(chromeOptions, "412x732", "Pixel XL");
-                yield return new TestFixtureData(chromeOptions, "412x869", "Galaxy Note 10+");
+                yield return new TestFixtureData("iPhone 16 Simulator", "18.6");
+                yield return new TestFixtureData("iPhone 16 Simulator", "18.6");
+                yield return new TestFixtureData("iPhone 16 Simulator", "18.6");
+                yield return new TestFixtureData("iPhone 16 Simulator", "18.6");
+                yield return new TestFixtureData("iPhone 16 Simulator", "18.6");
             }
         }
 

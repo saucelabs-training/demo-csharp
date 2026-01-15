@@ -36,7 +36,7 @@ namespace Core.Selenium.Examples.Selenium4.NewFeatures
         [TestMethod]
         public void RelativeLocationTest()
         {
-            Driver.Navigate().GoToUrl("https://www.diemol.com/selenium-4-demo/relative-locators-demo.html");
+            Driver.Navigate().GoToUrl("https://www.diemol.com/selenium-demo/relative-locators-demo.html");
 
             IWebElement element = Driver.FindElement(RelativeBy.WithLocator(By.TagName("li"))
                 .LeftOf(By.Id("berlin"))

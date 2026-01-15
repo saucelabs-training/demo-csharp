@@ -1,4 +1,5 @@
-﻿using Core.BestPractices.Web.MobileWebPageObjects.Android;
+﻿using System.Collections.Generic;
+using Core.BestPractices.Web.MobileWebPageObjects.Android;
 using Core.Common;
 using FluentAssertions;
 using NUnit.Framework;
@@ -16,13 +17,17 @@ namespace Core.BestPractices.Web.Tests.Mobile.Android
         public void Setup()
         {
             var appiumOptions = new AppiumOptions();
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.DeviceName, DeviceName);
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformName, "Android");
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformVersion, PlatformVersion);
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.BrowserName, "Chrome");
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.AppiumVersion, "1.20.2");
-            appiumOptions.AddAdditionalOption("name", TestContext.CurrentContext.Test.Name);
-            appiumOptions.AddAdditionalOption("build", Constants.BuildId);
+            appiumOptions.DeviceName = DeviceName;
+            appiumOptions.PlatformName = "Android";
+            appiumOptions.PlatformVersion = PlatformVersion;
+            appiumOptions.BrowserName = "Chrome";
+            SauceOptions = new Dictionary<string, object>
+            {
+                ["name"] = TestContext.CurrentContext.Test.Name,
+                ["build"] = Constants.BuildId,
+                [MobileCapabilityType.AppiumVersion] = "latest"
+            };            
+            appiumOptions.AddAdditionalAppiumOption("sauce:options", SauceOptions);
 
             _driver = GetAndroidDriver(appiumOptions);
         }

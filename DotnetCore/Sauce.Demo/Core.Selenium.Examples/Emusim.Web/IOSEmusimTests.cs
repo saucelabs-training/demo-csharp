@@ -3,32 +3,31 @@ using Core.Common;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
-using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.Enums;
+using OpenQA.Selenium.Appium.iOS;
 using OpenQA.Selenium.Support.UI;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace Core.Selenium.Examples.Emusim.Web.End
 {
     [TestFixture]
-    [TestFixtureSource(typeof(TestConfigData), nameof(TestConfigData.AndroidSimulators))]
+    [TestFixtureSource(typeof(TestConfigData), nameof(TestConfigData.IOSSimulators))]
+    [Category("ios-end")]
     [Category("emusim")]
-    [Category("android-end")]
-    public class AndroidEmusimTests : EmusimBaseTest
+    public class IOSEmusimTests : EmusimBaseTest
     {
         [SetUp]
         public void Setup()
         {
             var appiumOptions = new AppiumOptions();
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.DeviceName, DeviceName);
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformName, "Android");
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformVersion, PlatformVersion);
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.BrowserName, "Chrome");
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.AppiumVersion, "1.20.2");
-            appiumOptions.AddAdditionalOption("name", TestContext.CurrentContext.Test.Name);
-            appiumOptions.AddAdditionalOption("build", Constants.BuildId);
+            appiumOptions.DeviceName = DeviceName;
+            appiumOptions.PlatformName = "iOS";
+            appiumOptions.PlatformVersion = PlatformVersion;
+            appiumOptions.BrowserName = "Safari";
+            appiumOptions.AddAdditionalAppiumOption("name", TestContext.CurrentContext.Test.Name);
+            appiumOptions.AddAdditionalAppiumOption("build", Common.Constants.BuildId);
 
-            _driver = GetAndroidDriver(appiumOptions);
+            _driver = GetIOSDriver(appiumOptions);
         }
 
         [TearDown]
@@ -40,9 +39,9 @@ namespace Core.Selenium.Examples.Emusim.Web.End
             _driver.Quit();
         }
 
-        private AndroidDriver _driver;
+        private IOSDriver _driver;
 
-        public AndroidEmusimTests(string deviceName, string platformVersion) : base(deviceName, platformVersion)
+        public IOSEmusimTests(string deviceName, string platformVersion) : base(deviceName, platformVersion)
         {
         }
 

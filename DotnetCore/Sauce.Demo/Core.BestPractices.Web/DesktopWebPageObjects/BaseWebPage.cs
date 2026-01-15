@@ -20,10 +20,5 @@ namespace Core.BestPractices.Web.DesktopWebPageObjects
 
         public Wait Wait => new(Driver);
         public string BaseUrl { get; }
-
-        public void TakeSnapshot()
-        {
-            JavaScriptExecutor.ExecuteScript("/*@visual.snapshot*/", GetType().Name);
-        }
     }
 }

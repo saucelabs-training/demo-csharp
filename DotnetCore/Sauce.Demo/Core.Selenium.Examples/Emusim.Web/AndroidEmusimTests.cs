@@ -8,29 +8,26 @@ using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Support.UI;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
-namespace Core.Selenium.Examples.Emusim.Web.Start
+namespace Core.Selenium.Examples.Emusim.Web.End
 {
     [TestFixture]
-    //TODO change to [TestFixtureSource(typeof(TestConfigData), nameof(TestConfigData.IOSSimulators))]
     [TestFixtureSource(typeof(TestConfigData), nameof(TestConfigData.AndroidSimulators))]
-    [Category("ios-start")]
-    public class IOSEmusimTests : EmusimBaseTest
+    [Category("emusim")]
+    [Category("android-end")]
+    public class AndroidEmusimTests : EmusimBaseTest
     {
         [SetUp]
         public void Setup()
         {
-            //TODO use https://saucelabs.com/platform/platform-configurator#/
             var appiumOptions = new AppiumOptions();
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.DeviceName, DeviceName);
-            // TODO change this value to run on iOS
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformName, "Android");
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformVersion, PlatformVersion);
-            // TODO run on Safari
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.BrowserName, "Chrome");
-            appiumOptions.AddAdditionalOption("name", TestContext.CurrentContext.Test.Name);
-            appiumOptions.AddAdditionalOption("build", Common.Constants.BuildId);
+            appiumOptions.DeviceName = DeviceName;
+            appiumOptions.PlatformName = "Android";
+            appiumOptions.PlatformVersion = PlatformVersion;
+            appiumOptions.BrowserName = "Chrome";
+            appiumOptions.AddAdditionalAppiumOption(MobileCapabilityType.AppiumVersion, "1.20.2");
+            appiumOptions.AddAdditionalAppiumOption("name", TestContext.CurrentContext.Test.Name);
+            appiumOptions.AddAdditionalAppiumOption("build", Constants.BuildId);
 
-            //TODO GetIOSDriver() instead
             _driver = GetAndroidDriver(appiumOptions);
         }
 
@@ -42,14 +39,15 @@ namespace Core.Selenium.Examples.Emusim.Web.Start
             ExecuteSauceCleanupSteps(_driver);
             _driver.Quit();
         }
-        //TODO change this to use IOSDriver<IOSElement>
+
         private AndroidDriver _driver;
 
-        public IOSEmusimTests(string deviceName, string platformVersion) : base(deviceName, platformVersion)
+        public AndroidEmusimTests(string deviceName, string platformVersion) : base(deviceName, platformVersion)
         {
         }
 
         [Test]
+        [Retry(1)]
         public void ValidUserCanLogin()
         {
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");

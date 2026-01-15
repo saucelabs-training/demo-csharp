@@ -16,12 +16,12 @@ namespace Core.BestPractices.Web.Tests.Mobile.IOS
         public void Setup()
         {
             var appiumOptions = new AppiumOptions();
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.DeviceName, DeviceName);
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformName, "iOS");
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.PlatformVersion, PlatformVersion);
-            appiumOptions.AddAdditionalOption(MobileCapabilityType.BrowserName, "Safari");
-            appiumOptions.AddAdditionalOption("name", TestContext.CurrentContext.Test.Name);
-            appiumOptions.AddAdditionalOption("build", Constants.BuildId);
+            appiumOptions.DeviceName = DeviceName;
+            appiumOptions.PlatformName = "iOS";
+            appiumOptions.PlatformVersion = PlatformVersion;
+            appiumOptions.BrowserName = "Safari";
+            appiumOptions.AddAdditionalAppiumOption("name", TestContext.CurrentContext.Test.Name);
+            appiumOptions.AddAdditionalAppiumOption("build", Constants.BuildId);
 
             _driver = GetIOSDriver(appiumOptions);
         }

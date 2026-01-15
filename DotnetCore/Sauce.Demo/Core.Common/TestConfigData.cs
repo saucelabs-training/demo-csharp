@@ -125,18 +125,6 @@ namespace Core.Common
             }
         }
 
-        public static IEnumerable PopularVisualResolutions
-        {
-            get
-            {
-                yield return new TestFixtureData(SafariOptions, "375x812", "Iphone X");
-                yield return new TestFixtureData(SafariOptions, "1280x1024", "1024p");
-                yield return new TestFixtureData(SafariOptions, "1920x1080", "1080p");
-                yield return new TestFixtureData(ChromeOptions, "412x732", "Pixel XL");
-                yield return new TestFixtureData(ChromeOptions, "412x869", "Galaxy Note 10+");
-            }
-        }
-
         public static IEnumerable MostPopularAndroidDevices
         {
             get
