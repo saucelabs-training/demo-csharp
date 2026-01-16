@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.Common;
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
@@ -24,9 +25,14 @@ namespace Core.Selenium.Examples.Emusim.Web.End
             appiumOptions.PlatformName = "Android";
             appiumOptions.PlatformVersion = PlatformVersion;
             appiumOptions.BrowserName = "Chrome";
-            appiumOptions.AddAdditionalAppiumOption(MobileCapabilityType.AppiumVersion, "1.20.2");
-            appiumOptions.AddAdditionalAppiumOption("name", TestContext.CurrentContext.Test.Name);
-            appiumOptions.AddAdditionalAppiumOption("build", Constants.BuildId);
+            appiumOptions.AutomationName = "UiAutomator2";
+            SauceOptions = new Dictionary<string, object>
+            {
+                ["name"] = TestContext.CurrentContext.Test.Name,
+                ["build"] = Constants.BuildId,
+                [MobileCapabilityType.AppiumVersion] = "2.11.0"
+            };            
+            appiumOptions.AddAdditionalAppiumOption("sauce:options", SauceOptions);
 
             _driver = GetAndroidDriver(appiumOptions);
         }

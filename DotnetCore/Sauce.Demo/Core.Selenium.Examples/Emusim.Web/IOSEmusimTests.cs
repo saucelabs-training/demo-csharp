@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.Common;
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
@@ -24,8 +25,14 @@ namespace Core.Selenium.Examples.Emusim.Web.End
             appiumOptions.PlatformName = "iOS";
             appiumOptions.PlatformVersion = PlatformVersion;
             appiumOptions.BrowserName = "Safari";
-            appiumOptions.AddAdditionalAppiumOption("name", TestContext.CurrentContext.Test.Name);
-            appiumOptions.AddAdditionalAppiumOption("build", Common.Constants.BuildId);
+            appiumOptions.AutomationName = "XCUITest";
+            SauceOptions = new Dictionary<string, object>
+            {
+                ["name"] = TestContext.CurrentContext.Test.Name,
+                ["build"] = Constants.BuildId,
+                [MobileCapabilityType.AppiumVersion] = "2.0.0"
+            };            
+            appiumOptions.AddAdditionalAppiumOption("sauce:options", SauceOptions);
 
             _driver = GetIOSDriver(appiumOptions);
         }

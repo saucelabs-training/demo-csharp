@@ -20,13 +20,13 @@ namespace Core.Common
         private static readonly ChromeOptions ChromeOptions = new()
         {
             BrowserVersion = "latest",
-            PlatformName = "Windows 10"
+            PlatformName = "Windows 11"
         };
 
         private static readonly EdgeOptions EdgeOptions = new()
         {
             BrowserVersion = "latest",
-            PlatformName = "Windows 10"
+            PlatformName = "Windows 11"
         };
 
         public static IEnumerable PopularDesktopCombinations
@@ -94,8 +94,8 @@ namespace Core.Common
         {
             get
             {
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                yield return new TestFixtureData("Google Pixel 3a GoogleAPI Emulator", "11.0");
+                yield return new TestFixtureData("Google Pixel 9 Emulator", "16.0");
+                yield return new TestFixtureData("Google Pixel 9 Emulator", "16.0");
             }
         }
 
@@ -103,8 +103,8 @@ namespace Core.Common
         {
             get
             {
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone XS Max Simulator", "14.0");
+                yield return new TestFixtureData("iPhone Simulator", "16.2");
+                yield return new TestFixtureData("iPhone Simulator", "16.2");
             }
         }
 
@@ -112,16 +112,8 @@ namespace Core.Common
         {
             get
             {
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
-                yield return new TestFixtureData("iPhone X Simulator", "14.0");
+                yield return new TestFixtureData("iPhone Simulator", "16.2");
+                yield return new TestFixtureData("iPhone Simulator", "16.2");
             }
         }
 
@@ -148,11 +140,11 @@ namespace Core.Common
         {
             get
             {
-                yield return new TestFixtureData("iPhone 11.*", "iOS", "Safari");
-                yield return new TestFixtureData("iPhone 12.*", "iOS", "Safari");
+                yield return new TestFixtureData("iPhone 14.*", "iOS", "Safari");
+                yield return new TestFixtureData("iPhone 15.*", "iOS", "Safari");
                 //duplication only for parallel example
-                yield return new TestFixtureData("iPhone 11.*", "iOS", "Safari");
-                yield return new TestFixtureData("iPhone 12.*", "iOS", "Safari");
+                yield return new TestFixtureData("iPhone 14.*", "iOS", "Safari");
+                yield return new TestFixtureData("iPhone 15.*", "iOS", "Safari");
             }
         }
     }

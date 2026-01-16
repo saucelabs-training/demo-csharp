@@ -1,5 +1,6 @@
 ﻿using Core.BestPractices.Web.MobileWebPageObjects.IOS;
 using Core.Common;
+using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium.Appium;
@@ -20,8 +21,13 @@ namespace Core.BestPractices.Web.Tests.Mobile.IOS
             appiumOptions.PlatformName = "iOS";
             appiumOptions.PlatformVersion = PlatformVersion;
             appiumOptions.BrowserName = "Safari";
-            appiumOptions.AddAdditionalAppiumOption("name", TestContext.CurrentContext.Test.Name);
-            appiumOptions.AddAdditionalAppiumOption("build", Constants.BuildId);
+            SauceOptions = new Dictionary<string, object>
+            {
+                ["name"] = TestContext.CurrentContext.Test.Name,
+                ["build"] = Constants.BuildId,
+                [MobileCapabilityType.AppiumVersion] = "2.0.0"
+            };            
+            appiumOptions.AddAdditionalAppiumOption("sauce:options", SauceOptions);
 
             _driver = GetIOSDriver(appiumOptions);
         }

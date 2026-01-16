@@ -88,11 +88,8 @@ namespace Core.BestPractices.Web.Tests
         {
             get
             {
-                yield return new TestFixtureData("iPhone 16 Simulator", "18.6");
-                yield return new TestFixtureData("iPhone 16 Simulator", "18.6");
-                yield return new TestFixtureData("iPhone 16 Simulator", "18.6");
-                yield return new TestFixtureData("iPhone 16 Simulator", "18.6");
-                yield return new TestFixtureData("iPhone 16 Simulator", "18.6");
+                yield return new TestFixtureData("iPhone Simulator", "16.2");
+                yield return new TestFixtureData("iPhone Simulator", "16.2");
             }
         }
 
@@ -110,11 +107,11 @@ namespace Core.BestPractices.Web.Tests
         {
             get
             {
-                yield return new TestFixtureData("iPhone 11.*", "iOS", "Safari");
-                yield return new TestFixtureData("iPhone 12.*", "iOS", "Safari");
+                yield return new TestFixtureData("iPhone 14.*", "iOS", "Safari");
+                yield return new TestFixtureData("iPhone 15.*", "iOS", "Safari");
                 //duplication only for parallel example
-                yield return new TestFixtureData("iPhone 11.*", "iOS", "Safari");
-                yield return new TestFixtureData("iPhone 12.*", "iOS", "Safari");
+                yield return new TestFixtureData("iPhone 14.*", "iOS", "Safari");
+                yield return new TestFixtureData("iPhone 15.*", "iOS", "Safari");
             }
         }
     }

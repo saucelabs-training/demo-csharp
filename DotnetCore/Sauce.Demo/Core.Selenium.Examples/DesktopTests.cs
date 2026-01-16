@@ -46,7 +46,6 @@ namespace Core.Selenium.Examples
             {
                 BrowserVersion = "latest",
                 PlatformName = "Windows 10"
-                //AcceptInsecureCertificates = true //Insecure Certs are Not supported by Edge
             };
 
             browserOptions.AddAdditionalOption("sauce:options", _sauceOptions);
@@ -61,7 +60,7 @@ namespace Core.Selenium.Examples
         [TestMethod]
         public void VisibilityTest()
         {
-            //TODO please set your Sauce Labs username/access key in an environment variable
+            // Set your Sauce Labs username/access key in an environment variable
             _sauceUserName = Environment.GetEnvironmentVariable("SAUCE_USERNAME");
             // Do NOT use EnvironmentVariableTarget as it won't work in CI
             _sauceAccessKey = Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY");
@@ -78,7 +77,6 @@ namespace Core.Selenium.Examples
             {
                 BrowserVersion = "latest",
                 PlatformName = "Windows 10"
-                //AcceptInsecureCertificates = true //Insecure Certs are Not supported by Edge
             };
 
             browserOptions.AddAdditionalOption("sauce:options", _sauceOptions);

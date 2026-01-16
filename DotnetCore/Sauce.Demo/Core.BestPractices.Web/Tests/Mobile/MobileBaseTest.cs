@@ -1,4 +1,5 @@
 ﻿using Core.Common;
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Enums;
@@ -14,9 +15,14 @@ namespace Core.BestPractices.Web.Tests.Mobile
             MobileOptions.DeviceName = DeviceName;
             MobileOptions.PlatformName = Platform;
             MobileOptions.BrowserName = Browser;
-            MobileOptions.AddAdditionalAppiumOption("name", TestContext.CurrentContext.Test.Name);
-            MobileOptions.AddAdditionalAppiumOption("newCommandTimeout", 90);
-            MobileOptions.AddAdditionalAppiumOption("build", Constants.BuildId);
+            SauceOptions = new Dictionary<string, object>
+            {
+                ["name"] = TestContext.CurrentContext.Test.Name,
+                ["build"] = Constants.BuildId,
+                ["newCommandTimeout"] = 90,
+                [MobileCapabilityType.AppiumVersion] = "latest"
+            };            
+            MobileOptions.AddAdditionalAppiumOption("sauce:options", SauceOptions);
         }
 
         public readonly string DeviceName;
