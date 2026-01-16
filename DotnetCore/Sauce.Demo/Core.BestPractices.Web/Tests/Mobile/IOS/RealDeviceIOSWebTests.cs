@@ -1,6 +1,9 @@
-﻿using Core.BestPractices.Web.DesktopWebPageObjects;
+﻿using System.Collections.Generic;
+using Core.BestPractices.Web.DesktopWebPageObjects;
+using Core.Common;
 using FluentAssertions;
 using NUnit.Framework;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.iOS;
 
 namespace Core.BestPractices.Web.Tests.Mobile.IOS
@@ -12,7 +15,22 @@ namespace Core.BestPractices.Web.Tests.Mobile.IOS
         [SetUp]
         public void IOSSetup()
         {
-            Driver = GetIOSDriver(MobileOptions);
+            var appiumOptions = new AppiumOptions();
+            appiumOptions.AutomationName = "XCUITest";
+            appiumOptions.DeviceName = DeviceName;
+            appiumOptions.PlatformName = "iOS";
+            appiumOptions.BrowserName = "Safari";
+            appiumOptions.PlatformVersion = Platform;
+            
+            SauceOptions = new Dictionary<string, object>
+            {
+                ["name"] = TestContext.CurrentContext.Test.Name,
+                ["build"] = Constants.BuildId,
+                ["appiumVersion"] = "latest"
+            };            
+            appiumOptions.AddAdditionalAppiumOption("sauce:options", SauceOptions);
+            
+            Driver = GetIOSDriver(appiumOptions);
         }
 
         [TearDown]
@@ -26,8 +44,8 @@ namespace Core.BestPractices.Web.Tests.Mobile.IOS
 
         public new IOSDriver Driver { get; set; }
 
-        public RealDeviceIOSWebTests(string deviceName, string platform, string browser) :
-            base(deviceName, platform, browser)
+        public RealDeviceIOSWebTests(string deviceName, string platform) :
+            base(deviceName, platform)
         {
         }
 

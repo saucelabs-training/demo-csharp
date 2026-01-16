@@ -33,13 +33,13 @@ namespace Core.BestPractices.Web.Tests
 
         public AndroidDriver GetAndroidDriver(AppiumOptions appiumOptions)
         {
-            return new(new SauceLabsEndpoint().EmusimUri(SauceUserName, SauceAccessKey), appiumOptions, TimeSpan
+            return new(new SauceLabsEndpoint().SauceUri(SauceUserName, SauceAccessKey), appiumOptions, TimeSpan
                 .FromSeconds(240));
         }
 
         public IOSDriver GetIOSDriver(AppiumOptions appiumOptions)
         {
-            return new(new SauceLabsEndpoint().EmusimUri(SauceUserName, SauceAccessKey), appiumOptions, TimeSpan
+            return new(new SauceLabsEndpoint().SauceUri(SauceUserName, SauceAccessKey), appiumOptions, TimeSpan
                 .FromSeconds(240));
         }
 

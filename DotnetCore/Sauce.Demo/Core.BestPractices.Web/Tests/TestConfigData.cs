@@ -8,8 +8,8 @@ namespace Core.BestPractices.Web.Tests
 {
     public class TestConfigData
     {
-        private const string defaultBrowserVersion = "";
-        private const string defaultOS = "";
+        private const string defaultBrowserVersion = "latest";
+        private const string defaultOS = "Windows 11";
 
         private static readonly SafariOptions safariOptions = new()
         {
@@ -33,44 +33,9 @@ namespace Core.BestPractices.Web.Tests
         {
             get
             {
-                yield return new TestFixtureData("latest", "macOS 10.15", safariOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, chromeOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, edgeOptions);
-                //one version back
-                yield return new TestFixtureData("latest", "macOS 10.15", safariOptions);
-                yield return new TestFixtureData("latest-1", defaultOS, chromeOptions);
-                yield return new TestFixtureData("latest-1", defaultOS, edgeOptions);
-                //duplication for more parallelization
-                yield return new TestFixtureData("latest", "macOS 10.15", safariOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, chromeOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, edgeOptions);
-                yield return new TestFixtureData("latest", "macOS 10.15", safariOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, chromeOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, edgeOptions);
-                yield return new TestFixtureData("latest", "macOS 10.15", safariOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, chromeOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, edgeOptions);
-                yield return new TestFixtureData("latest", "macOS 10.15", safariOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, chromeOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, edgeOptions);
-                yield return new TestFixtureData("latest", "macOS 10.15", safariOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, chromeOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, edgeOptions);
-                yield return new TestFixtureData("latest", "macOS 10.15", safariOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, chromeOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, edgeOptions);
-                yield return new TestFixtureData("latest", "macOS 10.15", safariOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, chromeOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, edgeOptions);
-                yield return new TestFixtureData("latest", "macOS 10.15", safariOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, chromeOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, edgeOptions);
-                yield return new TestFixtureData("latest", "macOS 10.15", safariOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, chromeOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, edgeOptions);
-                yield return new TestFixtureData("latest", "macOS 10.15", safariOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, chromeOptions);
-                yield return new TestFixtureData(defaultBrowserVersion, defaultOS, edgeOptions);
+                yield return new TestFixtureData(safariOptions);
+                yield return new TestFixtureData(chromeOptions);
+                yield return new TestFixtureData(edgeOptions);
             }
         }
 
@@ -96,9 +61,10 @@ namespace Core.BestPractices.Web.Tests
         {
             get
             {
-                yield return new TestFixtureData("Google Pixel.*", "Android", "Chrome");
+                // Using specific Android versions for real device testing
+                yield return new TestFixtureData("Google.*", "14");
                 // duplication for massive parallel example
-                yield return new TestFixtureData("Samsung.*", "Android", "Chrome");
+                yield return new TestFixtureData("Samsung.*", "14");
             }
         }
 
@@ -106,11 +72,12 @@ namespace Core.BestPractices.Web.Tests
         {
             get
             {
-                yield return new TestFixtureData("iPhone 14.*", "iOS", "Safari");
-                yield return new TestFixtureData("iPhone 15.*", "iOS", "Safari");
+                // Using specific iOS versions for real device testing
+                yield return new TestFixtureData("iPhone 14.*", "17");
+                yield return new TestFixtureData("iPhone 15.*", "17");
                 //duplication only for parallel example
-                yield return new TestFixtureData("iPhone 14.*", "iOS", "Safari");
-                yield return new TestFixtureData("iPhone 15.*", "iOS", "Safari");
+                yield return new TestFixtureData("iPhone 14.*", "17");
+                yield return new TestFixtureData("iPhone 15.*", "17");
             }
         }
     }

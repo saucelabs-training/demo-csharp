@@ -6,6 +6,6 @@ namespace Core.Common
     {
         public static string BaseUrl => "https://www.saucedemo.com";
 
-        public static string BuildId { get; set; } = DateTime.Now.ToString("F");
+        public static string BuildId { get; set; } = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
     }
 }

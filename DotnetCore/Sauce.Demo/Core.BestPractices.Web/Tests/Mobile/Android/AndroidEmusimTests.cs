@@ -17,6 +17,7 @@ namespace Core.BestPractices.Web.Tests.Mobile.Android
         public void Setup()
         {
             var appiumOptions = new AppiumOptions();
+            appiumOptions.AutomationName = "UiAutomator2";
             appiumOptions.DeviceName = DeviceName;
             appiumOptions.PlatformName = "Android";
             appiumOptions.PlatformVersion = PlatformVersion;
@@ -25,7 +26,7 @@ namespace Core.BestPractices.Web.Tests.Mobile.Android
             {
                 ["name"] = TestContext.CurrentContext.Test.Name,
                 ["build"] = Constants.BuildId,
-                [MobileCapabilityType.AppiumVersion] = "latest"
+                [MobileCapabilityType.AppiumVersion] = "2.11.0"
             };            
             appiumOptions.AddAdditionalAppiumOption("sauce:options", SauceOptions);
 

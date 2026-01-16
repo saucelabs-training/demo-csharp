@@ -8,8 +8,8 @@ namespace Core.Common
 {
     public class TestConfigData
     {
-        private const string DefaultBrowserVersion = "";
-        private const string DefaultOs = "";
+        private const string DefaultBrowserVersion = "latest";
+        private const string DefaultOs = "Windows 11";
 
         private static readonly SafariOptions SafariOptions = new()
         {

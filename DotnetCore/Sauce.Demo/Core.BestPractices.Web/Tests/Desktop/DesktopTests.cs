@@ -21,16 +21,10 @@ namespace Core.BestPractices.Web.Tests.Desktop
             Driver = GetDesktopDriver(BrowserOptions.ToCapabilities());
         }
 
-        public string BrowserVersion { get; }
-        public string PlatformName { get; }
         public DriverOptions BrowserOptions { get; }
 
-        public DesktopTests(string browserVersion, string platformName, DriverOptions browserOptions)
+        public DesktopTests(DriverOptions browserOptions)
         {
-            if (string.IsNullOrEmpty(browserVersion))
-                BrowserVersion = browserVersion;
-            if (string.IsNullOrEmpty(platformName))
-                PlatformName = platformName;
             BrowserOptions = browserOptions;
         }
 

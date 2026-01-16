@@ -17,6 +17,7 @@ namespace Core.BestPractices.Web.Tests.Mobile.IOS
         public void Setup()
         {
             var appiumOptions = new AppiumOptions();
+            appiumOptions.AutomationName = "XCUITest";
             appiumOptions.DeviceName = DeviceName;
             appiumOptions.PlatformName = "iOS";
             appiumOptions.PlatformVersion = PlatformVersion;
