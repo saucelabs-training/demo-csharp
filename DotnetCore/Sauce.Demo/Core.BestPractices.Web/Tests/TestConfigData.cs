@@ -89,7 +89,6 @@ namespace Core.BestPractices.Web.Tests
             get
             {
                 yield return new TestFixtureData("iPhone Simulator", "16.2");
-                yield return new TestFixtureData("iPhone Simulator", "16.2");
             }
         }
 

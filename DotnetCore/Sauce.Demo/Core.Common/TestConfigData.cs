@@ -113,7 +113,6 @@ namespace Core.Common
             get
             {
                 yield return new TestFixtureData("iPhone Simulator", "16.2");
-                yield return new TestFixtureData("iPhone Simulator", "16.2");
             }
         }
 
