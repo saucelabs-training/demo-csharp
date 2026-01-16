@@ -95,7 +95,7 @@ namespace Common
             chromeOptions.AddAdditionalOption("sauce:options", sauceOptions);
             
             return new RemoteWebDriver(new Uri(SeleniumHubUrl),
-                chromeOptions.ToCapabilities(), TimeSpan.FromSeconds(600));
+                chromeOptions, TimeSpan.FromSeconds(600));
         }
         private IWebDriver SetSauceCapabilities(string testCaseName, Dictionary<string, object> capabilities)
         {
