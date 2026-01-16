@@ -79,14 +79,8 @@ namespace Core.Common
         {
             get
             {
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                //duplication for more parallelization
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
-                yield return new TestFixtureData("Google Pixel 3 XL GoogleAPI Emulator", "11.0");
+                yield return new TestFixtureData("Google Pixel 9 Emulator", "16.0");
+                yield return new TestFixtureData("Google Pixel 9 Emulator", "16.0");
             }
         }
 
