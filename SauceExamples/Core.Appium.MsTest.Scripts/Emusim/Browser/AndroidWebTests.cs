@@ -30,7 +30,7 @@ namespace Core.Appium.Examples.Emusim.Browser
             appiumOptions.AddAdditionalCapability(MobileCapabilityType.AppiumVersion, "1.9.1");
             appiumOptions.AddAdditionalCapability("name", TestContext.TestName);
 
-            _driver = new RemoteWebDriver(new SauceLabsEndpoint().EmusimUri(_sauceUserName, _sauceAccessKey),
+            _driver = new RemoteWebDriver(new SauceLabsEndpoint().SauceUri(_sauceUserName, _sauceAccessKey),
                 appiumOptions.ToCapabilities(), TimeSpan.FromSeconds(120));
         }
         [TestCleanup]

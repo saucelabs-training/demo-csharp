@@ -5,7 +5,7 @@ namespace Core.Appium.Nunit.BestPractices.Screens.iOS
 {
     public class BaseIosScreen
     {
-        protected BaseIosScreen(IOSDriver<IOSElement> driver)
+        protected BaseIosScreen(IOSDriver driver)
         {
             Driver = driver;
             WaitFor = new Wait(Driver);
@@ -13,6 +13,6 @@ namespace Core.Appium.Nunit.BestPractices.Screens.iOS
 
         public Wait WaitFor { get; set; }
 
-        public IOSDriver<IOSElement> Driver { get; set; }
+        public IOSDriver Driver { get; set; }
     }
 }

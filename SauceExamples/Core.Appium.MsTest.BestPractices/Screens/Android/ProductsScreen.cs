@@ -6,7 +6,7 @@ namespace Core.Appium.Nunit.BestPractices.Screens.Android
 {
     public class ProductsScreen : BaseAndroidScreen
     {
-        public ProductsScreen(AndroidDriver<AndroidElement> driver) : base(driver)
+        public ProductsScreen(AndroidDriver driver) : base(driver)
         {
         }
 

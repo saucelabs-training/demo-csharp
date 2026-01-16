@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common.SauceLabs;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
-using OpenQA.Selenium.Appium.Enums;
 
 namespace Core.Appium.Nunit.BestPractices.Tests
 {
@@ -21,7 +21,7 @@ namespace Core.Appium.Nunit.BestPractices.Tests
             _androidVersion = deviceVersion;
         }
 
-        public AndroidDriver<AndroidElement> Driver { get; set; }
+        public AndroidDriver Driver { get; set; }
 
         [SetUp]
         public void Setup()
@@ -29,18 +29,27 @@ namespace Core.Appium.Nunit.BestPractices.Tests
             var capabilities = new AppiumOptions();
             //We can run on any version of the platform as long as it's the correct device
             //Make sure to pick an Android or iOS device based on your app
-            capabilities.AddAdditionalCapability(MobileCapabilityType.DeviceName, _deviceName);
+            // Use properties for standard W3C capabilities
+            // Use properties instead of AddAdditionalAppiumOption for standard capabilities
+            capabilities.DeviceName = _deviceName;
             if (!string.IsNullOrEmpty(_androidVersion))
-                capabilities.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, _androidVersion);
-            capabilities.AddAdditionalCapability(MobileCapabilityType.PlatformName, "Android");
-            capabilities.AddAdditionalCapability("newCommandTimeout", 90);
-            capabilities.AddAdditionalCapability("name", TestContext.CurrentContext.Test.Name);
-            /*
-             * You need to upload your own Native Mobile App to Sauce Storage!
-             * https://wiki.saucelabs.com/display/DOCS/Uploading+your+Application+to+Sauce+Storage
-             * You can use either storage:<app-id> or storage:filename={your file name}
-             */
-            capabilities.AddAdditionalCapability("app", new ApiKeys().Rdc.Apps.SampleAppAndroidGithubUrl);
+                capabilities.PlatformVersion = _androidVersion;
+            capabilities.PlatformName = "Android";
+            capabilities.AutomationName = "UiAutomator2";
+            capabilities.App = new ApiKeys().Rdc.Apps.SampleAppAndroidGithubUrl;
+            // Put all Sauce Labs specific capabilities in sauce:options
+            var sauceOptions = new Dictionary<string, object>
+            {
+                ["name"] = TestContext.CurrentContext.Test.Name,
+                ["newCommandTimeout"] = 90,
+                /*
+                 * You need to upload your own Native Mobile App to Sauce Storage!
+                 * https://wiki.saucelabs.com/display/DOCS/Uploading+your+Application+to+Sauce+Storage
+                 * You can use either storage:<app-id> or storage:filename={your file name}
+                 */
+            };
+            
+            capabilities.AddAdditionalAppiumOption("sauce:options", sauceOptions);
 
 
             /*
@@ -49,7 +58,7 @@ namespace Core.Appium.Nunit.BestPractices.Tests
                 ----> System.Net.WebException : The operation has timed out
             Solution: Try changing to a more popular device
              */
-            Driver = new AndroidDriver<AndroidElement>(new Uri(Url), capabilities, TimeSpan.FromSeconds(180));
+            Driver = new AndroidDriver(new Uri(Url), capabilities, TimeSpan.FromSeconds(180));
         }
 
 

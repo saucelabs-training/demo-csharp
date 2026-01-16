@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common.SauceLabs;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -12,7 +13,8 @@ namespace Core.Appium.Nunit.BestPractices.Tests
     public class IosTest : BaseNativeAppTest
     {
         private readonly string _deviceName;
-        public IOSDriver<IOSElement> Driver;
+
+        protected IOSDriver Driver { get; set; }
 
         public IosTest(string deviceName)
         {
@@ -23,18 +25,21 @@ namespace Core.Appium.Nunit.BestPractices.Tests
         public void Setup()
         {
             var appiumCaps = new AppiumOptions();
-            appiumCaps.AddAdditionalCapability(MobileCapabilityType.DeviceName, _deviceName);
-
-            appiumCaps.AddAdditionalCapability(MobileCapabilityType.PlatformName, "iOS");
-            appiumCaps.AddAdditionalCapability("newCommandTimeout", 90);
-            appiumCaps.AddAdditionalCapability("name", TestContext.CurrentContext.Test.Name);
-            /*
-             * You need to upload your own Native Mobile App to Sauce Storage!
-             * https://wiki.saucelabs.com/display/DOCS/Uploading+your+Application+to+Sauce+Storage
-             * You can use either storage:<app-id> or storage:filename=
-             */
-            appiumCaps.AddAdditionalCapability("app", new ApiKeys().Rdc.Apps.SampleAppIosGithubUrl);
-            Driver = new IOSDriver<IOSElement>(new Uri(Url), appiumCaps, TimeSpan.FromSeconds(180));
+            appiumCaps.DeviceName = _deviceName;
+            appiumCaps.PlatformName = "iOS";
+            appiumCaps.AutomationName = "XCUITest";
+            appiumCaps.App = new ApiKeys().Rdc.Apps.SampleAppIosGithubUrl;
+            
+            // Put all Sauce Labs specific capabilities in sauce:options
+            var sauceOptions = new Dictionary<string, object>
+            {
+                ["name"] = TestContext.CurrentContext.Test.Name,
+                ["newCommandTimeout"] = 90,
+                ["appiumVersion"] = "latest"
+            };
+            
+            appiumCaps.AddAdditionalAppiumOption("sauce:options", sauceOptions);
+            Driver = new IOSDriver(new Uri(Url), appiumCaps, TimeSpan.FromSeconds(180));
         }
 
         [TearDown]

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Common
     public class WebDriverFactory
     {
         private SauceLabsCapabilities _sauceCustomCapabilities;
-        private DesiredCapabilities _desiredCapabilities;
+        private Dictionary<string, object> _capabilities;
         private string sauceHubUrl = new SauceLabsEndpoint().SauceHubUrl;
 
         public string SeleniumHubUrl
@@ -28,18 +29,18 @@ namespace Common
         public WebDriverFactory()
         {
             _sauceCustomCapabilities = new SauceLabsCapabilities();
-            _desiredCapabilities = new DesiredCapabilities();
+            _capabilities = new Dictionary<string, object>();
         }
 
         public WebDriverFactory(SauceLabsCapabilities sauceConfig)
         {
             _sauceCustomCapabilities = sauceConfig;
-            _desiredCapabilities = new DesiredCapabilities();
+            _capabilities = new Dictionary<string, object>();
         }
         public IWebDriver CreateSauceDriver(string testCaseName)
         {
             SetVMCapabilities("safari", "latest", "mac 10.13");
-            return SetSauceCapabilities(testCaseName, _desiredCapabilities);
+            return SetSauceCapabilities(testCaseName, _capabilities);
         }
         public IWebDriver CreateSauceDriver(string browser, string browserVersion, string osPlatform)
         {
@@ -54,48 +55,64 @@ namespace Common
             {
                 SeleniumHubUrl = new SauceLabsEndpoint().HeadlessSeleniumUrl;
             }
+            _capabilities = new Dictionary<string, object>();
             SetUserAndKey(userName, accessKey);
             SetVMCapabilities(browser, browserVersion, osPlatform);
             //an important flag to set for Edge and possibly Safari
-            _desiredCapabilities.SetCapability("avoidProxy", true);
-            _desiredCapabilities = SetDebuggingCapabilities(_desiredCapabilities);
-            _desiredCapabilities.SetCapability("build", SauceLabsCapabilities.BuildName);
-            //_desiredCapabilities.SetCapability("tunnelIdentifier", "NikolaysTunnel");
+            _capabilities["avoidProxy"] = true;
+            SetDebuggingCapabilities(_capabilities);
+            _capabilities["build"] = SauceLabsCapabilities.BuildName;
+            //_capabilities["tunnelIdentifier"] = "NikolaysTunnel";
             return GetSauceRemoteDriver();
         }
         private void SetUserAndKey(string userName, string accessKey)
         {
-            _desiredCapabilities.SetCapability("username", userName);
-            _desiredCapabilities.SetCapability("accessKey", accessKey);
+            _capabilities["username"] = userName;
+            _capabilities["accessKey"] = accessKey;
         }
         private void SetVMCapabilities(string browser, string browserVersion, string osPlatform)
         {
-            _desiredCapabilities.SetCapability(CapabilityType.BrowserName, browser);
-            _desiredCapabilities.SetCapability(CapabilityType.Version, browserVersion);
-            _desiredCapabilities.SetCapability(CapabilityType.Platform, osPlatform);
+            _capabilities["browserName"] = browser;
+            _capabilities["browserVersion"] = browserVersion;
+            _capabilities["platformName"] = osPlatform;
         }
 
         private RemoteWebDriver GetSauceRemoteDriver()
         {
+            var chromeOptions = new ChromeOptions();
+            chromeOptions.PlatformName = _capabilities.ContainsKey("platformName") ? _capabilities["platformName"].ToString() : "";
+            chromeOptions.BrowserVersion = _capabilities.ContainsKey("browserVersion") ? _capabilities["browserVersion"].ToString() : "";
+            
+            // Add all sauce capabilities
+            var sauceOptions = new Dictionary<string, object>();
+            foreach (var capability in _capabilities)
+            {
+                if (capability.Key != "browserName" && capability.Key != "browserVersion" && capability.Key != "platformName")
+                {
+                    sauceOptions[capability.Key] = capability.Value;
+                }
+            }
+            chromeOptions.AddAdditionalOption("sauce:options", sauceOptions);
+            
             return new RemoteWebDriver(new Uri(SeleniumHubUrl),
-                _desiredCapabilities, TimeSpan.FromSeconds(600));
+                chromeOptions.ToCapabilities(), TimeSpan.FromSeconds(600));
         }
-        private IWebDriver SetSauceCapabilities(string testCaseName, DesiredCapabilities capabilities)
+        private IWebDriver SetSauceCapabilities(string testCaseName, Dictionary<string, object> capabilities)
         {
-            _desiredCapabilities = capabilities;
+            _capabilities = capabilities;
             SetUserAndKey(SauceUser.Name, SauceUser.AccessKey);
 
             //CUSTOM SAUCE CAPABILITIES
             //These capabilities are excellent for debugging and make it much easier.
             //However, if your tests are pretty stable and you want faster tests, disable all the debugging features
-            //capabilities.SetCapability("extendedDebugging", true);
-            //capabilities.SetCapability("recordVideo", false);
-            //capabilities.SetCapability("videoUploadOnPass", false);
-            //capabilities.SetCapability("recordScreenshots", false);
-            _desiredCapabilities.SetCapability("build", $"SauceExamples-{DateTime.Now.ToString(CultureInfo.InvariantCulture)}");
+            //capabilities["extendedDebugging"] = true;
+            //capabilities["recordVideo"] = false;
+            //capabilities["videoUploadOnPass"] = false;
+            //capabilities["recordScreenshots"] = false;
+            _capabilities["build"] = $"SauceExamples-{DateTime.Now.ToString(CultureInfo.InvariantCulture)}";
             var tags = new List<string> { "withDebugging", "automationGroupName1", "automationGroupName2" };
-            _desiredCapabilities.SetCapability("tags", tags);
-            //capabilities.SetCapability("tunnelIdentifier", "NikolaysTunnel");
+            _capabilities["tags"] = tags;
+            //capabilities["tunnelIdentifier"] = "NikolaysTunnel";
 
             //SAUCE TIMEOUT CAPABILITIES
             SetSauceTimeouts();
@@ -108,52 +125,47 @@ namespace Common
         private void SetSauceTimeouts()
         {
             //How long is a test allowed to run?
-            _desiredCapabilities.SetCapability("maxDuration", 3600);
+            _capabilities["maxDuration"] = 3600;
             //Selenium crash might hang a command, this is the max time allowed to wait for a Selenium command
             //Keep this low, no reason to wait around a long time for a hanging command to fail
-            _desiredCapabilities.SetCapability("commandTimeout", 60);
+            _capabilities["commandTimeout"] = 60;
             //How long can the browser wait before a new command?
-            _desiredCapabilities.SetCapability("idleTimeout", 1000);
+            _capabilities["idleTimeout"] = 1000;
         }
 
-        private DesiredCapabilities SetDebuggingCapabilities(DesiredCapabilities capabilities)
+        private void SetDebuggingCapabilities(Dictionary<string, object> capabilities)
         {
             //These capabilities are excellent for debugging and make it much easier.
             //However, if your tests are pretty stable and you want faster tests, disable all the debugging features
             if (_sauceCustomCapabilities.IsDebuggingEnabled)
             {
-                capabilities =
-                    SetDebuggingForHeadless(_sauceCustomCapabilities.IsHeadless, capabilities);
-                capabilities = 
-                    SetDebuggingForNonHeadless(_sauceCustomCapabilities.IsHeadless, capabilities);
+                SetDebuggingForHeadless(_sauceCustomCapabilities.IsHeadless, capabilities);
+                SetDebuggingForNonHeadless(_sauceCustomCapabilities.IsHeadless, capabilities);
                 _sauceCustomCapabilities.Tags.Add("withDebuggingEnabled");
-                return capabilities;
+                return;
             }
 
-            capabilities.SetCapability("extendedDebugging", false);
-            capabilities.SetCapability("recordVideo", true);
-            capabilities.SetCapability("videoUploadOnPass", true);
-            capabilities.SetCapability("recordScreenshots", true);
+            capabilities["extendedDebugging"] = false;
+            capabilities["recordVideo"] = true;
+            capabilities["videoUploadOnPass"] = true;
+            capabilities["recordScreenshots"] = true;
             _sauceCustomCapabilities.Tags.Add("withDebuggingDisabled");
-            return capabilities;
         }
 
-        private DesiredCapabilities SetDebuggingForNonHeadless(bool isHeadless, DesiredCapabilities capabilities)
+        private void SetDebuggingForNonHeadless(bool isHeadless, Dictionary<string, object> capabilities)
         {
-            if (isHeadless) return capabilities;
-            capabilities.SetCapability("extendedDebugging", true);
-            capabilities.SetCapability("recordVideo", true);
-            capabilities.SetCapability("videoUploadOnPass", true);
-            capabilities.SetCapability("recordScreenshots", true);
-            return capabilities;
+            if (isHeadless) return;
+            capabilities["extendedDebugging"] = true;
+            capabilities["recordVideo"] = true;
+            capabilities["videoUploadOnPass"] = true;
+            capabilities["recordScreenshots"] = true;
         }
 
-        private DesiredCapabilities SetDebuggingForHeadless(bool isHeadless, DesiredCapabilities capabilities)
+        private void SetDebuggingForHeadless(bool isHeadless, Dictionary<string, object> capabilities)
         {
             if (!isHeadless)
-                return capabilities;
-            capabilities.SetCapability("recordScreenshots", true);
-            return capabilities;
+                return;
+            capabilities["recordScreenshots"] = true;
         }
     }
 }

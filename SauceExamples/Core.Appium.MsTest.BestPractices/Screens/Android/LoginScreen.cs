@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 
@@ -6,7 +7,7 @@ namespace Core.Appium.Nunit.BestPractices.Screens.Android
 {
     public class LoginScreen : BaseAndroidScreen
     {
-        public LoginScreen(AndroidDriver<AndroidElement> driver) : base(driver)
+        public LoginScreen(AndroidDriver driver) : base(driver)
         {
         }
 

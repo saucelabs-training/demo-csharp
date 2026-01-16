@@ -6,7 +6,7 @@ namespace Core.Appium.Nunit.BestPractices.Screens.iOS
 {
     public class ProductsScreen : BaseIosScreen
     {
-        public ProductsScreen(IOSDriver<IOSElement> driver) : base(driver)
+        public ProductsScreen(IOSDriver driver) : base(driver)
         {
         }
 

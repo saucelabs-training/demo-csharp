@@ -32,7 +32,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: '5.0.x'
+        dotnet-version: '8.0.x'
     
     - name: Restore dependencies
       run: dotnet restore SauceExamples/Core.Appium.MsTest.BestPractices/Core.Appium.Nunit.BestPractices.csproj
@@ -60,7 +60,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: '5.0.x'
+        dotnet-version: '8.0.x'
     
     - name: Restore dependencies
       run: dotnet restore SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj

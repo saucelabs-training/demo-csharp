@@ -5,7 +5,7 @@ namespace Core.Appium.Nunit.BestPractices.Screens.Android
 {
     public class BaseAndroidScreen
     {
-        protected BaseAndroidScreen(AndroidDriver<AndroidElement> driver)
+        protected BaseAndroidScreen(AndroidDriver driver)
         {
             Driver = driver;
             WaitFor = new Wait(Driver);
@@ -13,6 +13,6 @@ namespace Core.Appium.Nunit.BestPractices.Screens.Android
 
         public Wait WaitFor { get; set; }
 
-        public AndroidDriver<AndroidElement> Driver { get; set; }
+        public AndroidDriver Driver { get; set; }
     }
 }

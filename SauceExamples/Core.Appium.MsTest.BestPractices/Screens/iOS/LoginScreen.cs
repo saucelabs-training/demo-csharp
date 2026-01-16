@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.iOS;
 
@@ -6,7 +7,7 @@ namespace Core.Appium.Nunit.BestPractices.Screens.iOS
 {
     public class LoginScreen : BaseIosScreen
     {
-        public LoginScreen(IOSDriver<IOSElement> driver) : base(driver)
+        public LoginScreen(IOSDriver driver) : base(driver)
         {
         }
 
