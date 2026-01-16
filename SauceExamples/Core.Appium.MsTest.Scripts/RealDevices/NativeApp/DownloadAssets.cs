@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.IO;
 using System.Threading.Tasks;
 using Common.SauceLabs;
@@ -17,7 +17,7 @@ namespace Core.Appium.Examples.RealDevices.NativeApp
 
     public class DownloadAssets
     {
-        private AndroidDriver<IWebElement> _driver;
+        private AndroidDriver _driver;
         private string JobID;
         public static string HubUrlPart => "ondemand.us-west-1.saucelabs.com/wd/hub";
         public string Url => $"https://{SauceUser}:{SauceAccessKey}@{HubUrlPart}";
@@ -98,27 +98,28 @@ namespace Core.Appium.Examples.RealDevices.NativeApp
                 DownloadFile(videoUrl, "video.mp4");
         }
 
-        private async Task<IRestResponse> GetJobInfo()
+        private async Task<RestResponse> GetJobInfo()
         {
-            var client = new RestClient
+            var options = new RestClientOptions("https://api.us-west-1.saucelabs.com/v1/rdc/")
             {
-                BaseUrl = new Uri("https://api.us-west-1.saucelabs.com/v1/rdc/"),
                 Authenticator = new HttpBasicAuthenticator(SauceUser, SauceAccessKey)
             };
+            var client = new RestClient(options);
 
-            var request = new RestRequest($"jobs/{JobID}", Method.GET)
-            {
-                RequestFormat = DataFormat.Json
-            };
+            var request = new RestRequest($"jobs/{JobID}");
             var response = await client.ExecuteAsync(request);
             return response;
         }
 
         public void DownloadFile(string url, string fileName)
         {
-            //RestClient restClient = new RestClient($@"{url}");
-            var restClient = new RestClient($@"{url}") { Authenticator = new HttpBasicAuthenticator(SauceUser, SauceAccessKey) };
-            var fileBytes = restClient.DownloadData(new RestRequest("#", Method.GET));
+            var options = new RestClientOptions(url)
+            {
+                Authenticator = new HttpBasicAuthenticator(SauceUser, SauceAccessKey)
+            };
+            var restClient = new RestClient(options);
+            var request = new RestRequest("#");
+            var fileBytes = restClient.DownloadData(request);
             var directory = @"C:\SauceResources\";
             File.WriteAllBytes(Path.Combine(directory, fileName), fileBytes);
         }

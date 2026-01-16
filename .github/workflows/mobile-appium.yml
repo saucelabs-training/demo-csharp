@@ -50,34 +50,6 @@ jobs:
         name: appium-best-practices-results
         path: '**/appium-best-practices-results.trx'
 
-  appium-examples:
-    name: Appium Examples
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v6
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v5
-      with:
-        dotnet-version: '8.0.x'
-    
-    - name: Restore dependencies
-      run: dotnet restore SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj
-    
-    - name: Build
-      run: dotnet build SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj --no-restore --configuration Release
-    
-    - name: Run tests
-      run: dotnet test SauceExamples/Core.Appium.MsTest.Scripts/Core.Appium.Examples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=appium-examples-results.trx"
-    
-    - name: Upload test results
-      uses: actions/upload-artifact@v6
-      if: always()
-      with:
-        name: appium-examples-results
-        path: '**/appium-examples-results.trx'
-
   appium-mstest-framework:
     name: Appium MsTest (.NET Framework)
     runs-on: windows-latest

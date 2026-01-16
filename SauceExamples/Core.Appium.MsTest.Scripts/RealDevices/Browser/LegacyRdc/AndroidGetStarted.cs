@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using Common.SauceLabs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.Appium;
@@ -13,7 +13,7 @@ namespace Core.Appium.Examples.RealDevices.Browser.LegacyRdc
     public class AndroidGetStarted
     {
         private static string RdcUsHubUrl => "https://us1.appium.testobject.com/wd/hub";
-        private AndroidDriver<AndroidElement> _driver;
+        private AndroidDriver _driver;
 
         [TestMethod]
         public void ShouldOpenNativeAndroidApp()

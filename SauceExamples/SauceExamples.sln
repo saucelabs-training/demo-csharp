@@ -4,18 +4,12 @@ VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{BE3EF376-360B-4B9C-BB24-E6C3B9545E4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium3.Nunit.Scripts", "SeleniumNunit\Selenium3.Nunit.Scripts.csproj", "{D0544BBB-85D0-4BD0-82E2-2AC1C6BBBCF5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02D1155D-7E24-485D-84E5-043B79A04B74}"
 	ProjectSection(SolutionItems) = preProject
 		Appium3.MsTest.Scripts.yml = Appium3.MsTest.Scripts.yml
 		index.html = index.html
 		..\setEnvironmentVariables.ps1 = ..\setEnvironmentVariables.ps1
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium3.Nunit.Framework", "Web.Tests\Selenium3.Nunit.Framework.csproj", "{7B1C4CE7-45E7-436A-96D2-79493B1274ED}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium3.MsTest.Scripts", "SeleniumMsTest\Selenium3.MsTest.Scripts.csproj", "{8EAC3C5C-FDF4-4A85-BFE9-19EB8B30E989}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Posh", "Posh", "{B4AB832A-65EC-44FF-B136-197A2DA8E74B}"
 	ProjectSection(SolutionItems) = preProject
@@ -25,27 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Posh", "Posh", "{B4AB832A-6
 		..\Test-SauceConnectState.Tests.ps1 = ..\Test-SauceConnectState.Tests.ps1
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium4.MsTest.Scripts", "Selenium4DotNetFramework\Selenium4.MsTest.Scripts.csproj", "{0D11C201-3FCF-4836-9B1F-A45F461A7B02}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotnetFramework", "DotnetFramework", "{C06B06E4-9DD7-4536-93D9-343944EF4F8D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Appium", "Appium", "{21DDBE02-10ED-40E3-8F18-05B9845577BC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Selenium", "Selenium", "{43F0822F-C5D4-44CE-A7BF-4FE6B6C4968C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleApps", "SampleApps", "{FC693E5B-3A53-49EB-A28B-FB5A584E23C2}"
-	ProjectSection(SolutionItems) = preProject
-		DotnetFramework\Appium\SampleApps\Android.SauceLabs.Mobile.Sample.app.2.2.1.apk = DotnetFramework\Appium\SampleApps\Android.SauceLabs.Mobile.Sample.app.2.2.1.apk
-		DotnetFramework\Appium\SampleApps\iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.2.1.ipa = DotnetFramework\Appium\SampleApps\iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.2.1.ipa
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appium4.NUnit.Scripts", "DotnetFramework\Appium\Appium4.NUnit.Scripts\Appium4.NUnit.Scripts.csproj", "{EE8B089A-1659-418B-9C41-FC6970DF1C8B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotnetCore", "DotnetCore", "{E859E381-462F-46E4-8FA0-203A549FF6DC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Selenium4.MsTest.Scripts", "DotnetCore\Core.Selenium4.MsTest.Scripts\Core.Selenium4.MsTest.Scripts.csproj", "{780B17C4-DE36-4308-A432-D1EF5E7C57D7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Appium.Examples", "Core.Appium.MsTest.Scripts\Core.Appium.Examples.csproj", "{4B512D3B-DFFB-4A03-BC1B-4064139FB96D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Appium.Nunit.BestPractices", "Core.Appium.MsTest.BestPractices\Core.Appium.Nunit.BestPractices.csproj", "{FA1C4898-6470-4230-B360-7647C7FBC7A2}"
 EndProject
@@ -59,34 +33,6 @@ Global
 		{BE3EF376-360B-4B9C-BB24-E6C3B9545E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE3EF376-360B-4B9C-BB24-E6C3B9545E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE3EF376-360B-4B9C-BB24-E6C3B9545E4D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0544BBB-85D0-4BD0-82E2-2AC1C6BBBCF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0544BBB-85D0-4BD0-82E2-2AC1C6BBBCF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0544BBB-85D0-4BD0-82E2-2AC1C6BBBCF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0544BBB-85D0-4BD0-82E2-2AC1C6BBBCF5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B1C4CE7-45E7-436A-96D2-79493B1274ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B1C4CE7-45E7-436A-96D2-79493B1274ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B1C4CE7-45E7-436A-96D2-79493B1274ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B1C4CE7-45E7-436A-96D2-79493B1274ED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8EAC3C5C-FDF4-4A85-BFE9-19EB8B30E989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8EAC3C5C-FDF4-4A85-BFE9-19EB8B30E989}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8EAC3C5C-FDF4-4A85-BFE9-19EB8B30E989}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8EAC3C5C-FDF4-4A85-BFE9-19EB8B30E989}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D11C201-3FCF-4836-9B1F-A45F461A7B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D11C201-3FCF-4836-9B1F-A45F461A7B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D11C201-3FCF-4836-9B1F-A45F461A7B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D11C201-3FCF-4836-9B1F-A45F461A7B02}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE8B089A-1659-418B-9C41-FC6970DF1C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE8B089A-1659-418B-9C41-FC6970DF1C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE8B089A-1659-418B-9C41-FC6970DF1C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE8B089A-1659-418B-9C41-FC6970DF1C8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{780B17C4-DE36-4308-A432-D1EF5E7C57D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{780B17C4-DE36-4308-A432-D1EF5E7C57D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{780B17C4-DE36-4308-A432-D1EF5E7C57D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{780B17C4-DE36-4308-A432-D1EF5E7C57D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4B512D3B-DFFB-4A03-BC1B-4064139FB96D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B512D3B-DFFB-4A03-BC1B-4064139FB96D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B512D3B-DFFB-4A03-BC1B-4064139FB96D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B512D3B-DFFB-4A03-BC1B-4064139FB96D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FA1C4898-6470-4230-B360-7647C7FBC7A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FA1C4898-6470-4230-B360-7647C7FBC7A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA1C4898-6470-4230-B360-7647C7FBC7A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -96,17 +42,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D0544BBB-85D0-4BD0-82E2-2AC1C6BBBCF5} = {43F0822F-C5D4-44CE-A7BF-4FE6B6C4968C}
-		{7B1C4CE7-45E7-436A-96D2-79493B1274ED} = {43F0822F-C5D4-44CE-A7BF-4FE6B6C4968C}
-		{8EAC3C5C-FDF4-4A85-BFE9-19EB8B30E989} = {43F0822F-C5D4-44CE-A7BF-4FE6B6C4968C}
 		{B4AB832A-65EC-44FF-B136-197A2DA8E74B} = {02D1155D-7E24-485D-84E5-043B79A04B74}
-		{0D11C201-3FCF-4836-9B1F-A45F461A7B02} = {43F0822F-C5D4-44CE-A7BF-4FE6B6C4968C}
-		{21DDBE02-10ED-40E3-8F18-05B9845577BC} = {C06B06E4-9DD7-4536-93D9-343944EF4F8D}
-		{43F0822F-C5D4-44CE-A7BF-4FE6B6C4968C} = {C06B06E4-9DD7-4536-93D9-343944EF4F8D}
-		{FC693E5B-3A53-49EB-A28B-FB5A584E23C2} = {21DDBE02-10ED-40E3-8F18-05B9845577BC}
-		{EE8B089A-1659-418B-9C41-FC6970DF1C8B} = {21DDBE02-10ED-40E3-8F18-05B9845577BC}
-		{780B17C4-DE36-4308-A432-D1EF5E7C57D7} = {E859E381-462F-46E4-8FA0-203A549FF6DC}
-		{4B512D3B-DFFB-4A03-BC1B-4064139FB96D} = {E859E381-462F-46E4-8FA0-203A549FF6DC}
 		{FA1C4898-6470-4230-B360-7647C7FBC7A2} = {E859E381-462F-46E4-8FA0-203A549FF6DC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

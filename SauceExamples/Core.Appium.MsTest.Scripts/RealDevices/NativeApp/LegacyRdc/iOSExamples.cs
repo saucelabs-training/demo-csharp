@@ -1,6 +1,7 @@
-﻿using System;
+﻿﻿using System;
 using Common.SauceLabs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Appium.iOS;
@@ -16,7 +17,7 @@ namespace Core.Appium.Examples.RealDevices.NativeApp.LegacyRdc
 
         public const string APPIUM_VERSION = "1.16.0";
 
-        private IOSDriver<IOSElement> _driver;
+        private IOSDriver _driver;
         private SessionId _sessionId;
         public TestContext TestContext { get; set; }
 
