@@ -5,13 +5,11 @@ on:
     branches: [ main ]
     paths:
       - 'SeleniumExamples/**'
-      - 'SauceExamples/SeleniumMsTest/**'
       - '.github/workflows/selenium-examples.yml'
   pull_request:
     branches: [ main ]
     paths:
       - 'SeleniumExamples/**'
-      - 'SauceExamples/SeleniumMsTest/**'
       - '.github/workflows/selenium-examples.yml'
   workflow_dispatch:
 
