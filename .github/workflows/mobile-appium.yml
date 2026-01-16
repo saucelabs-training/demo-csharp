@@ -52,7 +52,7 @@ jobs:
 
   appium-mstest-framework:
     name: Appium MsTest (.NET Framework)
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v6
@@ -80,7 +80,7 @@ jobs:
 
   appium-nunit-framework:
     name: Appium NUnit (.NET Framework)
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v6
