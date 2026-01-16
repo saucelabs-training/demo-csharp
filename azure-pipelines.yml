@@ -1,0 +1,76 @@
+pool:
+  name: Hosted VS2017
+  vmImage: 'windows-latest'
+
+steps:
+- script: set
+  displayName: print all variables
+
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk'
+  inputs:
+    packageType: runtime
+    version: 3.x
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 4.4.1'
+  inputs:
+    versionSpec: 4.4.1
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: '**\*.sln'
+
+- task: VSBuild@1
+  displayName: 'Build solution'
+  inputs:
+    solution: '**\*.sln'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactstagingdirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    logProjectEvents: true
+    #platform: '$(BuildPlatform)'
+    #configuration: '$(BuildConfiguration)'
+
+- task: PowerShell@2
+  displayName: 'Set Sauce Environment Variables'
+  inputs:
+    targetType: filePath
+    filePath: ./setEnvironmentVariables.ps1
+    arguments: '$env:SAUCE_USER $env:SAUCE_KEY'
+
+# Using powershell ##vso command to set an environment variable in the system
+- powershell: |
+   Write-Host "Sauce Username stored in ADO variables is=>$($env:SAUCE_USER)";
+   Write-Host "Sauce Access Key stored in ADO variables is=>$($env:SAUCE_KEY)";
+   Write-Host "Sauce Username stored in Env variables is=>$($env:SAUCE_USERNAME)";
+   Write-Host "Sauce Access Key stored in Env variables is=>$($env:SAUCE_ACCESS_KEY)";
+   Write-Host "Sauce Build Repository URI stored in Env variables is=>$($env:BUILD_REPOSITORY_URI)";
+
+#checking to make sure that env variables were set between yml tasks
+- powershell: |
+   Write-Host "Sauce Username stored in Env Variables variables is=>$($env:SAUCE_USERNAME)";
+   Write-Host "Sauce Access Key stored in ADO variables is=>$($env:SAUCE_ACCESS_KEY)";
+  displayName: display env variables bw posh tasks
+
+- task: VSTest@2
+  displayName: 'Run Best Practices Framework'
+  inputs:
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+     **\Selenium3.Nunit.Framework.dll
+     !**\Appium\**
+     !**\SauceExamples\packages\*.dll
+     !**\packages\*.dll
+    testFiltercriteria: 'TestCategory=BestPractices&TestCategory!=Performance'
+    runInParallel: true
+    codeCoverageEnabled: true
+    testRunTitle: 'NUnit Automation Framework'
+    rerunFailedTests: true
+    rerunFailedThreshold: 10
+    rerunMaxAttempts: 2
+    failOnMinTestsNotRun: true
+
+
+
+
