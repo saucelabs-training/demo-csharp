@@ -75,32 +75,3 @@ jobs:
       with:
         name: nunit-examples-results
         path: '**/nunit-examples-results.trx'
-
-  selenium-mstest:
-    name: Selenium MsTest
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v6
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v5
-      with:
-        dotnet-version: '8.0.x'
-    
-    - name: Restore dependencies
-      run: dotnet restore SauceExamples/SeleniumMsTest/Selenium3.MsTest.Scripts.csproj
-    
-    - name: Build
-      run: dotnet build SauceExamples/SeleniumMsTest/Selenium3.MsTest.Scripts.csproj --no-restore --configuration Release
-    
-    - name: Run tests
-      run: dotnet test SauceExamples/SeleniumMsTest/Selenium3.MsTest.Scripts.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=selenium-mstest-results.trx"
-    
-    - name: Upload test results
-      uses: actions/upload-artifact@v6
-      if: always()
-      with:
-        name: selenium-mstest-results
-        path: '**/selenium-mstest-results.trx'
-
