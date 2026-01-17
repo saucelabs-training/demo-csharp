@@ -11,6 +11,8 @@ on:
     paths:
       - 'Dotnet/**'
       - '.github/workflows/dotnet-simple.yml'
+  schedule:
+    - cron: '* 4 * * *'
   workflow_dispatch:
 
 env:

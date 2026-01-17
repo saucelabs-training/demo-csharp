@@ -11,6 +11,8 @@ on:
     paths:
       - 'SeleniumExamples/**'
       - '.github/workflows/selenium-examples.yml'
+  schedule:
+    - cron: '* 4 * * *'
   workflow_dispatch:
 
 env:
