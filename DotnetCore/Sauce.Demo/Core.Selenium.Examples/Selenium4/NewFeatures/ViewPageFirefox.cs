@@ -36,7 +36,7 @@ namespace Core.Selenium.Examples.Selenium4.NewFeatures
         [TestMethod]
         public void ScreenshotTest()
         {
-            Driver.Navigate().GoToUrl("https://www.saucedemo.com/v1/inventory.html");
+            Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
             var parentFullName = Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
 
             
@@ -46,7 +46,7 @@ namespace Core.Selenium.Examples.Selenium4.NewFeatures
         [TestMethod]
         public void PrintPageTest()
         {
-            Driver.Navigate().GoToUrl("https://www.saucedemo.com/v1/inventory.html");
+            Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
             var parentFullName = Directory.GetParent(Environment.CurrentDirectory)?.Parent?.Parent?.FullName;
 
             ((ISupportsPrint) Driver).Print(new PrintOptions()).SaveAsFile(parentFullName + "/Selenium4/Resources/FirefoxPrintPage.pdf");
@@ -63,7 +63,7 @@ namespace Core.Selenium.Examples.Selenium4.NewFeatures
             SessionId sessionId = ((RemoteWebDriver)Driver).SessionId;
             var fullPageScreenshotCommand = new Command(sessionId, "fullPageScreenshot", null);
 
-            Driver.Navigate().GoToUrl("https://www.saucedemo.com/v1/inventory.html");
+            Driver.Navigate().GoToUrl("https://www.saucedemo.com/");
             var screenshotResponse = hasCommandExecutor.CommandExecutor.Execute(fullPageScreenshotCommand);
             string base64 = screenshotResponse.Value.ToString();
             Screenshot image = new Screenshot(base64);
