@@ -41,41 +41,7 @@ public abstract class TestBase
         });
         
         // Build capabilities payload
-        var sauceOptions = new Dictionary<string, object>
-        {
-            ["username"] = SauceUsername,
-            ["accessKey"] = SauceAccessKey,
-            ["devTools"] = true,
-            ["name"] = testName,
-            ["build"] = BuildInfo.Identifier
-        };
-        
-        var sessionRequest = new Dictionary<string, object>
-        {
-            ["platformName"] = "macOS 13",
-            ["browserName"] = "Chrome",
-            ["sauce:options"] = sauceOptions,
-            ["goog:chromeOptions"] = new Dictionary<string, object>
-            {
-                ["args"] = new[] { "--disable-features=SafeBrowsing,PasswordLeakToggleMove" },
-                ["prefs"] = new Dictionary<string, object>
-                {
-                    ["credentials_enable_service"] = false,
-                    ["profile.password_manager_enabled"] = false,
-                    ["profile.password_manager_leak_detection"] = false
-                }
-            }
-        };
-        
-        var capabilities = new Dictionary<string, object>
-        {
-            ["alwaysMatch"] = sessionRequest
-        };
-        
-        var payload = new Dictionary<string, object>
-        {
-            ["capabilities"] = capabilities
-        };
+        var payload = BuildCapabilitiesPayload(testName);
         
         // Create session on Sauce Labs
         var response = await _requestContext.PostAsync("session", new APIRequestContextOptions
@@ -149,6 +115,45 @@ public abstract class TestBase
             
             Playwright?.Dispose();
         }
+    }
+    
+    private Dictionary<string, object> BuildCapabilitiesPayload(string testName)
+    {
+        var sauceOptions = new Dictionary<string, object>
+        {
+            ["username"] = SauceUsername,
+            ["accessKey"] = SauceAccessKey,
+            ["devTools"] = true,
+            ["name"] = testName,
+            ["build"] = BuildInfo.Identifier
+        };
+        
+        var sessionRequest = new Dictionary<string, object>
+        {
+            ["platformName"] = "macOS 13",
+            ["browserName"] = "Chrome",
+            ["sauce:options"] = sauceOptions,
+            ["goog:chromeOptions"] = new Dictionary<string, object>
+            {
+                ["args"] = new[] { "--disable-features=SafeBrowsing,PasswordLeakToggleMove" },
+                ["prefs"] = new Dictionary<string, object>
+                {
+                    ["credentials_enable_service"] = false,
+                    ["profile.password_manager_enabled"] = false,
+                    ["profile.password_manager_leak_detection"] = false
+                }
+            }
+        };
+        
+        var capabilities = new Dictionary<string, object>
+        {
+            ["alwaysMatch"] = sessionRequest
+        };
+        
+        return new Dictionary<string, object>
+        {
+            ["capabilities"] = capabilities
+        };
     }
     
     private async Task UpdateSauceResultAsync(bool passed)
