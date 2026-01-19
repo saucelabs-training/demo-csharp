@@ -23,3 +23,7 @@ All examples are using .NET 8 and MSTest unless specified
 
   * [MSTest Examples](./SeleniumExamples/MSTestExamples) `.net` `mstest`
   * [NUnit Examples](./SeleniumExamples/NUnitExamples) `.net` `nunit`
+
+### Playwright Examples
+
+  * [Playwright NUnit Examples](./PlaywrightExamples) `.net` `nunit` `playwright`

@@ -1,0 +1,52 @@
+name: Playwright Examples Tests
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'PlaywrightExamples/**'
+      - '.github/workflows/playwright-examples.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'PlaywrightExamples/**'
+      - '.github/workflows/playwright-examples.yml'
+  schedule:
+    - cron: '* 4 * * *'
+  workflow_dispatch:
+
+env:
+  SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+  SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+
+jobs:
+  playwright-tests:
+    name: Playwright NUnit Examples
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v6
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore PlaywrightExamples/PlaywrightExamples.csproj
+    
+    - name: Build
+      run: dotnet build PlaywrightExamples/PlaywrightExamples.csproj --no-restore --configuration Release
+    
+    - name: Install Playwright browsers
+      run: pwsh PlaywrightExamples/bin/Release/net8.0/playwright.ps1 install --with-deps
+    
+    - name: Run tests
+      run: dotnet test PlaywrightExamples/PlaywrightExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=playwright-examples-results.trx"
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v6
+      if: always()
+      with:
+        name: playwright-examples-results
+        path: '**/playwright-examples-results.trx'
