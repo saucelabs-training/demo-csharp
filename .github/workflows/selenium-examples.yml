@@ -42,7 +42,7 @@ jobs:
       run: dotnet test SeleniumExamples/MSTestExamples/MSTestExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=mstest-examples-results.trx"
     
     - name: Upload test results
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       if: always()
       with:
         name: mstest-examples-results
@@ -70,7 +70,7 @@ jobs:
       run: dotnet test SeleniumExamples/NUnitExamples/NUnitExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=nunit-examples-results.trx"
     
     - name: Upload test results
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       if: always()
       with:
         name: nunit-examples-results
