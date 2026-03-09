@@ -42,7 +42,7 @@ jobs:
       run: dotnet test DotnetCore/Sauce.Demo/Core.Selenium.Examples/Core.Selenium.Examples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=selenium-examples-results.trx"
     
     - name: Upload test results
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       if: always()
       with:
         name: selenium-examples-results
@@ -70,7 +70,7 @@ jobs:
       run: dotnet test DotnetCore/Sauce.Demo/Core.BestPractices.Web/Core.BestPractices.Web.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=best-practices-web-results.trx"
     
     - name: Upload test results
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       if: always()
       with:
         name: best-practices-web-results

@@ -45,7 +45,7 @@ jobs:
       run: dotnet test PlaywrightExamples/PlaywrightExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=playwright-examples-results.trx"
     
     - name: Upload test results
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       if: always()
       with:
         name: playwright-examples-results
