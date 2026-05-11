@@ -39,7 +39,7 @@ jobs:
       run: dotnet build DotnetCore/Sauce.Demo/Sauce.Demo.sln --no-restore --configuration Release
     
     - name: Run Selenium Examples Tests
-      uses: nick-fields/retry@v3
+      uses: nick-fields/retry@v4
       with:
         max_attempts: 3
         timeout_minutes: 30
@@ -71,7 +71,7 @@ jobs:
       run: dotnet build DotnetCore/Sauce.Demo/Sauce.Demo.sln --no-restore --configuration Release
     
     - name: Run Best Practices Web Tests
-      uses: nick-fields/retry@v3
+      uses: nick-fields/retry@v4
       with:
         max_attempts: 3
         timeout_minutes: 30
