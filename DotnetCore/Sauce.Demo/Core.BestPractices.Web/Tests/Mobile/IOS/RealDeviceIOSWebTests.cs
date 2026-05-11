@@ -21,6 +21,7 @@ namespace Core.BestPractices.Web.Tests.Mobile.IOS
             appiumOptions.PlatformName = "iOS";
             appiumOptions.BrowserName = "Safari";
             appiumOptions.PlatformVersion = Platform;
+            appiumOptions.AddAdditionalAppiumOption("appium:webviewConnectTimeout", 15000);
             
             SauceOptions = new Dictionary<string, object>
             {
