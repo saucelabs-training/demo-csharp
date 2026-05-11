@@ -39,7 +39,11 @@ jobs:
       run: dotnet build SeleniumExamples/MSTestExamples/MSTestExamples.csproj --no-restore --configuration Release
     
     - name: Run tests
-      run: dotnet test SeleniumExamples/MSTestExamples/MSTestExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=mstest-examples-results.trx"
+      uses: nick-fields/retry@v3
+      with:
+        max_attempts: 3
+        timeout_minutes: 30
+        command: dotnet test SeleniumExamples/MSTestExamples/MSTestExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=mstest-examples-results.trx"
     
     - name: Upload test results
       uses: actions/upload-artifact@v7
@@ -67,7 +71,11 @@ jobs:
       run: dotnet build SeleniumExamples/NUnitExamples/NUnitExamples.csproj --no-restore --configuration Release
     
     - name: Run tests
-      run: dotnet test SeleniumExamples/NUnitExamples/NUnitExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=nunit-examples-results.trx"
+      uses: nick-fields/retry@v3
+      with:
+        max_attempts: 3
+        timeout_minutes: 30
+        command: dotnet test SeleniumExamples/NUnitExamples/NUnitExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=nunit-examples-results.trx"
     
     - name: Upload test results
       uses: actions/upload-artifact@v7

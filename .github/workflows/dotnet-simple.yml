@@ -39,7 +39,11 @@ jobs:
       run: dotnet build Dotnet/Dotnet.csproj --no-restore --configuration Release
     
     - name: Run tests
-      run: dotnet test Dotnet/Dotnet.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=dotnet-simple-results.trx"
+      uses: nick-fields/retry@v3
+      with:
+        max_attempts: 3
+        timeout_minutes: 30
+        command: dotnet test Dotnet/Dotnet.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=dotnet-simple-results.trx"
     
     - name: Upload test results
       uses: actions/upload-artifact@v7

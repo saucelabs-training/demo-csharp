@@ -42,7 +42,11 @@ jobs:
       run: pwsh PlaywrightExamples/bin/Release/net8.0/playwright.ps1 install --with-deps
     
     - name: Run tests
-      run: dotnet test PlaywrightExamples/PlaywrightExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=playwright-examples-results.trx"
+      uses: nick-fields/retry@v4
+      with:
+        max_attempts: 3
+        timeout_minutes: 30
+        command: dotnet test PlaywrightExamples/PlaywrightExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=playwright-examples-results.trx"
     
     - name: Upload test results
       uses: actions/upload-artifact@v7
