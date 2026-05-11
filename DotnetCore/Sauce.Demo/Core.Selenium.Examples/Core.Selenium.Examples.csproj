@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Appium.WebDriver" Version="8.1.0" />
+    <PackageReference Include="Appium.WebDriver" Version="8.2.0" />
     <PackageReference Include="Castle.Core" Version="5.2.1" />
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="FluentAssertions" Version="8.9.0" />
