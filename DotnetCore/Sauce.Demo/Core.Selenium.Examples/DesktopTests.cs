@@ -5,7 +5,6 @@ using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
 using OpenQA.Selenium.Support.UI;
-using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace Core.Selenium.Examples
 {
@@ -55,7 +54,11 @@ namespace Core.Selenium.Examples
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");
 
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(6));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#user-name")));
+            wait.Until(driver =>
+            {
+                var element = driver.FindElement(By.CssSelector("#user-name"));
+                return element.Displayed ? element : null;
+            });
         }
         [TestMethod]
         public void VisibilityTest()
@@ -87,7 +90,11 @@ namespace Core.Selenium.Examples
             _driver.Navigate().GoToUrl("https://www.saucedemo.com");
 
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(6));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("#user-name")));
+            wait.Until(driver =>
+            {
+                var element = driver.FindElement(By.CssSelector("#user-name"));
+                return element.Displayed ? element : null;
+            });
 
             // share this with your teams
             var testUrl = "https://app.saucelabs.com/tests/" + sessionId;

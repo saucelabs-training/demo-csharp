@@ -7,7 +7,6 @@ using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Support.UI;
-using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace Core.Selenium.Examples.Emusim.Web.End
 {
@@ -63,7 +62,11 @@ namespace Core.Selenium.Examples.Emusim.Web.End
             _driver.FindElement(By.CssSelector(".btn_action")).Click();
 
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("#inventory_container")));
+            wait.Until(driver =>
+            {
+                var element = driver.FindElement(By.CssSelector("#inventory_container"));
+                return element.Displayed ? element : null;
+            });
         }
     }
 }
