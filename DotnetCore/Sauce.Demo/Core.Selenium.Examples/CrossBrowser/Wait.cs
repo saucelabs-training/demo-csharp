@@ -1,7 +1,6 @@
 using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace Core.Selenium.Examples.CrossBrowser
 {
@@ -29,7 +28,11 @@ namespace Core.Selenium.Examples.CrossBrowser
 
         public IWebElement UntilIsVisible(By locator)
         {
-            return _wait.Until(ExpectedConditions.ElementIsVisible(locator));
+            return _wait.Until(driver =>
+            {
+                var element = driver.FindElement(locator);
+                return element.Displayed ? element : null;
+            });
         }
 
         public IWebElement UntilIsVisibleByClass(string className)
@@ -39,7 +42,7 @@ namespace Core.Selenium.Examples.CrossBrowser
 
         public bool IsVisible()
         {
-            return _wait.Until(ExpectedConditions.ElementIsVisible(_locator)).Displayed;
+            return UntilIsVisible(_locator).Displayed;
         }
 
         public IWebElement UntilIsVisibleById(string id)
