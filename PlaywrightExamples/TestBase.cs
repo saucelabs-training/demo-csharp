@@ -77,7 +77,7 @@ public abstract class TestBase
     {
         if (Grouping == SessionGrouping.Class)
         {
-            var className = TestContext.CurrentContext.Test.ClassName ?? "";
+            var className = ClassSessionKey();
             var lazySession = ClassSessions.GetOrAdd(className, _ =>
                 new Lazy<Task<WorkerSession>>(() => OpenSessionAsync(ShortClassName(className)),
                     LazyThreadSafetyMode.ExecutionAndPublication));
@@ -91,6 +91,15 @@ public abstract class TestBase
         _context = await _session.Browser.NewContextAsync();
         Page = await _context.NewPageAsync();
     }
+
+    // The same key must be used everywhere ClassSessions is read or written (BaseSetUp and the
+    // eviction path in BaseTearDown) - a mismatch would let two different fixtures collide on one
+    // entry, or let teardown fail to find the entry it just used. ClassName is only ever null for
+    // a test with no fixture, which GROUPING=class doesn't support - fail loudly rather than
+    // silently bucket such a test under a shared "" key.
+    private static string ClassSessionKey() =>
+        TestContext.CurrentContext.Test.ClassName
+        ?? throw new InvalidOperationException("GROUPING=class requires the test to belong to a fixture (ClassName was null).");
 
     private static string ShortClassName(string fullClassName) => fullClassName.Split('.')[^1];
 
@@ -157,7 +166,7 @@ public abstract class TestBase
 
             Console.WriteLine($"Test: {testName} - Result: {result}");
 
-            if (_session.SessionId != null)
+            if (_session != null && _session.SessionId != null)
             {
                 PrintSauceJobLink(testName, _session.SessionId);
             }
@@ -168,27 +177,32 @@ public abstract class TestBase
         }
         finally
         {
-            await Page.CloseAsync();
+            // Page/_session are only null if BaseSetUp threw before reaching that point - nothing
+            // to clean up in that case, and touching them here would throw a NullReferenceException
+            // that masks the real SetUp failure in the test result.
+            if (Page != null) await Page.CloseAsync();
             if (_context != null) await _context.CloseAsync();
 
-            if (Grouping == SessionGrouping.Class)
+            if (_session != null)
             {
-                // Passed: leave the session in ClassSessions for the next test in this class to
-                // reuse. Failed: evict and close it now instead of leaving a possibly-dirty
-                // browser for the next test in this class to inherit - safe to do unconditionally
-                // because ParallelScope.Fixtures guarantees no sibling test is using it right now.
-                if (!passed)
+                if (Grouping == SessionGrouping.Class)
                 {
-                    var className = TestContext.CurrentContext.Test.ClassName ?? "";
-                    ClassSessions.TryRemove(className, out _);
-                    await CloseSessionAsync(_session, passed: false);
+                    // Passed: leave the session in ClassSessions for the next test in this class to
+                    // reuse. Failed: evict and close it now instead of leaving a possibly-dirty
+                    // browser for the next test in this class to inherit - safe to do unconditionally
+                    // because ParallelScope.Fixtures guarantees no sibling test is using it right now.
+                    if (!passed)
+                    {
+                        ClassSessions.TryRemove(ClassSessionKey(), out _);
+                        await CloseSessionAsync(_session, passed: false);
+                    }
                 }
-            }
-            else
-            {
-                // "test" mode sessions are never shared, so there's nobody to hand this off to -
-                // always close and report, pass or fail.
-                await CloseSessionAsync(_session, passed);
+                else
+                {
+                    // "test" mode sessions are never shared, so there's nobody to hand this off to -
+                    // always close and report, pass or fail.
+                    await CloseSessionAsync(_session, passed);
+                }
             }
         }
     }
