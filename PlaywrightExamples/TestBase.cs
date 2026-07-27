@@ -52,7 +52,12 @@ public abstract class TestBase
             ? SessionGrouping.Test
             : SessionGrouping.Class;
 
-    private static readonly string BrowserName = Environment.GetEnvironmentVariable("BROWSER") ?? "chromium";
+    // Normalized once here (not just inside GetBrowserType) because the raw value is also sent
+    // verbatim to Sauce in BuildCapabilitiesPayload and appended to the native WebSocket URL -
+    // either would reject a mixed-case or whitespace-padded value even though GetBrowserType itself
+    // tolerates it.
+    private static readonly string BrowserName =
+        (Environment.GetEnvironmentVariable("BROWSER") ?? "chromium").Trim().ToLowerInvariant();
 
     private static readonly string SauceUsername = Environment.GetEnvironmentVariable("SAUCE_USERNAME") ?? "";
     private static readonly string SauceAccessKey = Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY") ?? "";
@@ -137,8 +142,13 @@ public abstract class TestBase
 
         while (response.Status == 303)
         {
-            var location = response.Headers["location"];
-            response = await requestContext.GetAsync(location, new APIRequestContextOptions { MaxRedirects = 0 });
+            if (!response.Headers.TryGetValue("location", out var location))
+            {
+                throw new InvalidOperationException(
+                    $"Sauce responded {response.Status} to POST playwright/session without a Location header.");
+            }
+
+            response = await requestContext.GetAsync(location, new APIRequestContextOptions { MaxRedirects = 0, Timeout = 120000 });
         }
 
         var responseText = await response.TextAsync();
@@ -234,7 +244,7 @@ public abstract class TestBase
 
     // Closes every session still in ClassSessions ("test" mode never populates it - each session
     // is already closed in BaseTearDown). Invoked once after all tests finish, by
-    // SauceSessionsTeardown's [OneTimeTearDown] below. Any class session that ever failed a test
+    // SessionsTeardown's [OneTimeTearDown] below. Any class session that ever failed a test
     // was already evicted and closed in BaseTearDown, so everything left here only ever ran
     // passing tests - each is reported as passed.
     internal static async Task CloseAllWorkerSessionsAsync()
@@ -262,8 +272,9 @@ public abstract class TestBase
     }
 
     // The session endpoint accepts 'chromium', 'firefox' or 'webkit' - the same names Playwright
-    // itself uses, so no translation table is needed.
-    private static IBrowserType GetBrowserType(IPlaywright playwright, string browserName) => browserName.ToLowerInvariant() switch
+    // itself uses, so no translation table is needed. browserName is expected pre-normalized (see
+    // BrowserName above).
+    private static IBrowserType GetBrowserType(IPlaywright playwright, string browserName) => browserName switch
     {
         "chromium" => playwright.Chromium,
         "firefox" => playwright.Firefox,
@@ -324,10 +335,10 @@ public abstract class TestBase
 // Runs once after every test in the assembly has finished, closing out whatever class sessions
 // (local or Sauce) are still open (see ClassSessions above).
 [SetUpFixture]
-public class SauceSessionsTeardown
+public class SessionsTeardown
 {
     [OneTimeTearDown]
-    public async Task CloseAllSauceSessions()
+    public async Task CloseAllSessions()
     {
         await TestBase.CloseAllWorkerSessionsAsync();
     }

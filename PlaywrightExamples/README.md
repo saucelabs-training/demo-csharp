@@ -31,7 +31,7 @@ A session (local browser or Sauce Labs job) is checked out for a test and, on te
 alive for reuse (test passed) or closed immediately (test failed) - so a failing test never leaves
 a possibly-dirty browser behind for whatever test picks up that session next. Each test still gets
 its own fresh, isolated `BrowserContext`/`Page` regardless of session reuse. Whatever sessions are
-still open once the whole run finishes are closed out by `SauceSessionsTeardown` in `TestBase.cs`.
+still open once the whole run finishes are closed out by `SessionsTeardown` in `TestBase.cs`.
 This applies the same way regardless of `TARGET` or `GROUPING`.
 
 ## Prerequisites
