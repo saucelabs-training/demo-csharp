@@ -25,7 +25,11 @@ jobs:
   playwright-tests:
     name: Playwright NUnit Examples
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+
     steps:
     - uses: actions/checkout@v7
     
@@ -46,6 +50,14 @@ jobs:
         max_attempts: 3
         timeout_minutes: 30
         command: dotnet test PlaywrightExamples/PlaywrightExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=playwright-examples-results.trx" --logger "html;LogFileName=playwright-examples-report.html"
+
+    - name: Publish test report to job summary and checks
+      uses: dorny/test-reporter@v3
+      if: always()
+      with:
+        name: Playwright Examples Test Report
+        path: '**/playwright-examples-results.trx'
+        reporter: dotnet-trx
 
     - name: Upload test results
       uses: actions/upload-artifact@v7
