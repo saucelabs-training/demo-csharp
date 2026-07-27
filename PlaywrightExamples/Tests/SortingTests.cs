@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace PlaywrightExamples.Tests;
 
 [TestFixture]
-[Parallelizable(ParallelScope.All)]
+[Parallelizable(ParallelScope.Fixtures)]
 public class SortingTests : TestBase
 {
     [Test]

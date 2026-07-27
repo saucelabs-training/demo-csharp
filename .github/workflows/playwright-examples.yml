@@ -18,12 +18,18 @@ on:
 env:
   SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
   SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+  TARGET: sauce
+  GROUPING: class
 
 jobs:
   playwright-tests:
     name: Playwright NUnit Examples
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+
     steps:
     - uses: actions/checkout@v7
     
@@ -37,20 +43,32 @@ jobs:
     
     - name: Build
       run: dotnet build PlaywrightExamples/PlaywrightExamples.csproj --no-restore --configuration Release
-    
-    - name: Install Playwright browsers
-      run: pwsh PlaywrightExamples/bin/Release/net8.0/playwright.ps1 install --with-deps
-    
+
     - name: Run tests
       uses: nick-fields/retry@v4
       with:
         max_attempts: 3
         timeout_minutes: 30
-        command: dotnet test PlaywrightExamples/PlaywrightExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=playwright-examples-results.trx"
-    
+        command: dotnet test PlaywrightExamples/PlaywrightExamples.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=playwright-examples-results.trx" --logger "html;LogFileName=playwright-examples-report.html"
+
+    - name: Publish test report to job summary and checks
+      uses: dorny/test-reporter@v3
+      if: always()
+      with:
+        name: Playwright Examples Test Report
+        path: '**/playwright-examples-results.trx'
+        reporter: dotnet-trx
+
     - name: Upload test results
       uses: actions/upload-artifact@v7
       if: always()
       with:
         name: playwright-examples-results
         path: '**/playwright-examples-results.trx'
+
+    - name: Upload HTML report
+      uses: actions/upload-artifact@v7
+      if: always()
+      with:
+        name: playwright-examples-html-report
+        path: '**/playwright-examples-report.html'
